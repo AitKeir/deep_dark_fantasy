@@ -1,6 +1,7 @@
 import traceback
 import tkinter as tk
 import win32api
+import math
 from tkinter import *
 from tkinter import scrolledtext
 from tkinter import ttk
@@ -103,15 +104,16 @@ def change_main_window(window,list_obj):
 
 def new_exp():
     global expNow,lvlNow,allAtt
-    expNow = plus_exp(expNow,int(addExp.get()),learningAttInt)
-    expNowAttLabel.config(text='{0}'.format(expNow))
-    lastLVL = lvlNow
-    lvlNow = what_lvl(list_lvl,expNow)
-    if lvlNow > lastLVL:
-        allAtt = allAtt+(lvlNow-lastLVL)
-        levelLabel2.config(text='{0}'.format(lvlNow))
-        availableAttNumb.config(text='{0}'.format(allAtt))
-    addExp.delete(0, 'end')
+    if addExp.get():
+        expNow = plus_exp(expNow,int(addExp.get()),learningAttInt)
+        expNowAttLabel.config(text='{0}'.format(expNow))
+        lastLVL = lvlNow
+        lvlNow = what_lvl(list_lvl,expNow)
+        if lvlNow > lastLVL:
+            allAtt = allAtt+(lvlNow-lastLVL)
+            levelLabel2.config(text='{0}'.format(lvlNow))
+            availableAttNumb.config(text='{0}'.format(allAtt))
+        addExp.delete(0, 'end')
 
 def create_attribute_window():
     ChoAtt = Toplevel(window)
@@ -367,54 +369,199 @@ def create_attribute_window():
     steelBodyButt.grid(row=5, column=2)
 
 def create_magic_window():
-    global spell11ProgressLabelInt,spell12ProgressLabelInt,spell21ProgressLabelInt,spell22ProgressLabelInt,spell31ProgressLabelInt,spell32ProgressLabelInt,spell41ProgressLabelInt,spell42ProgressLabelInt,spell51ProgressLabelInt,spell52ProgressLabelInt,spell11LVLInt,spell12LVLInt,spell21LVLInt,spell22LVLInt,spell31LVLInt,spell32LVLInt,spell41LVLInt,spell42LVLInt,spell51LVLInt,spell52LVLInt
+    global spell11ProgressLabelInt,spell12ProgressLabelInt,spell21ProgressLabelInt,spell22ProgressLabelInt,spell31ProgressLabelInt,spell32ProgressLabelInt,spell41ProgressLabelInt,spell42ProgressLabelInt,spell51ProgressLabelInt,spell52ProgressLabelInt,spell11LVLInt,spell12LVLInt,spell21LVLInt,spell22LVLInt,spell31LVLInt,spell32LVLInt,spell41LVLInt,spell42LVLInt,spell51LVLInt,spell52LVLInt,magicCircleAttLabel,spell211ProgressLabelInt,spell212ProgressLabelInt,spell221ProgressLabelInt,spell222ProgressLabelInt,spell231ProgressLabelInt,spell232ProgressLabelInt,spell241ProgressLabelInt,spell242ProgressLabelInt,spell251ProgressLabelInt,spell252ProgressLabelInt,spell211LVLInt,spell212LVLInt,spell221LVLInt,spell222LVLInt,spell231LVLInt,spell232LVLInt,spell241LVLInt,spell242LVLInt,spell251LVLInt,spell252LVLInt,magicCircleAttLabel2,firstSchMag,secondSchMag
 
     def change_lines_in_magic_window(event):
+        global firstSchMag
+        firstSchMag = firstMagicSchool.get()
         spell11.config(text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]].keys())[0])
+        CreateToolTip(spell11,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]].keys())[0]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]].keys())[0]]['level']))
         spell12.config(text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]].keys())[1])
+        CreateToolTip(spell12,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]].keys())[1]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]].keys())[1]]['level']))
         spell21.config(text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]].keys())[0])
+        CreateToolTip(spell21,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]].keys())[0]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]].keys())[0]]['level']))
         spell22.config(text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]].keys())[1])
+        CreateToolTip(spell22,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]].keys())[1]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]].keys())[1]]['level']))
         spell31.config(text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]].keys())[0])
+        CreateToolTip(spell31,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]].keys())[0]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]].keys())[0]]['level']))
         spell32.config(text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]].keys())[1])
+        CreateToolTip(spell32,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]].keys())[1]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]].keys())[1]]['level']))
         spell41.config(text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]].keys())[0])
+        CreateToolTip(spell41,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]].keys())[0]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]].keys())[0]]['level']))
         spell42.config(text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]].keys())[1])
+        CreateToolTip(spell42,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]].keys())[1]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]].keys())[1]]['level']))
         spell51.config(text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[0])
+        CreateToolTip(spell51,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[0]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[0]]['level']))
         spell52.config(text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[1])
+        CreateToolTip(spell52,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[1]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[1]]['level']))
+
+    def change_lines_in_magic_window2(event):
+        global secondSchMag
+        secondSchMag = secondMagicSchool.get()
+        spell211.config(text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]].keys())[0])
+        CreateToolTip(spell211,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]].keys())[0]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]].keys())[0]]['level']))
+        spell212.config(text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]].keys())[1])
+        CreateToolTip(spell212,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]].keys())[1]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]].keys())[1]]['level']))
+        spell221.config(text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]].keys())[0])
+        CreateToolTip(spell221,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]].keys())[0]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]].keys())[0]]['level']))
+        spell222.config(text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]].keys())[1])
+        CreateToolTip(spell222,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]].keys())[1]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]].keys())[1]]['level']))
+        spell231.config(text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]].keys())[0])
+        CreateToolTip(spell231,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]].keys())[0]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]].keys())[0]]['level']))
+        spell232.config(text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]].keys())[1])
+        CreateToolTip(spell232,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]].keys())[1]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]].keys())[1]]['level']))
+        spell241.config(text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]].keys())[0])
+        CreateToolTip(spell241,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]].keys())[0]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]].keys())[0]]['level']))
+        spell242.config(text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]].keys())[1])
+        CreateToolTip(spell242,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]].keys())[1]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]].keys())[1]]['level']))
+        spell251.config(text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[0])
+        CreateToolTip(spell251,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[0]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[0]]['level']))
+        spell252.config(text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[1])
+        CreateToolTip(spell252,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[1]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[1]]['level']))
 
     def add_spell_exp(num):
-        global spell11ProgressLabelInt,spell12ProgressLabelInt,spell21ProgressLabelInt,spell22ProgressLabelInt,spell31ProgressLabelInt,spell32ProgressLabelInt,spell41ProgressLabelInt,spell42ProgressLabelInt,spell51ProgressLabelInt,spell52ProgressLabelInt
+        global spell11ProgressLabelInt,spell12ProgressLabelInt,spell21ProgressLabelInt,spell22ProgressLabelInt,spell31ProgressLabelInt,spell32ProgressLabelInt,spell41ProgressLabelInt,spell42ProgressLabelInt,spell51ProgressLabelInt,spell52ProgressLabelInt,spell11LVLInt,spell12LVLInt,spell21LVLInt,spell22LVLInt,spell31LVLInt,spell32LVLInt,spell41LVLInt,spell42LVLInt,spell51LVLInt,spell52LVLInt,spell211ProgressLabelInt,spell212ProgressLabelInt,spell221ProgressLabelInt,spell222ProgressLabelInt,spell231ProgressLabelInt,spell232ProgressLabelInt,spell241ProgressLabelInt,spell242ProgressLabelInt,spell251ProgressLabelInt,spell252ProgressLabelInt,spell211LVLInt,spell212LVLInt,spell221LVLInt,spell222LVLInt,spell231LVLInt,spell232LVLInt,spell241LVLInt,spell242LVLInt,spell251LVLInt,spell252LVLInt
 
         if num == 0:
-            spell11ProgressLabelInt += 1
-            spell11ProgressLabel.config(text='{0}'.format(spell11ProgressLabelInt))
+            if magicCircleAttInt == 1:
+                spell11ProgressLabelInt += 1
+                if 6 > math.floor(spell11ProgressLabelInt/10 + 1) > spell11LVLInt:
+                    spell11LVLInt = math.floor(spell11ProgressLabelInt/10 + 1)
+                    spell11LVLLabel.config(text='{0}'.format(spell11LVLInt))
+                spell11ProgressLabel.config(text='{0}'.format(spell11ProgressLabelInt))
         elif num == 1:
-            spell12ProgressLabelInt += 1
-            spell12ProgressLabel.config(text='{0}'.format(spell12ProgressLabelInt))
+            if magicCircleAttInt == 1:
+                spell12ProgressLabelInt += 1
+                if 6 > math.floor(spell12ProgressLabelInt/10 + 1) > spell12LVLInt:
+                    spell12LVLInt = math.floor(spell12ProgressLabelInt/10 + 1)
+                    spell12LVLLabel.config(text='{0}'.format(spell12LVLInt))
+                spell12ProgressLabel.config(text='{0}'.format(spell12ProgressLabelInt))
         elif num == 2:
-            spell21ProgressLabelInt += 1
-            spell21ProgressLabel.config(text='{0}'.format(spell21ProgressLabelInt))
+            if magicCircleAttInt == 2:
+                spell21ProgressLabelInt += 1
+                if 6 > math.floor(spell21ProgressLabelInt/10 + 1) > spell21LVLInt:
+                    spell21LVLInt = math.floor(spell21ProgressLabelInt/10 + 1)
+                    spell21LVLLabel.config(text='{0}'.format(spell21LVLInt))
+                spell21ProgressLabel.config(text='{0}'.format(spell21ProgressLabelInt))
         elif num == 3:
-            spell22ProgressLabelInt += 1
-            spell22ProgressLabel.config(text='{0}'.format(spell22ProgressLabelInt))
+            if magicCircleAttInt == 2:
+                spell22ProgressLabelInt += 1
+                if 6 > math.floor(spell22ProgressLabelInt/10 + 1) > spell22LVLInt:
+                    spell22LVLInt = math.floor(spell22ProgressLabelInt/10 + 1)
+                    spell22LVLLabel.config(text='{0}'.format(spell22LVLInt))
+                spell22ProgressLabel.config(text='{0}'.format(spell22ProgressLabelInt))
         elif num == 4:
-            spell31ProgressLabelInt += 1
-            spell31ProgressLabel.config(text='{0}'.format(spell31ProgressLabelInt))
+            if magicCircleAttInt == 3:
+                spell31ProgressLabelInt += 1
+                if 6 > math.floor(spell31ProgressLabelInt/10 + 1) > spell31LVLInt:
+                    spell31LVLInt = math.floor(spell31ProgressLabelInt/10 + 1)
+                    spell31LVLLabel.config(text='{0}'.format(spell31LVLInt))
+                spell31ProgressLabel.config(text='{0}'.format(spell31ProgressLabelInt))
         elif num == 5:
-            spell32ProgressLabelInt += 1
-            spell32ProgressLabel.config(text='{0}'.format(spell32ProgressLabelInt))
+            if magicCircleAttInt == 3:
+                spell32ProgressLabelInt += 1
+                if 6 > math.floor(spell32ProgressLabelInt/10 + 1) > spell32LVLInt:
+                    spell32LVLInt = math.floor(spell32ProgressLabelInt/10 + 1)
+                    spell32LVLLabel.config(text='{0}'.format(spell32LVLInt))
+                spell32ProgressLabel.config(text='{0}'.format(spell32ProgressLabelInt))
         elif num == 6:
-            spell41ProgressLabelInt += 1
-            spell41ProgressLabel.config(text='{0}'.format(spell41ProgressLabelInt))
+            if magicCircleAttInt == 4:
+                spell41ProgressLabelInt += 1
+                if 6 > math.floor(spell41ProgressLabelInt/10 + 1) > spell41LVLInt:
+                    spell41LVLInt = math.floor(spell41ProgressLabelInt/10 + 1)
+                    spell41LVLLabel.config(text='{0}'.format(spell41LVLInt))
+                spell41ProgressLabel.config(text='{0}'.format(spell41ProgressLabelInt))
         elif num == 7:
-            spell42ProgressLabelInt += 1
-            spell42ProgressLabel.config(text='{0}'.format(spell42ProgressLabelInt))
+            if magicCircleAttInt == 4:
+                spell42ProgressLabelInt += 1
+                if 6 > math.floor(spell42ProgressLabelInt/10 + 1) > spell42LVLInt:
+                    spell42LVLInt = math.floor(spell42ProgressLabelInt/10 + 1)
+                    spell42LVLLabel.config(text='{0}'.format(spell42LVLInt))
+                spell42ProgressLabel.config(text='{0}'.format(spell42ProgressLabelInt))
         elif num == 8:
-            spell51ProgressLabelInt += 1
-            spell51ProgressLabel.config(text='{0}'.format(spell51ProgressLabelInt))
+            if magicCircleAttInt == 5:
+                spell51ProgressLabelInt += 1
+                if 6 > math.floor(spell51ProgressLabelInt/10 + 1) > spell51LVLInt:
+                    spell51LVLInt = math.floor(spell51ProgressLabelInt/10 + 1)
+                    spell51LVLLabel.config(text='{0}'.format(spell51LVLInt))
+                spell51ProgressLabel.config(text='{0}'.format(spell51ProgressLabelInt))
         elif num == 9:
-            spell52ProgressLabelInt += 1
-            spell52ProgressLabel.config(text='{0}'.format(spell52ProgressLabelInt))
-
+            if magicCircleAttInt == 5:
+                spell52ProgressLabelInt += 1
+                if 6 > math.floor(spell52ProgressLabelInt/10 + 1) > spell52LVLInt:
+                    spell52LVLInt = math.floor(spell52ProgressLabelInt/10 + 1)
+                    spell52LVLLabel.config(text='{0}'.format(spell52LVLInt))
+                spell52ProgressLabel.config(text='{0}'.format(spell52ProgressLabelInt))
+        elif num == 10:
+            if magicCircleAttInt == 1:
+                spell211ProgressLabelInt += 1
+                if 6 > math.floor(spell211ProgressLabelInt/10 + 1) > spell211LVLInt:
+                    spell211LVLInt = math.floor(spell211ProgressLabelInt/10 + 1)
+                    spell211LVLLabel.config(text='{0}'.format(spell211LVLInt))
+                spell211ProgressLabel.config(text='{0}'.format(spell211ProgressLabelInt))
+        elif num == 11:
+            if magicCircleAttInt == 1:
+                spell212ProgressLabelInt += 1
+                if 6 > math.floor(spell212ProgressLabelInt/10 + 1) > spell212LVLInt:
+                    spell212LVLInt = math.floor(spell212ProgressLabelInt/10 + 1)
+                    spell212LVLLabel.config(text='{0}'.format(spell212LVLInt))
+                spell212ProgressLabel.config(text='{0}'.format(spell212ProgressLabelInt))
+        elif num == 12:
+            if magicCircleAttInt == 2:
+                spell221ProgressLabelInt += 1
+                if 6 > math.floor(spell221ProgressLabelInt/10 + 1) > spell221LVLInt:
+                    spell221LVLInt = math.floor(spell221ProgressLabelInt/10 + 1)
+                    spell221LVLLabel.config(text='{0}'.format(spell221LVLInt))
+                spell221ProgressLabel.config(text='{0}'.format(spell221ProgressLabelInt))
+        elif num == 13:
+            if magicCircleAttInt == 2:
+                spell222ProgressLabelInt += 1
+                if 6 > math.floor(spell222ProgressLabelInt/10 + 1) > spell222LVLInt:
+                    spell222LVLInt = math.floor(spell222ProgressLabelInt/10 + 1)
+                    spell222LVLLabel.config(text='{0}'.format(spell222LVLInt))
+                spell222ProgressLabel.config(text='{0}'.format(spell222ProgressLabelInt))
+        elif num == 14:
+            if magicCircleAttInt == 3:
+                spell231ProgressLabelInt += 1
+                if 6 > math.floor(spell231ProgressLabelInt/10 + 1) > spell231LVLInt:
+                    spell231LVLInt = math.floor(spell231ProgressLabelInt/10 + 1)
+                    spell231LVLLabel.config(text='{0}'.format(spell231LVLInt))
+                spell231ProgressLabel.config(text='{0}'.format(spell231ProgressLabelInt))
+        elif num == 15:
+            if magicCircleAttInt == 3:
+                spell232ProgressLabelInt += 1
+                if 6 > math.floor(spell232ProgressLabelInt/10 + 1) > spell232LVLInt:
+                    spell232LVLInt = math.floor(spell232ProgressLabelInt/10 + 1)
+                    spell232LVLLabel.config(text='{0}'.format(spell232LVLInt))
+                spell232ProgressLabel.config(text='{0}'.format(spell232ProgressLabelInt))
+        elif num == 16:
+            if magicCircleAttInt == 4:
+                spell241ProgressLabelInt += 1
+                if 6 > math.floor(spell241ProgressLabelInt/10 + 1) > spell241LVLInt:
+                    spell241LVLInt = math.floor(spell241ProgressLabelInt/10 + 1)
+                    spell241LVLLabel.config(text='{0}'.format(spell241LVLInt))
+                spell241ProgressLabel.config(text='{0}'.format(spell241ProgressLabelInt))
+        elif num == 17:
+            if magicCircleAttInt == 4:
+                spell242ProgressLabelInt += 1
+                if 6 > math.floor(spell242ProgressLabelInt/10 + 1) > spell242LVLInt:
+                    spell242LVLInt = math.floor(spell242ProgressLabelInt/10 + 1)
+                    spell242LVLLabel.config(text='{0}'.format(spell242LVLInt))
+                spell242ProgressLabel.config(text='{0}'.format(spell242ProgressLabelInt))
+        elif num == 18:
+            if magicCircleAttInt == 5:
+                spell251ProgressLabelInt += 1
+                if 6 > math.floor(spell251ProgressLabelInt/10 + 1) > spell251LVLInt:
+                    spell251LVLInt = math.floor(spell251ProgressLabelInt/10 + 1)
+                    spell251LVLLabel.config(text='{0}'.format(spell251LVLInt))
+                spell251ProgressLabel.config(text='{0}'.format(spell251ProgressLabelInt))
+        elif num == 19:
+            if magicCircleAttInt == 5:
+                spell252ProgressLabelInt += 1
+                if 6 > math.floor(spell252ProgressLabelInt/10 + 1) > spell252LVLInt:
+                    spell252LVLInt = math.floor(spell252ProgressLabelInt/10 + 1)
+                    spell252LVLLabel.config(text='{0}'.format(spell252LVLInt))
+                spell252ProgressLabel.config(text='{0}'.format(spell252ProgressLabelInt))
 
     ChoMag = Toplevel(window)
     ChoMag.title('Школы магии')
@@ -451,7 +598,7 @@ def create_magic_window():
     frameFirstMagic.grid(row=0, column=0)
 
     firstMagicSchool = ttk.Combobox(frameFirstMagic, values = allMagicSchool)
-    firstMagicSchool.set(allMagicSchool[0])
+    firstMagicSchool.set(firstSchMag)
     firstMagicSchool.bind("<<ComboboxSelected>>", change_lines_in_magic_window)
     magicCircleLabel = Label(frameFirstMagic, text='Круг магии:')
     magicCircleAttLabel = Label(frameFirstMagic, text='{0}'.format(magicCircleAttInt))
@@ -459,7 +606,7 @@ def create_magic_window():
     spellProgressLabel = Label(frameFirstMagic, text='Прогресс')
     spellLVLLebel = Label(frameFirstMagic, text='Уровень')
 
-    firstMagicSchool.grid(row=0, column=0, columnspan=5)
+    firstMagicSchool.grid(row=0, column=0, columnspan=6)
     magicCircleLabel.grid(row=1, column=0)
     magicCircleAttLabel.grid(row=1, column=1)
     spellLabel.grid(row=1, column=2)
@@ -478,15 +625,25 @@ def create_magic_window():
     Label(frameFirstMagic, text=list(support['magic'][firstMagicSchool.get()].keys())[4]).grid(row=11, column=0, sticky=W, columnspan=2)
 
     spell11 = Label(frameFirstMagic, text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]].keys())[0])
+    CreateToolTip(spell11,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]].keys())[0]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]].keys())[0]]['level']))
     spell12 = Label(frameFirstMagic, text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]].keys())[1])
+    CreateToolTip(spell12,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]].keys())[1]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[0]].keys())[1]]['level']))
     spell21 = Label(frameFirstMagic, text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]].keys())[0])
+    CreateToolTip(spell21,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]].keys())[0]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]].keys())[0]]['level']))
     spell22 = Label(frameFirstMagic, text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]].keys())[1])
+    CreateToolTip(spell22,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]].keys())[1]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[1]].keys())[1]]['level']))
     spell31 = Label(frameFirstMagic, text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]].keys())[0])
+    CreateToolTip(spell31,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]].keys())[0]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]].keys())[0]]['level']))
     spell32 = Label(frameFirstMagic, text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]].keys())[1])
+    CreateToolTip(spell32,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]].keys())[1]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[2]].keys())[1]]['level']))
     spell41 = Label(frameFirstMagic, text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]].keys())[0])
+    CreateToolTip(spell41,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]].keys())[0]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]].keys())[0]]['level']))
     spell42 = Label(frameFirstMagic, text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]].keys())[1])
+    CreateToolTip(spell42,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]].keys())[1]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[3]].keys())[1]]['level']))
     spell51 = Label(frameFirstMagic, text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[0])
+    CreateToolTip(spell51,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[0]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[0]]['level']))
     spell52 = Label(frameFirstMagic, text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[1])
+    CreateToolTip(spell52,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[1]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[1]]['level']))
 
     spell11.grid(row=2, column=2)
     spell12.grid(row=3, column=2)
@@ -554,7 +711,162 @@ def create_magic_window():
     spell51LVLLabel = Label(frameFirstMagic, text = '{0}'.format(spell51LVLInt))
     spell52LVLLabel = Label(frameFirstMagic, text = '{0}'.format(spell52LVLInt))
 
+    spell11LVLLabel.grid(row=2, column=5)
+    spell12LVLLabel.grid(row=3, column=5)
+    spell21LVLLabel.grid(row=4, column=5)
+    spell22LVLLabel.grid(row=5, column=5)
+    spell31LVLLabel.grid(row=6, column=5)
+    spell32LVLLabel.grid(row=7, column=5)
+    spell41LVLLabel.grid(row=8, column=5)
+    spell42LVLLabel.grid(row=9, column=5)
+    spell51LVLLabel.grid(row=10, column=5)
+    spell52LVLLabel.grid(row=11, column=5)
 
+    frameSecondMagic=Frame(ChoMag, relief=RAISED, borderwidth=1)
+    frameSecondMagic.rowconfigure(0, pad=3)
+    frameSecondMagic.rowconfigure(1, pad=3)
+    frameSecondMagic.rowconfigure(2, pad=3)
+    frameSecondMagic.rowconfigure(3, pad=3)
+    frameSecondMagic.rowconfigure(4, pad=3)
+    frameSecondMagic.rowconfigure(5, pad=3)
+    frameSecondMagic.rowconfigure(6, pad=3)
+    frameSecondMagic.rowconfigure(7, pad=3)
+    frameSecondMagic.rowconfigure(8, pad=3)
+    frameSecondMagic.rowconfigure(9, pad=3)
+    frameSecondMagic.rowconfigure(10, pad=3)
+    frameSecondMagic.rowconfigure(11, pad=3)
+    frameSecondMagic.columnconfigure(0, pad=3)
+    frameSecondMagic.columnconfigure(1, pad=3)
+    frameSecondMagic.columnconfigure(2, pad=3)
+    frameSecondMagic.columnconfigure(3, pad=3)
+    frameSecondMagic.columnconfigure(4, pad=3)
+    frameSecondMagic.columnconfigure(5, pad=3)
+    frameSecondMagic.grid(row=0, column=1)
+
+    secondMagicSchool = ttk.Combobox(frameSecondMagic, values = allMagicSchool)
+    secondMagicSchool.set(secondSchMag)
+    secondMagicSchool.bind("<<ComboboxSelected>>", change_lines_in_magic_window2)
+    magicCircleLabel = Label(frameSecondMagic, text='Круг магии:')
+    magicCircleAttLabel2 = Label(frameSecondMagic, text='{0}'.format(magicCircleAttInt))
+    spellLabel = Label(frameSecondMagic, text='Заклинания')
+    spellProgressLabel = Label(frameSecondMagic, text='Прогресс')
+    spellLVLLebel = Label(frameSecondMagic, text='Уровень')
+
+    secondMagicSchool.grid(row=0, column=0, columnspan=6)
+    magicCircleLabel.grid(row=1, column=0)
+    magicCircleAttLabel2.grid(row=1, column=1)
+    spellLabel.grid(row=1, column=2)
+    spellProgressLabel.grid(row=1, column=3, columnspan=2)
+    spellLVLLebel.grid(row=1, column=5)
+
+    Label(frameSecondMagic, text=list(support['magic'][secondMagicSchool.get()].keys())[0]).grid(row=2, column=0, sticky=W, columnspan=2)
+    Label(frameSecondMagic, text=list(support['magic'][secondMagicSchool.get()].keys())[0]).grid(row=3, column=0, sticky=W, columnspan=2)
+    Label(frameSecondMagic, text=list(support['magic'][secondMagicSchool.get()].keys())[1]).grid(row=4, column=0, sticky=W, columnspan=2)
+    Label(frameSecondMagic, text=list(support['magic'][secondMagicSchool.get()].keys())[1]).grid(row=5, column=0, sticky=W, columnspan=2)
+    Label(frameSecondMagic, text=list(support['magic'][secondMagicSchool.get()].keys())[2]).grid(row=6, column=0, sticky=W, columnspan=2)
+    Label(frameSecondMagic, text=list(support['magic'][secondMagicSchool.get()].keys())[2]).grid(row=7, column=0, sticky=W, columnspan=2)
+    Label(frameSecondMagic, text=list(support['magic'][secondMagicSchool.get()].keys())[3]).grid(row=8, column=0, sticky=W, columnspan=2)
+    Label(frameSecondMagic, text=list(support['magic'][secondMagicSchool.get()].keys())[3]).grid(row=9, column=0, sticky=W, columnspan=2)
+    Label(frameSecondMagic, text=list(support['magic'][secondMagicSchool.get()].keys())[4]).grid(row=10, column=0, sticky=W, columnspan=2)
+    Label(frameSecondMagic, text=list(support['magic'][secondMagicSchool.get()].keys())[4]).grid(row=11, column=0, sticky=W, columnspan=2)
+
+    spell211 = Label(frameSecondMagic, text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]].keys())[0])
+    CreateToolTip(spell211,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]].keys())[0]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]].keys())[0]]['level']))
+    spell212 = Label(frameSecondMagic, text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]].keys())[1])
+    CreateToolTip(spell212,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]].keys())[1]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[0]].keys())[1]]['level']))
+    spell221 = Label(frameSecondMagic, text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]].keys())[0])
+    CreateToolTip(spell221,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]].keys())[0]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]].keys())[0]]['level']))
+    spell222 = Label(frameSecondMagic, text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]].keys())[1])
+    CreateToolTip(spell222,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]].keys())[1]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[1]].keys())[1]]['level']))
+    spell231 = Label(frameSecondMagic, text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]].keys())[0])
+    CreateToolTip(spell231,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]].keys())[0]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]].keys())[0]]['level']))
+    spell232 = Label(frameSecondMagic, text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]].keys())[1])
+    CreateToolTip(spell232,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]].keys())[1]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[2]].keys())[1]]['level']))
+    spell241 = Label(frameSecondMagic, text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]].keys())[0])
+    CreateToolTip(spell241,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]].keys())[0]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]].keys())[0]]['level']))
+    spell242 = Label(frameSecondMagic, text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]].keys())[1])
+    CreateToolTip(spell242,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]].keys())[1]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[3]].keys())[1]]['level']))
+    spell251 = Label(frameSecondMagic, text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[0])
+    CreateToolTip(spell251,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[0]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[0]]['level']))
+    spell252 = Label(frameSecondMagic, text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[1])
+    CreateToolTip(spell252,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[1]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[1]]['level']))
+
+    spell211.grid(row=2, column=2)
+    spell212.grid(row=3, column=2)
+    spell221.grid(row=4, column=2)
+    spell222.grid(row=5, column=2)
+    spell231.grid(row=6, column=2)
+    spell232.grid(row=7, column=2)
+    spell241.grid(row=8, column=2)
+    spell242.grid(row=9, column=2)
+    spell251.grid(row=10, column=2)
+    spell252.grid(row=11, column=2)
+
+    spell211ProgressLabel = Label(frameSecondMagic, text = '{0}'.format(spell211ProgressLabelInt))
+    spell212ProgressLabel = Label(frameSecondMagic, text = '{0}'.format(spell212ProgressLabelInt))
+    spell221ProgressLabel = Label(frameSecondMagic, text = '{0}'.format(spell221ProgressLabelInt))
+    spell222ProgressLabel = Label(frameSecondMagic, text = '{0}'.format(spell222ProgressLabelInt))
+    spell231ProgressLabel = Label(frameSecondMagic, text = '{0}'.format(spell231ProgressLabelInt))
+    spell232ProgressLabel = Label(frameSecondMagic, text = '{0}'.format(spell232ProgressLabelInt))
+    spell241ProgressLabel = Label(frameSecondMagic, text = '{0}'.format(spell241ProgressLabelInt))
+    spell242ProgressLabel = Label(frameSecondMagic, text = '{0}'.format(spell242ProgressLabelInt))
+    spell251ProgressLabel = Label(frameSecondMagic, text = '{0}'.format(spell251ProgressLabelInt))
+    spell252ProgressLabel = Label(frameSecondMagic, text = '{0}'.format(spell252ProgressLabelInt))
+
+    spell211ProgressLabel.grid(row=2, column=3)
+    spell212ProgressLabel.grid(row=3, column=3)
+    spell221ProgressLabel.grid(row=4, column=3)
+    spell222ProgressLabel.grid(row=5, column=3)
+    spell231ProgressLabel.grid(row=6, column=3)
+    spell232ProgressLabel.grid(row=7, column=3)
+    spell241ProgressLabel.grid(row=8, column=3)
+    spell242ProgressLabel.grid(row=9, column=3)
+    spell251ProgressLabel.grid(row=10, column=3)
+    spell252ProgressLabel.grid(row=11, column=3)
+
+    spell211ProgressButt = Button(frameSecondMagic, command=lambda: add_spell_exp(10), text='+')
+    spell212ProgressButt = Button(frameSecondMagic, command=lambda: add_spell_exp(11), text='+')
+    spell221ProgressButt = Button(frameSecondMagic, command=lambda: add_spell_exp(12), text='+')
+    spell222ProgressButt = Button(frameSecondMagic, command=lambda: add_spell_exp(13), text='+')
+    spell231ProgressButt = Button(frameSecondMagic, command=lambda: add_spell_exp(14), text='+')
+    spell232ProgressButt = Button(frameSecondMagic, command=lambda: add_spell_exp(15), text='+')
+    spell241ProgressButt = Button(frameSecondMagic, command=lambda: add_spell_exp(16), text='+')
+    spell242ProgressButt = Button(frameSecondMagic, command=lambda: add_spell_exp(17), text='+')
+    spell251ProgressButt = Button(frameSecondMagic, command=lambda: add_spell_exp(18), text='+')
+    spell252ProgressButt = Button(frameSecondMagic, command=lambda: add_spell_exp(19), text='+')
+
+    spell211ProgressButt.grid(row=2, column=4)
+    spell212ProgressButt.grid(row=3, column=4)
+    spell221ProgressButt.grid(row=4, column=4)
+    spell222ProgressButt.grid(row=5, column=4)
+    spell231ProgressButt.grid(row=6, column=4)
+    spell232ProgressButt.grid(row=7, column=4)
+    spell241ProgressButt.grid(row=8, column=4)
+    spell242ProgressButt.grid(row=9, column=4)
+    spell251ProgressButt.grid(row=10, column=4)
+    spell252ProgressButt.grid(row=11, column=4)
+
+    spell211LVLLabel = Label(frameSecondMagic, text = '{0}'.format(spell211LVLInt))
+    spell212LVLLabel = Label(frameSecondMagic, text = '{0}'.format(spell212LVLInt))
+    spell221LVLLabel = Label(frameSecondMagic, text = '{0}'.format(spell221LVLInt))
+    spell222LVLLabel = Label(frameSecondMagic, text = '{0}'.format(spell222LVLInt))
+    spell231LVLLabel = Label(frameSecondMagic, text = '{0}'.format(spell231LVLInt))
+    spell232LVLLabel = Label(frameSecondMagic, text = '{0}'.format(spell232LVLInt))
+    spell241LVLLabel = Label(frameSecondMagic, text = '{0}'.format(spell241LVLInt))
+    spell242LVLLabel = Label(frameSecondMagic, text = '{0}'.format(spell242LVLInt))
+    spell251LVLLabel = Label(frameSecondMagic, text = '{0}'.format(spell251LVLInt))
+    spell252LVLLabel = Label(frameSecondMagic, text = '{0}'.format(spell252LVLInt))
+
+    spell211LVLLabel.grid(row=2, column=5)
+    spell212LVLLabel.grid(row=3, column=5)
+    spell221LVLLabel.grid(row=4, column=5)
+    spell222LVLLabel.grid(row=5, column=5)
+    spell231LVLLabel.grid(row=6, column=5)
+    spell232LVLLabel.grid(row=7, column=5)
+    spell241LVLLabel.grid(row=8, column=5)
+    spell242LVLLabel.grid(row=9, column=5)
+    spell251LVLLabel.grid(row=10, column=5)
+    spell252LVLLabel.grid(row=11, column=5)
 
 def create_race_window():
     ChoRace = Toplevel(window)
@@ -605,7 +917,7 @@ def change_race():
     CreateToolTip(raceLabel2,support['race'][raceVar.get()]['tooltip'])
 
 def add_att(num,widget):
-    global allAtt, meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,firstAidAttInt,manaAttInt,thiefArtAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt
+    global allAtt, meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,firstAidAttInt,manaAttInt,thiefArtAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt,magicCircleAttLabel,magicCircleAttLabel2
     if allAtt > 0:
         if num == 0:
             meleFightAttInt += 1
@@ -645,7 +957,28 @@ def add_att(num,widget):
             widget.config(text='{0}'.format(firstAidAttInt))
         elif num == 12:
             magicCircleAttInt += 1
+            if magicCircleAttInt == 1:
+                spell11LVLInt = 1
+                spell12LVLInt = 1
+            elif magicCircleAttInt == 2:
+                spell21LVLInt = 1
+                spell22LVLInt = 1
+            elif magicCircleAttInt == 3:
+                spell31LVLInt = 1
+                spell32LVLInt = 1
+            elif magicCircleAttInt == 4:
+                spell41LVLInt = 1
+                spell42LVLInt = 1
+            elif magicCircleAttInt == 5:
+                spell51LVLInt = 1
+                spell52LVLInt = 1
             widget.config(text='{0}'.format(magicCircleAttInt))
+            try:
+                if magicCircleAttLabel:
+                    magicCircleAttLabel.config(text='{0}'.format(magicCircleAttInt))
+                    magicCircleAttLabel2.config(text='{0}'.format(magicCircleAttInt))
+            except:
+                print("magic window don't open")
         elif num == 13:
             magicPowerAttInt += 1
             widget.config(text='{0}'.format(magicPowerAttInt))
@@ -679,6 +1012,8 @@ OPTIONS = list(support['race'].keys())
 allMagicSchool = list(support['magic'].keys())
 list_lvl = list_lvlExp()
 language = 'Общий'
+firstSchMag = allMagicSchool[0]
+secondSchMag = allMagicSchool[0]
 
 # Variables str
 allStr = 0
@@ -720,6 +1055,17 @@ spell42ProgressLabelInt = 0
 spell51ProgressLabelInt = 0
 spell52ProgressLabelInt = 0
 
+spell211ProgressLabelInt = 0
+spell212ProgressLabelInt = 0
+spell221ProgressLabelInt = 0
+spell222ProgressLabelInt = 0
+spell231ProgressLabelInt = 0
+spell232ProgressLabelInt = 0
+spell241ProgressLabelInt = 0
+spell242ProgressLabelInt = 0
+spell251ProgressLabelInt = 0
+spell252ProgressLabelInt = 0
+
 spell11LVLInt = 0
 spell12LVLInt = 0
 spell21LVLInt = 0
@@ -730,6 +1076,17 @@ spell41LVLInt = 0
 spell42LVLInt = 0
 spell51LVLInt = 0
 spell52LVLInt = 0
+
+spell211LVLInt = 0
+spell212LVLInt = 0
+spell221LVLInt = 0
+spell222LVLInt = 0
+spell231LVLInt = 0
+spell232LVLInt = 0
+spell241LVLInt = 0
+spell242LVLInt = 0
+spell251LVLInt = 0
+spell252LVLInt = 0
 
 window = Tk() #sozdanie okna
 window.title('Лист персонажа.') #Присвоение окну тайтла
