@@ -103,7 +103,7 @@ def change_main_window(window,list_obj):
             object_name.grid_remove()
 
 def new_exp():
-    global expNow,lvlNow,allAtt
+    global expNow,lvlNow,allAtt,repLvl,repExp
     if addExp.get():
         expNow = plus_exp(expNow,int(addExp.get()),learningAttInt)
         expNowAttLabel.config(text='{0}'.format(expNow))
@@ -114,6 +114,13 @@ def new_exp():
             levelLabel2.config(text='{0}'.format(lvlNow))
             availableAttNumb.config(text='{0}'.format(allAtt))
         addExp.delete(0, 'end')
+    if addRep.get():
+        repExp = repExp + int(addRep.get())
+        repExpNowAttLabel.config(text='{0}'.format(repExp))
+        if 6 > math.floor(repExp/10 + 1) > repLvl:
+            repLvl = math.floor(repExp/10 + 1)
+            repLabel2.config(text='{0}'.format(repLvl))
+        addRep.delete(0, 'end')
 
 def create_attribute_window():
     ChoAtt = Toplevel(window)
@@ -369,7 +376,7 @@ def create_attribute_window():
     steelBodyButt.grid(row=5, column=2)
 
 def create_magic_window():
-    global spell11ProgressLabelInt,spell12ProgressLabelInt,spell21ProgressLabelInt,spell22ProgressLabelInt,spell31ProgressLabelInt,spell32ProgressLabelInt,spell41ProgressLabelInt,spell42ProgressLabelInt,spell51ProgressLabelInt,spell52ProgressLabelInt,spell11LVLInt,spell12LVLInt,spell21LVLInt,spell22LVLInt,spell31LVLInt,spell32LVLInt,spell41LVLInt,spell42LVLInt,spell51LVLInt,spell52LVLInt,magicCircleAttLabel,spell211ProgressLabelInt,spell212ProgressLabelInt,spell221ProgressLabelInt,spell222ProgressLabelInt,spell231ProgressLabelInt,spell232ProgressLabelInt,spell241ProgressLabelInt,spell242ProgressLabelInt,spell251ProgressLabelInt,spell252ProgressLabelInt,spell211LVLInt,spell212LVLInt,spell221LVLInt,spell222LVLInt,spell231LVLInt,spell232LVLInt,spell241LVLInt,spell242LVLInt,spell251LVLInt,spell252LVLInt,magicCircleAttLabel2,firstSchMag,secondSchMag
+    global spell11ProgressLabelInt,spell12ProgressLabelInt,spell21ProgressLabelInt,spell22ProgressLabelInt,spell31ProgressLabelInt,spell32ProgressLabelInt,spell41ProgressLabelInt,spell42ProgressLabelInt,spell51ProgressLabelInt,spell52ProgressLabelInt,spell11LVLInt,spell12LVLInt,spell21LVLInt,spell22LVLInt,spell31LVLInt,spell32LVLInt,spell41LVLInt,spell42LVLInt,spell51LVLInt,spell52LVLInt,magicCircleAttLabel,spell211ProgressLabelInt,spell212ProgressLabelInt,spell221ProgressLabelInt,spell222ProgressLabelInt,spell231ProgressLabelInt,spell232ProgressLabelInt,spell241ProgressLabelInt,spell242ProgressLabelInt,spell251ProgressLabelInt,spell252ProgressLabelInt,spell211LVLInt,spell212LVLInt,spell221LVLInt,spell222LVLInt,spell231LVLInt,spell232LVLInt,spell241LVLInt,spell242LVLInt,spell251LVLInt,spell252LVLInt,magicCircleAttLabel2,firstSchMag,secondSchMag,spell211LVLLabel,spell212LVLLabel,spell221LVLLabel,spell222LVLLabel,spell231LVLLabel,spell232LVLLabel,spell241LVLLabel,spell242LVLLabel,spell251LVLLabel,spell252LVLLabel,spell11LVLLabel,spell12LVLLabel,spell21LVLLabel,spell22LVLLabel,spell31LVLLabel,spell32LVLLabel,spell41LVLLabel,spell42LVLLabel,spell51LVLLabel,spell52LVLLabel
 
     def change_lines_in_magic_window(event):
         global firstSchMag
@@ -423,142 +430,142 @@ def create_magic_window():
         global spell11ProgressLabelInt,spell12ProgressLabelInt,spell21ProgressLabelInt,spell22ProgressLabelInt,spell31ProgressLabelInt,spell32ProgressLabelInt,spell41ProgressLabelInt,spell42ProgressLabelInt,spell51ProgressLabelInt,spell52ProgressLabelInt,spell11LVLInt,spell12LVLInt,spell21LVLInt,spell22LVLInt,spell31LVLInt,spell32LVLInt,spell41LVLInt,spell42LVLInt,spell51LVLInt,spell52LVLInt,spell211ProgressLabelInt,spell212ProgressLabelInt,spell221ProgressLabelInt,spell222ProgressLabelInt,spell231ProgressLabelInt,spell232ProgressLabelInt,spell241ProgressLabelInt,spell242ProgressLabelInt,spell251ProgressLabelInt,spell252ProgressLabelInt,spell211LVLInt,spell212LVLInt,spell221LVLInt,spell222LVLInt,spell231LVLInt,spell232LVLInt,spell241LVLInt,spell242LVLInt,spell251LVLInt,spell252LVLInt
 
         if num == 0:
-            if magicCircleAttInt == 1:
+            if magicCircleAttInt > 0:
                 spell11ProgressLabelInt += 1
                 if 6 > math.floor(spell11ProgressLabelInt/10 + 1) > spell11LVLInt:
                     spell11LVLInt = math.floor(spell11ProgressLabelInt/10 + 1)
                     spell11LVLLabel.config(text='{0}'.format(spell11LVLInt))
                 spell11ProgressLabel.config(text='{0}'.format(spell11ProgressLabelInt))
         elif num == 1:
-            if magicCircleAttInt == 1:
+            if magicCircleAttInt > 0:
                 spell12ProgressLabelInt += 1
                 if 6 > math.floor(spell12ProgressLabelInt/10 + 1) > spell12LVLInt:
                     spell12LVLInt = math.floor(spell12ProgressLabelInt/10 + 1)
                     spell12LVLLabel.config(text='{0}'.format(spell12LVLInt))
                 spell12ProgressLabel.config(text='{0}'.format(spell12ProgressLabelInt))
         elif num == 2:
-            if magicCircleAttInt == 2:
+            if magicCircleAttInt > 1:
                 spell21ProgressLabelInt += 1
                 if 6 > math.floor(spell21ProgressLabelInt/10 + 1) > spell21LVLInt:
                     spell21LVLInt = math.floor(spell21ProgressLabelInt/10 + 1)
                     spell21LVLLabel.config(text='{0}'.format(spell21LVLInt))
                 spell21ProgressLabel.config(text='{0}'.format(spell21ProgressLabelInt))
         elif num == 3:
-            if magicCircleAttInt == 2:
+            if magicCircleAttInt > 1:
                 spell22ProgressLabelInt += 1
                 if 6 > math.floor(spell22ProgressLabelInt/10 + 1) > spell22LVLInt:
                     spell22LVLInt = math.floor(spell22ProgressLabelInt/10 + 1)
                     spell22LVLLabel.config(text='{0}'.format(spell22LVLInt))
                 spell22ProgressLabel.config(text='{0}'.format(spell22ProgressLabelInt))
         elif num == 4:
-            if magicCircleAttInt == 3:
+            if magicCircleAttInt > 2:
                 spell31ProgressLabelInt += 1
                 if 6 > math.floor(spell31ProgressLabelInt/10 + 1) > spell31LVLInt:
                     spell31LVLInt = math.floor(spell31ProgressLabelInt/10 + 1)
                     spell31LVLLabel.config(text='{0}'.format(spell31LVLInt))
                 spell31ProgressLabel.config(text='{0}'.format(spell31ProgressLabelInt))
         elif num == 5:
-            if magicCircleAttInt == 3:
+            if magicCircleAttInt > 2:
                 spell32ProgressLabelInt += 1
                 if 6 > math.floor(spell32ProgressLabelInt/10 + 1) > spell32LVLInt:
                     spell32LVLInt = math.floor(spell32ProgressLabelInt/10 + 1)
                     spell32LVLLabel.config(text='{0}'.format(spell32LVLInt))
                 spell32ProgressLabel.config(text='{0}'.format(spell32ProgressLabelInt))
         elif num == 6:
-            if magicCircleAttInt == 4:
+            if magicCircleAttInt > 3:
                 spell41ProgressLabelInt += 1
-                if 6 > math.floor(spell41ProgressLabelInt/10 + 1) > spell41LVLInt:
+                if 5 > math.floor(spell41ProgressLabelInt/10 + 1) > spell41LVLInt:
                     spell41LVLInt = math.floor(spell41ProgressLabelInt/10 + 1)
                     spell41LVLLabel.config(text='{0}'.format(spell41LVLInt))
                 spell41ProgressLabel.config(text='{0}'.format(spell41ProgressLabelInt))
         elif num == 7:
-            if magicCircleAttInt == 4:
+            if magicCircleAttInt > 3:
                 spell42ProgressLabelInt += 1
-                if 6 > math.floor(spell42ProgressLabelInt/10 + 1) > spell42LVLInt:
+                if 5 > math.floor(spell42ProgressLabelInt/10 + 1) > spell42LVLInt:
                     spell42LVLInt = math.floor(spell42ProgressLabelInt/10 + 1)
                     spell42LVLLabel.config(text='{0}'.format(spell42LVLInt))
                 spell42ProgressLabel.config(text='{0}'.format(spell42ProgressLabelInt))
         elif num == 8:
-            if magicCircleAttInt == 5:
+            if magicCircleAttInt > 4:
                 spell51ProgressLabelInt += 1
-                if 6 > math.floor(spell51ProgressLabelInt/10 + 1) > spell51LVLInt:
+                if 4 > math.floor(spell51ProgressLabelInt/10 + 1) > spell51LVLInt:
                     spell51LVLInt = math.floor(spell51ProgressLabelInt/10 + 1)
                     spell51LVLLabel.config(text='{0}'.format(spell51LVLInt))
                 spell51ProgressLabel.config(text='{0}'.format(spell51ProgressLabelInt))
         elif num == 9:
-            if magicCircleAttInt == 5:
+            if magicCircleAttInt > 4:
                 spell52ProgressLabelInt += 1
-                if 6 > math.floor(spell52ProgressLabelInt/10 + 1) > spell52LVLInt:
+                if 4 > math.floor(spell52ProgressLabelInt/10 + 1) > spell52LVLInt:
                     spell52LVLInt = math.floor(spell52ProgressLabelInt/10 + 1)
                     spell52LVLLabel.config(text='{0}'.format(spell52LVLInt))
                 spell52ProgressLabel.config(text='{0}'.format(spell52ProgressLabelInt))
         elif num == 10:
-            if magicCircleAttInt == 1:
+            if magicCircleAttInt > 0:
                 spell211ProgressLabelInt += 1
                 if 6 > math.floor(spell211ProgressLabelInt/10 + 1) > spell211LVLInt:
                     spell211LVLInt = math.floor(spell211ProgressLabelInt/10 + 1)
                     spell211LVLLabel.config(text='{0}'.format(spell211LVLInt))
                 spell211ProgressLabel.config(text='{0}'.format(spell211ProgressLabelInt))
         elif num == 11:
-            if magicCircleAttInt == 1:
+            if magicCircleAttInt > 0:
                 spell212ProgressLabelInt += 1
                 if 6 > math.floor(spell212ProgressLabelInt/10 + 1) > spell212LVLInt:
                     spell212LVLInt = math.floor(spell212ProgressLabelInt/10 + 1)
                     spell212LVLLabel.config(text='{0}'.format(spell212LVLInt))
                 spell212ProgressLabel.config(text='{0}'.format(spell212ProgressLabelInt))
         elif num == 12:
-            if magicCircleAttInt == 2:
+            if magicCircleAttInt > 1:
                 spell221ProgressLabelInt += 1
                 if 6 > math.floor(spell221ProgressLabelInt/10 + 1) > spell221LVLInt:
                     spell221LVLInt = math.floor(spell221ProgressLabelInt/10 + 1)
                     spell221LVLLabel.config(text='{0}'.format(spell221LVLInt))
                 spell221ProgressLabel.config(text='{0}'.format(spell221ProgressLabelInt))
         elif num == 13:
-            if magicCircleAttInt == 2:
+            if magicCircleAttInt > 1:
                 spell222ProgressLabelInt += 1
                 if 6 > math.floor(spell222ProgressLabelInt/10 + 1) > spell222LVLInt:
                     spell222LVLInt = math.floor(spell222ProgressLabelInt/10 + 1)
                     spell222LVLLabel.config(text='{0}'.format(spell222LVLInt))
                 spell222ProgressLabel.config(text='{0}'.format(spell222ProgressLabelInt))
         elif num == 14:
-            if magicCircleAttInt == 3:
+            if magicCircleAttInt > 2:
                 spell231ProgressLabelInt += 1
                 if 6 > math.floor(spell231ProgressLabelInt/10 + 1) > spell231LVLInt:
                     spell231LVLInt = math.floor(spell231ProgressLabelInt/10 + 1)
                     spell231LVLLabel.config(text='{0}'.format(spell231LVLInt))
                 spell231ProgressLabel.config(text='{0}'.format(spell231ProgressLabelInt))
         elif num == 15:
-            if magicCircleAttInt == 3:
+            if magicCircleAttInt > 2:
                 spell232ProgressLabelInt += 1
                 if 6 > math.floor(spell232ProgressLabelInt/10 + 1) > spell232LVLInt:
                     spell232LVLInt = math.floor(spell232ProgressLabelInt/10 + 1)
                     spell232LVLLabel.config(text='{0}'.format(spell232LVLInt))
                 spell232ProgressLabel.config(text='{0}'.format(spell232ProgressLabelInt))
         elif num == 16:
-            if magicCircleAttInt == 4:
+            if magicCircleAttInt > 3:
                 spell241ProgressLabelInt += 1
-                if 6 > math.floor(spell241ProgressLabelInt/10 + 1) > spell241LVLInt:
+                if 5 > math.floor(spell241ProgressLabelInt/10 + 1) > spell241LVLInt:
                     spell241LVLInt = math.floor(spell241ProgressLabelInt/10 + 1)
                     spell241LVLLabel.config(text='{0}'.format(spell241LVLInt))
                 spell241ProgressLabel.config(text='{0}'.format(spell241ProgressLabelInt))
         elif num == 17:
-            if magicCircleAttInt == 4:
+            if magicCircleAttInt > 3:
                 spell242ProgressLabelInt += 1
-                if 6 > math.floor(spell242ProgressLabelInt/10 + 1) > spell242LVLInt:
+                if 5 > math.floor(spell242ProgressLabelInt/10 + 1) > spell242LVLInt:
                     spell242LVLInt = math.floor(spell242ProgressLabelInt/10 + 1)
                     spell242LVLLabel.config(text='{0}'.format(spell242LVLInt))
                 spell242ProgressLabel.config(text='{0}'.format(spell242ProgressLabelInt))
         elif num == 18:
-            if magicCircleAttInt == 5:
+            if magicCircleAttInt > 4:
                 spell251ProgressLabelInt += 1
-                if 6 > math.floor(spell251ProgressLabelInt/10 + 1) > spell251LVLInt:
+                if 4 > math.floor(spell251ProgressLabelInt/10 + 1) > spell251LVLInt:
                     spell251LVLInt = math.floor(spell251ProgressLabelInt/10 + 1)
                     spell251LVLLabel.config(text='{0}'.format(spell251LVLInt))
                 spell251ProgressLabel.config(text='{0}'.format(spell251ProgressLabelInt))
         elif num == 19:
-            if magicCircleAttInt == 5:
+            if magicCircleAttInt > 4:
                 spell252ProgressLabelInt += 1
-                if 6 > math.floor(spell252ProgressLabelInt/10 + 1) > spell252LVLInt:
+                if 4 > math.floor(spell252ProgressLabelInt/10 + 1) > spell252LVLInt:
                     spell252LVLInt = math.floor(spell252ProgressLabelInt/10 + 1)
                     spell252LVLLabel.config(text='{0}'.format(spell252LVLInt))
                 spell252ProgressLabel.config(text='{0}'.format(spell252ProgressLabelInt))
@@ -887,7 +894,7 @@ def create_radio(ChoRace,option):
                       variable=raceVar)
 
 def change_race():
-    global allStr,allAgi,allInt,allBody,lvlNow,allAtt,expNow,learningAttInt,shootAttInt,language,lastRace
+    global allStr,allAgi,allInt,allBody,lvlNow,allAtt,expNow,learningAttInt,shootAttInt,language,lastRace,lanAttLabel
     raceLabel2.config(text = raceVar.get())
     if raceVar.get() == 'Человек' and lastRace != 'Человек':
         learningAttInt += 1
@@ -913,17 +920,22 @@ def change_race():
             language = '{0},{1}'.format(language,lang)
         else:
             language = lang
+    lanAttLabel.config(text=language)
     lastRace = raceVar.get()
     CreateToolTip(raceLabel2,support['race'][raceVar.get()]['tooltip'])
 
 def add_att(num,widget):
-    global allAtt, meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,firstAidAttInt,manaAttInt,thiefArtAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt,magicCircleAttLabel,magicCircleAttLabel2
+    global allAtt, meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,firstAidAttInt,manaAttInt,thiefArtAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt,magicCircleAttLabel,magicCircleAttLabel2,spell211LVLLabel,spell212LVLLabel,spell221LVLLabel,spell222LVLLabel,spell231LVLLabel,spell232LVLLabel,spell241LVLLabel,spell242LVLLabel,spell251LVLLabel,spell252LVLLabel,spell11LVLLabel,spell12LVLLabel,spell21LVLLabel,spell22LVLLabel,spell31LVLLabel,spell32LVLLabel,spell41LVLLabel,spell42LVLLabel,spell51LVLLabel,spell52LVLLabel,staticEnergy,staticRegenEnergy,staticHaste,staticAttack,staticDMG,staticHP,staticRegenHP,staticEvade,staticDMG,staticMP,staticRegenMP,staticDirectMagicDMG,staticPeriodicMagicDMG,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalHP,totalRegenHP,totalEvade,totalDMG,totalMP,totalRegenMP,totalDirectMagicDMG,totalPeriodicMagicDMG,totalSpellPenetration,staticSpellPenetration
+
+
     if allAtt > 0:
         if num == 0:
             meleFightAttInt += 1
+            staticAttack += 1
             widget.config(text='{0}'.format(meleFightAttInt))
         elif num == 1:
             shootAttInt += 1
+            staticDMG += 1
             widget.config(text='{0}'.format(shootAttInt))
         elif num == 2:
             strongHitsAttInt += 1
@@ -936,12 +948,16 @@ def add_att(num,widget):
             widget.config(text='{0}'.format(tacticsAttInt))
         elif num == 5:
             attackAttInt += 1
+            staticAttack += 1
+            staticDMG += 1
             widget.config(text='{0}'.format(attackAttInt))
         elif num == 6:
             evasionAttInt += 1
+            staticEvade += 1
             widget.config(text='{0}'.format(evasionAttInt))
         elif num == 7:
             hasteAttInt += 1
+            staticHaste += 1
             widget.config(text='{0}'.format(hasteAttInt))
         elif num == 8:
             coldBloodAttInt += 1
@@ -951,6 +967,8 @@ def add_att(num,widget):
             widget.config(text='{0}'.format(thiefArtAttInt))
         elif num == 10:
             manaAttInt += 1
+            staticMP += 2
+            staticRegenMP += 1
             widget.config(text='{0}'.format(manaAttInt))
         elif num == 11:
             firstAidAttInt += 1
@@ -960,18 +978,49 @@ def add_att(num,widget):
             if magicCircleAttInt == 1:
                 spell11LVLInt = 1
                 spell12LVLInt = 1
+                spell211LVLInt = 1
+                spell212LVLInt = 1
+                spell11LVLLabel.config(text = '{0}'.format(spell11LVLInt))
+                spell12LVLLabel.config(text = '{0}'.format(spell12LVLInt))
+                spell211LVLLabel.config(text = '{0}'.format(spell211LVLInt))
+                spell212LVLLabel.config(text = '{0}'.format(spell212LVLInt))
             elif magicCircleAttInt == 2:
                 spell21LVLInt = 1
                 spell22LVLInt = 1
+                spell221LVLInt = 1
+                spell222LVLInt = 1
+                spell21LVLLabel.config(text = '{0}'.format(spell21LVLInt))
+                spell22LVLLabel.config(text = '{0}'.format(spell22LVLInt))
+                spell221LVLLabel.config(text = '{0}'.format(spell221LVLInt))
+                spell222LVLLabel.config(text = '{0}'.format(spell222LVLInt))
             elif magicCircleAttInt == 3:
                 spell31LVLInt = 1
                 spell32LVLInt = 1
+                spell231LVLInt = 1
+                spell232LVLInt = 1
+                spell31LVLLabel.config(text = '{0}'.format(spell31LVLInt))
+                spell32LVLLabel.config(text = '{0}'.format(spell32LVLInt))
+                spell231LVLLabel.config(text = '{0}'.format(spell231LVLInt))
+                spell232LVLLabel.config(text = '{0}'.format(spell232LVLInt))
             elif magicCircleAttInt == 4:
                 spell41LVLInt = 1
                 spell42LVLInt = 1
+                spell241LVLInt = 1
+                spell242LVLInt = 1
+                spell41LVLLabel.config(text = '{0}'.format(spell41LVLInt))
+                spell42LVLLabel.config(text = '{0}'.format(spell42LVLInt))
+                spell241LVLLabel.config(text = '{0}'.format(spell241LVLInt))
+                spell242LVLLabel.config(text = '{0}'.format(spell242LVLInt))
             elif magicCircleAttInt == 5:
                 spell51LVLInt = 1
                 spell52LVLInt = 1
+                spell251LVLInt = 1
+                spell252LVLInt = 1
+                spell251LVLLabel.config(text = '{0}'.format(spell51LVLInt))
+                spell252LVLLabel.config(text = '{0}'.format(spell52LVLInt))
+                spell251LVLLabel.config(text = '{0}'.format(spell251LVLInt))
+                spell252LVLLabel.config(text = '{0}'.format(spell252LVLInt))
+
             widget.config(text='{0}'.format(magicCircleAttInt))
             try:
                 if magicCircleAttLabel:
@@ -981,15 +1030,20 @@ def add_att(num,widget):
                 print("magic window don't open")
         elif num == 13:
             magicPowerAttInt += 1
+            staticDirectMagicDMG += 1
+            staticSpellPenetration += 1
             widget.config(text='{0}'.format(magicPowerAttInt))
         elif num == 14:
             learningAttInt += 1
             widget.config(text='{0}'.format(learningAttInt))
         elif num == 15:
             healthAttInt += 1
+            staticHP += 2
+            staticRegenHP += 1
             widget.config(text='{0}'.format(healthAttInt))
         elif num == 16:
             energyAttInt += 1
+            staticEnergy += 1
             widget.config(text='{0}'.format(energyAttInt))
         elif num == 17:
             resistAttInt += 1
@@ -1004,9 +1058,193 @@ def add_att(num,widget):
         allAtt -= 1
         availableAttNumb.config(text='{0}'.format(allAtt))
 
+def create_active_skill_window():
+
+    global skillProgressInt1,skillProgressInt2,skillProgressInt3,skillProgressInt4,skillProgressInt5,skillProgressInt6,skillProgressInt7,skillProgressInt8,skillProgressInt9,skillProgressInt10,skillLevelInt1,skillLevelInt2,skillLevelInt3,skillLevelInt4,skillLevelInt5,skillLevelInt6,skillLevelInt7,skillLevelInt8,skillLevelInt9,skillLevelInt10,skillLevelLabel1,skillLevelLabel2,skillLevelLabel3,skillLevelLabel4,skillLevelLabel5,skillLevelLabel6,skillLevelLabel7,skillLevelLabel8,skillLevelLabel9,skillLevelLabel10,skillProgressLabel1,skillProgressLabel2,skillProgressLabel3,skillProgressLabel4,skillProgressLabel5,skillProgressLabel6,skillProgressLabel7,skillProgressLabel8,skillProgressLabel9,skillProgressLabel10
+
+    ChoAct = Toplevel(window)
+    ChoAct.title('Личные умения')
+    ChoAct.resizable(width=False, height=False)
+    ChoAct.rowconfigure(0, pad=3)
+    ChoAct.rowconfigure(1, pad=3)
+    ChoAct.rowconfigure(2, pad=3)
+    ChoAct.rowconfigure(3, pad=3)
+    ChoAct.rowconfigure(4, pad=3)
+    ChoAct.columnconfigure(0, pad=3)
+    ChoAct.columnconfigure(1, pad=3)
+    ChoAct.columnconfigure(2, pad=3)
+    ChoAct.columnconfigure(3, pad=3)
+
+    def add_skill_exp(num):
+
+        global skillProgressInt1,skillProgressInt2,skillProgressInt3,skillProgressInt4,skillProgressInt5,skillProgressInt6,skillProgressInt7,skillProgressInt8,skillProgressInt9,skillProgressInt10,skillLevelInt1,skillLevelInt2,skillLevelInt3,skillLevelInt4,skillLevelInt5,skillLevelInt6,skillLevelInt7,skillLevelInt8,skillLevelInt9,skillLevelInt10,skillLevelLabel1,skillLevelLabel2,skillLevelLabel3,skillLevelLabel4,skillLevelLabel5,skillLevelLabel6,skillLevelLabel7,skillLevelLabel8,skillLevelLabel9,skillLevelLabel10,skillProgressLabel1,skillProgressLabel2,skillProgressLabel3,skillProgressLabel4,skillProgressLabel5,skillProgressLabel6,skillProgressLabel7,skillProgressLabel8,skillProgressLabel9,skillProgressLabel10
+
+        if num == 0:
+            skillProgressInt1 += 1
+            skillProgressLabel1.config(text='{0}'.format(skillProgressInt1))
+            if 6 > math.floor(skillProgressInt1/10 + 1) > skillLevelInt1:
+                skillLevelInt1 = math.floor(skillProgressInt1/10 + 1)
+                skillLevelLabel1.config(text='{0}'.format(skillLevelInt1))
+        elif num == 1:
+            skillProgressInt2 += 1
+            skillProgressLabel2.config(text='{0}'.format(skillProgressInt2))
+            if 6 > math.floor(skillProgressInt2/10 + 1) > skillLevelInt2:
+                skillLevelInt2 = math.floor(skillProgressInt2/10 + 1)
+                skillLevelLabel2.config(text='{0}'.format(skillLevelInt2))
+        elif num == 2:
+            skillProgressInt3 += 1
+            skillProgressLabel3.config(text='{0}'.format(skillProgressInt3))
+            if 6 > math.floor(skillProgressInt3/10 + 1) > skillLevelInt3:
+                skillLevelInt3 = math.floor(skillProgressInt3/10 + 1)
+                skillLevelLabel3.config(text='{0}'.format(skillLevelInt3))
+        elif num == 3:
+            skillProgressInt4 += 1
+            skillProgressLabel4.config(text='{0}'.format(skillProgressInt4))
+            if 6 > math.floor(skillProgressInt4/10 + 1) > skillLevelInt4:
+                skillLevelInt4 = math.floor(skillProgressInt4/10 + 1)
+                skillLevelLabel4.config(text='{0}'.format(skillLevelInt4))
+        elif num == 4:
+            skillProgressInt5 += 1
+            skillProgressLabel5.config(text='{0}'.format(skillProgressInt5))
+            if 6 > math.floor(skillProgressInt5/10 + 1) > skillLevelInt5:
+                skillLevelInt5 = math.floor(skillProgressInt5/10 + 1)
+                skillLevelLabel5.config(text='{0}'.format(skillLevelInt5))
+        elif num == 5:
+            skillProgressInt6 += 1
+            skillProgressLabel6.config(text='{0}'.format(skillProgressInt6))
+            if 6 > math.floor(skillProgressInt6/10 + 1) > skillLevelInt6:
+                skillLevelInt6 = math.floor(skillProgressInt6/10 + 1)
+                skillLevelLabel6.config(text='{0}'.format(skillLevelInt6))
+        elif num == 6:
+            skillProgressInt7 += 1
+            skillProgressLabel7.config(text='{0}'.format(skillProgressInt7))
+            if 6 > math.floor(skillProgressInt7/10 + 1) > skillLevelInt7:
+                skillLevelInt7 = math.floor(skillProgressInt7/10 + 1)
+                skillLevelLabel7.config(text='{0}'.format(skillLevelInt7))
+        elif num == 7:
+            skillProgressInt8 += 1
+            skillProgressLabel8.config(text='{0}'.format(skillProgressInt8))
+            if 6 > math.floor(skillProgressInt8/10 + 1) > skillLevelInt8:
+                skillLevelInt8 = math.floor(skillProgressInt8/10 + 1)
+                skillLevelLabel8.config(text='{0}'.format(skillLevelInt8))
+        elif num == 8:
+            skillProgressInt9 += 1
+            skillProgressLabel9.config(text='{0}'.format(skillProgressInt9))
+            if 6 > math.floor(skillProgressInt9/10 + 1) > skillLevelInt9:
+                skillLevelInt9 = math.floor(skillProgressInt9/10 + 1)
+                skillLevelLabel9.config(text='{0}'.format(skillLevelInt9))
+        elif num == 9:
+            skillProgressInt10 += 1
+            skillProgressLabel10.config(text='{0}'.format(skillProgressInt10))
+            if 6 > math.floor(skillProgressInt10/10 + 1) > skillLevelInt10:
+                skillLevelInt10 = math.floor(skillProgressInt10/10 + 1)
+                skillLevelLabel10.config(text='{0}'.format(skillLevelInt10))
+
+    skillLabel1 = Label(ChoAct, text=list(support['activeSkill'].keys())[0])
+    skillLabel2 = Label(ChoAct, text=list(support['activeSkill'].keys())[1])
+    skillLabel3 = Label(ChoAct, text=list(support['activeSkill'].keys())[2])
+    skillLabel4 = Label(ChoAct, text=list(support['activeSkill'].keys())[3])
+    skillLabel5 = Label(ChoAct, text=list(support['activeSkill'].keys())[4])
+    skillLabel6 = Label(ChoAct, text=list(support['activeSkill'].keys())[5])
+    skillLabel7 = Label(ChoAct, text=list(support['activeSkill'].keys())[6])
+    skillLabel8 = Label(ChoAct, text=list(support['activeSkill'].keys())[7])
+    skillLabel9 = Label(ChoAct, text=list(support['activeSkill'].keys())[8])
+    skillLabel10 = Label(ChoAct, text=list(support['activeSkill'].keys())[9])
+
+    CreateToolTip(skillLabel1,support['activeSkill'][list(support['activeSkill'].keys())[0]])
+    CreateToolTip(skillLabel2,support['activeSkill'][list(support['activeSkill'].keys())[1]])
+    CreateToolTip(skillLabel3,support['activeSkill'][list(support['activeSkill'].keys())[2]])
+    CreateToolTip(skillLabel4,support['activeSkill'][list(support['activeSkill'].keys())[3]])
+    CreateToolTip(skillLabel5,support['activeSkill'][list(support['activeSkill'].keys())[4]])
+    CreateToolTip(skillLabel6,support['activeSkill'][list(support['activeSkill'].keys())[5]])
+    CreateToolTip(skillLabel7,support['activeSkill'][list(support['activeSkill'].keys())[6]])
+    CreateToolTip(skillLabel8,support['activeSkill'][list(support['activeSkill'].keys())[7]])
+    CreateToolTip(skillLabel9,support['activeSkill'][list(support['activeSkill'].keys())[8]])
+    CreateToolTip(skillLabel10,support['activeSkill'][list(support['activeSkill'].keys())[9]])
+
+    skillLabel1.grid(row=0, column=0, sticky=W)
+    skillLabel2.grid(row=1, column=0, sticky=W)
+    skillLabel3.grid(row=2, column=0, sticky=W)
+    skillLabel4.grid(row=3, column=0, sticky=W)
+    skillLabel5.grid(row=4, column=0, sticky=W)
+    skillLabel6.grid(row=5, column=0, sticky=W)
+    skillLabel7.grid(row=6, column=0, sticky=W)
+    skillLabel8.grid(row=7, column=0, sticky=W)
+    skillLabel9.grid(row=8, column=0, sticky=W)
+    skillLabel10.grid(row=9, column=0, sticky=W)
+
+    skillProgressLabel1 = Label(ChoAct, text='{0}'.format(skillProgressInt1))
+    skillProgressLabel2 = Label(ChoAct, text='{0}'.format(skillProgressInt2))
+    skillProgressLabel3 = Label(ChoAct, text='{0}'.format(skillProgressInt3))
+    skillProgressLabel4 = Label(ChoAct, text='{0}'.format(skillProgressInt4))
+    skillProgressLabel5 = Label(ChoAct, text='{0}'.format(skillProgressInt5))
+    skillProgressLabel6 = Label(ChoAct, text='{0}'.format(skillProgressInt6))
+    skillProgressLabel7 = Label(ChoAct, text='{0}'.format(skillProgressInt7))
+    skillProgressLabel8 = Label(ChoAct, text='{0}'.format(skillProgressInt8))
+    skillProgressLabel9 = Label(ChoAct, text='{0}'.format(skillProgressInt9))
+    skillProgressLabel10 = Label(ChoAct, text='{0}'.format(skillProgressInt10))
+
+    skillProgressLabel1.grid(row=0, column=1)
+    skillProgressLabel2.grid(row=1, column=1)
+    skillProgressLabel3.grid(row=2, column=1)
+    skillProgressLabel4.grid(row=3, column=1)
+    skillProgressLabel5.grid(row=4, column=1)
+    skillProgressLabel6.grid(row=5, column=1)
+    skillProgressLabel7.grid(row=6, column=1)
+    skillProgressLabel8.grid(row=7, column=1)
+    skillProgressLabel9.grid(row=8, column=1)
+    skillProgressLabel10.grid(row=9, column=1)
+
+    skillButt1 = Button(ChoAct, text='+', command=lambda: add_skill_exp(0))
+    skillButt2 = Button(ChoAct, text='+', command=lambda: add_skill_exp(1))
+    skillButt3 = Button(ChoAct, text='+', command=lambda: add_skill_exp(2))
+    skillButt4 = Button(ChoAct, text='+', command=lambda: add_skill_exp(3))
+    skillButt5 = Button(ChoAct, text='+', command=lambda: add_skill_exp(4))
+    skillButt6 = Button(ChoAct, text='+', command=lambda: add_skill_exp(5))
+    skillButt7 = Button(ChoAct, text='+', command=lambda: add_skill_exp(6))
+    skillButt8 = Button(ChoAct, text='+', command=lambda: add_skill_exp(7))
+    skillButt9 = Button(ChoAct, text='+', command=lambda: add_skill_exp(8))
+    skillButt10 = Button(ChoAct, text='+', command=lambda: add_skill_exp(9))
+
+    skillButt1.grid(row=0, column=2)
+    skillButt2.grid(row=1, column=2)
+    skillButt3.grid(row=2, column=2)
+    skillButt4.grid(row=3, column=2)
+    skillButt5.grid(row=4, column=2)
+    skillButt6.grid(row=5, column=2)
+    skillButt7.grid(row=6, column=2)
+    skillButt8.grid(row=7, column=2)
+    skillButt9.grid(row=8, column=2)
+    skillButt10.grid(row=9, column=2)
+
+    skillLevelLabel1 = Label(ChoAct, text='{0}'.format(skillLevelInt1))
+    skillLevelLabel2 = Label(ChoAct, text='{0}'.format(skillLevelInt2))
+    skillLevelLabel3 = Label(ChoAct, text='{0}'.format(skillLevelInt3))
+    skillLevelLabel4 = Label(ChoAct, text='{0}'.format(skillLevelInt4))
+    skillLevelLabel5 = Label(ChoAct, text='{0}'.format(skillLevelInt5))
+    skillLevelLabel6 = Label(ChoAct, text='{0}'.format(skillLevelInt6))
+    skillLevelLabel7 = Label(ChoAct, text='{0}'.format(skillLevelInt7))
+    skillLevelLabel8 = Label(ChoAct, text='{0}'.format(skillLevelInt8))
+    skillLevelLabel9 = Label(ChoAct, text='{0}'.format(skillLevelInt9))
+    skillLevelLabel10 = Label(ChoAct, text='{0}'.format(skillLevelInt10))
+
+    skillLevelLabel1.grid(row=0, column=3)
+    skillLevelLabel2.grid(row=1, column=3)
+    skillLevelLabel3.grid(row=2, column=3)
+    skillLevelLabel4.grid(row=3, column=3)
+    skillLevelLabel5.grid(row=4, column=3)
+    skillLevelLabel6.grid(row=5, column=3)
+    skillLevelLabel7.grid(row=6, column=3)
+    skillLevelLabel8.grid(row=7, column=3)
+    skillLevelLabel9.grid(row=8, column=3)
+    skillLevelLabel10.grid(row=9, column=3)
+
+
 # all vars
 lvlNow = 1
 expNow = 0
+repLvl = 1
+repExp = 0
 allAtt = 12
 OPTIONS = list(support['race'].keys())
 allMagicSchool = list(support['magic'].keys())
@@ -1014,6 +1252,58 @@ list_lvl = list_lvlExp()
 language = 'Общий'
 firstSchMag = allMagicSchool[0]
 secondSchMag = allMagicSchool[0]
+
+# status att
+staticEnergy = 1
+staticRegenEnergy = 0
+staticHaste = 0
+staticAttack = 0
+staticDMG = 0
+staticARP = 0
+staticHP = 5
+staticRegenHP = 0
+staticEvade = 0
+staticArmor = 0
+staticMgicArmor = 0
+staticMP = 0
+staticRegenMP = 0
+staticSpellPenetration = 0
+staticDirectMagicDMG = 0
+staticPeriodicMagicDMG = 0
+
+changeEnergy = 0
+changeRegenEnergy = 0
+changeHaste = 0
+changeAttack = 0
+changeDMG = staticDMG
+changeARP = 0
+changeHP = 0
+changeRegenHP = 0
+changeEvade = 0
+changeArmor = 0
+changeMgicArmor = 0
+changeMP = 0
+changeRegenMP = 0
+changeSpellPenetration = 0
+changeDirectMagicDMG = 0
+changePeriodicMagicDMG = 0
+
+totalEnergy = 1
+totalRegenEnergy = 0
+totalHaste = 0
+totalAttack = 0
+totalDMG = staticDMG
+totalARP = 0
+totalHP = 5
+totalRegenHP = 0
+totalEvade = 0
+totalArmor = 0
+totalMgicArmor = 0
+totalMP = 0
+totalRegenMP = 0
+totalSpellPenetration = 0
+totalDirectMagicDMG = 0
+totalPeriodicMagicDMG = 0
 
 # Variables str
 allStr = 0
@@ -1088,6 +1378,28 @@ spell242LVLInt = 0
 spell251LVLInt = 0
 spell252LVLInt = 0
 
+skillProgressInt1 = 0
+skillProgressInt2 = 0
+skillProgressInt3 = 0
+skillProgressInt4 = 0
+skillProgressInt5 = 0
+skillProgressInt6 = 0
+skillProgressInt7 = 0
+skillProgressInt8 = 0
+skillProgressInt9 = 0
+skillProgressInt10 = 0
+
+skillLevelInt1 = 0
+skillLevelInt2 = 0
+skillLevelInt3 = 0
+skillLevelInt4 = 0
+skillLevelInt5 = 0
+skillLevelInt6 = 0
+skillLevelInt7 = 0
+skillLevelInt8 = 0
+skillLevelInt9 = 0
+skillLevelInt10 = 0
+
 window = Tk() #sozdanie okna
 window.title('Лист персонажа.') #Присвоение окну тайтла
 window.resizable(width=False, height=False) #Запрет на изменение размеров окна
@@ -1121,12 +1433,16 @@ loginLabel = Label(frame2, text='Имя*:')
 login = Entry(frame2)
 levelLabel = Label(frame2, text='Уровень:')
 levelLabel2 = Label(frame2, text='{0}'.format(lvlNow))
+repLabel = Label(frame2, text='Уровень репутации:')
+repLabel2 = Label(frame2, text='{0}'.format(repLvl))
 raceLabel = Label(frame2, text='Раса:')
 raceLabel2 = Label(frame2, text='{0}'.format(raceVar.get()))
-# raceOpt = ttk.Combobox(frame2, values = OPTIONS)
 raceADD = Button(frame2, command=create_race_window, text='Выбрать расу')
+magicButt = Button(frame2, command=create_magic_window, text='Магия')
+activeAbilButt = Button(frame2, command=create_active_skill_window, text='Активные умения')
+passiveAbilButt = Button(frame2, command=create_active_skill_window, text='Пассивки')
 lanLabel = Label(frame2, text='Языки:')
-lanAttLabel = Label(frame2, text='Языки:')
+lanAttLabel = Label(frame2, text=language)
 
 CreateToolTip(raceLabel2,support['race'][OPTIONS[0]]['tooltip'])
 
@@ -1135,9 +1451,16 @@ loginLabel.grid(row=1, column=0)
 login.grid(row=1, column=1, columnspan=2)
 levelLabel.grid(row=2, column=0)
 levelLabel2.grid(row=2, column=1, columnspan=2)
-raceLabel.grid(row=3, column=0)
-raceLabel2.grid(row=3, column=1)
-raceADD.grid(row=3,column=2)
+repLabel.grid(row=3, column=0)
+repLabel2.grid(row=3, column=1, columnspan=2)
+lanLabel.grid(row=4, column=0)
+lanAttLabel.grid(row=4, column=1, columnspan=2)
+raceLabel.grid(row=5, column=0)
+raceLabel2.grid(row=5, column=1)
+raceADD.grid(row=5,column=2)
+activeAbilButt.grid(row=6, column=0)
+magicButt.grid(row=6, column=1)
+passiveAbilButt.grid(row=6, column=2)
 # raceOpt.grid(row=3,column=2)
 
 # raceOpt.bind("<<ComboboxSelected>>", change_race)
@@ -1161,8 +1484,12 @@ availableAttNumb = Label(frame3, text='{0}'.format(allAtt))
 changeAtt = Button(frame3, command=create_attribute_window, text='Окно характеристик')
 expNowLabel = Label(frame3, text='Текущее количество опыта:')
 expNowAttLabel = Label(frame3, text='{0}'.format(expNow))
+repExpNowLabel = Label(frame3, text='Текущее количество репутации:')
+repExpNowAttLabel = Label(frame3, text='{0}'.format(repExp))
 addExpLabel = Label(frame3, text='Добавить опыт:')
 addExp = Entry(frame3)
+addRepLabel = Label(frame3, text='Добавить репу:')
+addRep = Entry(frame3)
 addExpButt = Button(frame3, command=new_exp, text='Прокачаться!')
 
 
@@ -1171,9 +1498,13 @@ availableAttNumb.grid(row=0, column=2)
 changeAtt.grid(row=1, column=0, columnspan=3)
 expNowLabel.grid(row=2, column=0, columnspan=2)
 expNowAttLabel.grid(row=2, column=2)
-addExpLabel.grid(row=3, column=0)
-addExp.grid(row=3, column=1, columnspan=2)
-addExpButt.grid(row=4, column=0, columnspan=3)
+repExpNowLabel.grid(row=3, column=0, columnspan=2)
+repExpNowAttLabel.grid(row=3, column=2)
+addExpLabel.grid(row=4, column=0)
+addExp.grid(row=4, column=1, columnspan=2)
+addRepLabel.grid(row=5, column=0)
+addRep.grid(row=5, column=1, columnspan=2)
+addExpButt.grid(row=6, column=0, columnspan=3)
 
 frame4=Frame(window, relief=RAISED, borderwidth=1)
 frame4.rowconfigure(0, pad=3)
@@ -1185,15 +1516,147 @@ frame4.rowconfigure(5, pad=3)
 frame4.rowconfigure(6, pad=3)
 frame4.columnconfigure(0, pad=3)
 frame4.columnconfigure(1, pad=3)
-frame4.grid(row=1, column=0)
+frame4.columnconfigure(2, pad=3)
+frame4.columnconfigure(3, pad=3)
+frame4.columnconfigure(4, pad=3)
+frame4.columnconfigure(5, pad=3)
+frame4.columnconfigure(6, pad=3)
+frame4.columnconfigure(7, pad=3)
+frame4.columnconfigure(8, pad=3)
+frame4.columnconfigure(9, pad=3)
+frame4.columnconfigure(10, pad=3)
+frame4.columnconfigure(11, pad=3)
+frame4.columnconfigure(12, pad=3)
+frame4.columnconfigure(13, pad=3)
+frame4.columnconfigure(14, pad=3)
+frame4.columnconfigure(15, pad=3)
+frame4.columnconfigure(16, pad=3)
+frame4.columnconfigure(17, pad=3)
+frame4.grid(row=1, column=0, columnspan=2)
 
-magicButt = Button(frame2, command=create_magic_window, text='Магия')
-activeAbilButt = Button(frame2, command=create_attribute_window, text='Активные умения')
+Label(frame4, text = 'Параметр').grid(row=0, column=0)
+Label(frame4, text = 'Энергия').grid(row=0, column=1)
+Label(frame4, text = 'Регенерация\nЭнергии').grid(row=0, column=2)
+Label(frame4, text = 'Скорость').grid(row=0, column=3)
+Label(frame4, text = 'Урон\nближний').grid(row=0, column=4)
+Label(frame4, text = 'Урон\nдальний').grid(row=0, column=5)
+Label(frame4, text = 'АРП').grid(row=0, column=6)
+Label(frame4, text = 'ХП').grid(row=0, column=7)
+Label(frame4, text = 'Регенерация\nХП').grid(row=0, column=8)
+Label(frame4, text = 'Уклонение').grid(row=0, column=9)
+Label(frame4, text = 'Броня').grid(row=0, column=10)
+Label(frame4, text = 'Броня от\nмагии').grid(row=0, column=11)
+Label(frame4, text = 'МП').grid(row=0, column=12)
+Label(frame4, text = 'Регенерация\nМП').grid(row=0, column=13)
+Label(frame4, text = 'Магическое\nпроникновение').grid(row=0, column=14)
+Label(frame4, text = 'Прямой\nмаг.урон').grid(row=0, column=15)
+Label(frame4, text = 'Период\nмаг.урон').grid(row=0, column=16)
+Label(frame4, text = 'Статус').grid(row=1, column=0)
+Label(frame4, text = 'Изменения').grid(row=2, column=0)
+Label(frame4, text = 'Текущий итог').grid(row=3, column=0)
 
-# magicButt.grid(row=0, column=0)
-# activeAbilButt.grid(row=0, column=1)
+staticEnergyLabel = Label(frame4, text = '{0}'.format(staticEnergy))
+staticRegenEnergyLabel = Label(frame4, text = '{0}'.format(staticRegenEnergy))
+staticHasteLabel = Label(frame4, text = '{0}'.format(staticHaste))
+staticAttackLabel = Label(frame4, text = '{0}'.format(staticAttack))
+staticDMGLabel = Label(frame4, text = '{0}'.format(staticDMG))
+staticARPLabel = Label(frame4, text = '{0}'.format(staticARP))
+staticHPLabel = Label(frame4, text = '{0}'.format(staticHP))
+staticRegenHPLabel = Label(frame4, text = '{0}'.format(staticRegenHP))
+staticEvadeLabel = Label(frame4, text = '{0}'.format(staticEvade))
+staticArmorLabel = Label(frame4, text = '{0}'.format(staticArmor))
+staticMgicArmorLabel = Label(frame4, text = '{0}'.format(staticMgicArmor))
+staticMPLabel = Label(frame4, text = '{0}'.format(staticMP))
+staticRegenMPLabel = Label(frame4, text = '{0}'.format(staticRegenMP))
+staticSpellPenetrationLabel = Label(frame4, text = '{0}'.format(staticSpellPenetration))
+staticDirectMagicDMGLabel = Label(frame4, text = '{0}'.format(staticDirectMagicDMG))
+staticPeriodicMagicDMGLabel = Label(frame4, text = '{0}'.format(staticPeriodicMagicDMG))
 
-magicButt.grid(row=4, column=0)
-activeAbilButt.grid(row=4, column=1, columnspan=2)
+staticEnergyLabel.grid(row=1, column=1)
+staticRegenEnergyLabel.grid(row=1, column=2)
+staticHasteLabel.grid(row=1, column=3)
+staticAttackLabel.grid(row=1, column=4)
+staticDMGLabel.grid(row=1, column=5)
+staticARPLabel.grid(row=1, column=6)
+staticHPLabel.grid(row=1, column=7)
+staticRegenHPLabel.grid(row=1, column=8)
+staticEvadeLabel.grid(row=1, column=9)
+staticArmorLabel.grid(row=1, column=10)
+staticMgicArmorLabel.grid(row=1, column=11)
+staticMPLabel.grid(row=1, column=12)
+staticRegenMPLabel.grid(row=1, column=13)
+staticSpellPenetrationLabel.grid(row=1, column=14)
+staticDirectMagicDMGLabel.grid(row=1, column=15)
+staticPeriodicMagicDMGLabel.grid(row=1, column=16)
+
+changeEnergyLabel = Entry(frame4,width=8)
+changeRegenEnergyLabel = Entry(frame4,width=8)
+changeHasteLabel = Entry(frame4,width=8)
+changeAttackLabel = Entry(frame4,width=8)
+changeDMGLabel = Entry(frame4,width=8)
+changeARPLabel = Entry(frame4,width=8)
+changeHPLabel = Entry(frame4,width=8)
+changeRegenHPLabel = Entry(frame4,width=8)
+changeEvadeLabel = Entry(frame4,width=8)
+changeArmorLabel = Entry(frame4,width=8)
+changeMgicArmorLabel = Entry(frame4,width=8)
+changeMPLabel = Entry(frame4,width=8)
+changeRegenMPLabel = Entry(frame4,width=8)
+changeSpellPenetrationLabel = Entry(frame4,width=8)
+changeDirectMagicDMGLabel = Entry(frame4,width=8)
+changePeriodicMagicDMGLabel = Entry(frame4,width=8)
+
+# ADLogin.bind('<Return>', clickReturn)
+
+changeEnergyLabel.grid(row=2, column=1)
+changeRegenEnergyLabel.grid(row=2, column=2)
+changeHasteLabel.grid(row=2, column=3)
+changeAttackLabel.grid(row=2, column=4)
+changeDMGLabel.grid(row=2, column=5)
+changeARPLabel.grid(row=2, column=6)
+changeHPLabel.grid(row=2, column=7)
+changeRegenHPLabel.grid(row=2, column=8)
+changeEvadeLabel.grid(row=2, column=9)
+changeArmorLabel.grid(row=2, column=10)
+changeMgicArmorLabel.grid(row=2, column=11)
+changeMPLabel.grid(row=2, column=12)
+changeRegenMPLabel.grid(row=2, column=13)
+changeSpellPenetrationLabel.grid(row=2, column=14)
+changeDirectMagicDMGLabel.grid(row=2, column=15)
+changePeriodicMagicDMGLabel.grid(row=2, column=16)
+
+totalEnergyLabel = Label(frame4, text = '{0}'.format(totalEnergy))
+totalRegenEnergyLabel = Label(frame4, text = '{0}'.format(totalRegenEnergy))
+totalHasteLabel = Label(frame4, text = '{0}'.format(totalHaste))
+totalAttackLabel = Label(frame4, text = '{0}'.format(totalAttack))
+totalDMGLabel = Label(frame4, text = '{0}'.format(totalDMG))
+totalARPLabel = Label(frame4, text = '{0}'.format(totalARP))
+totalHPLabel = Label(frame4, text = '{0}'.format(totalHP))
+totalRegenHPLabel = Label(frame4, text = '{0}'.format(totalRegenHP))
+totalEvadeLabel = Label(frame4, text = '{0}'.format(totalEvade))
+totalArmorLabel = Label(frame4, text = '{0}'.format(totalArmor))
+totalMgicArmorLabel = Label(frame4, text = '{0}'.format(totalMgicArmor))
+totalMPLabel = Label(frame4, text = '{0}'.format(totalMP))
+totalRegenMPLabel = Label(frame4, text = '{0}'.format(totalRegenMP))
+totalSpellPenetrationLabel = Label(frame4, text = '{0}'.format(totalSpellPenetration))
+totalDirectMagicDMGLabel = Label(frame4, text = '{0}'.format(totalDirectMagicDMG))
+totalPeriodicMagicDMGLabel = Label(frame4, text = '{0}'.format(totalPeriodicMagicDMG))
+
+totalEnergyLabel.grid(row=3, column=1)
+totalRegenEnergyLabel.grid(row=3, column=2)
+totalHasteLabel.grid(row=3, column=3)
+totalAttackLabel.grid(row=3, column=4)
+totalDMGLabel.grid(row=3, column=5)
+totalARPLabel.grid(row=3, column=6)
+totalHPLabel.grid(row=3, column=7)
+totalRegenHPLabel.grid(row=3, column=8)
+totalEvadeLabel.grid(row=3, column=9)
+totalArmorLabel.grid(row=3, column=10)
+totalMgicArmorLabel.grid(row=3, column=11)
+totalMPLabel.grid(row=3, column=12)
+totalRegenMPLabel.grid(row=3, column=13)
+totalSpellPenetrationLabel.grid(row=3, column=14)
+totalDirectMagicDMGLabel.grid(row=3, column=15)
+totalPeriodicMagicDMGLabel.grid(row=3, column=16)
 
 window.mainloop()
