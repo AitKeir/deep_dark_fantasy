@@ -117,8 +117,8 @@ def new_exp():
     if addRep.get():
         repExp = repExp + int(addRep.get())
         repExpNowAttLabel.config(text='{0}'.format(repExp))
-        if 6 > math.floor(repExp/10 + 1) > repLvl:
-            repLvl = math.floor(repExp/10 + 1)
+        if math.floor(repExp/10) > repLvl:
+            repLvl = math.floor(repExp/10)
             repLabel2.config(text='{0}'.format(repLvl))
         addRep.delete(0, 'end')
 
@@ -925,137 +925,219 @@ def change_race():
     CreateToolTip(raceLabel2,support['race'][raceVar.get()]['tooltip'])
 
 def add_att(num,widget):
-    global allAtt, meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,firstAidAttInt,manaAttInt,thiefArtAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt,magicCircleAttLabel,magicCircleAttLabel2,spell211LVLLabel,spell212LVLLabel,spell221LVLLabel,spell222LVLLabel,spell231LVLLabel,spell232LVLLabel,spell241LVLLabel,spell242LVLLabel,spell251LVLLabel,spell252LVLLabel,spell11LVLLabel,spell12LVLLabel,spell21LVLLabel,spell22LVLLabel,spell31LVLLabel,spell32LVLLabel,spell41LVLLabel,spell42LVLLabel,spell51LVLLabel,spell52LVLLabel,staticEnergy,staticRegenEnergy,staticHaste,staticAttack,staticDMG,staticHP,staticRegenHP,staticEvade,staticDMG,staticMP,staticRegenMP,staticDirectMagicDMG,staticPeriodicMagicDMG,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalHP,totalRegenHP,totalEvade,totalDMG,totalMP,totalRegenMP,totalDirectMagicDMG,totalPeriodicMagicDMG,totalSpellPenetration,staticSpellPenetration
+    global allAtt, meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,firstAidAttInt,manaAttInt,thiefArtAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt,magicCircleAttLabel,magicCircleAttLabel2,spell211LVLLabel,spell212LVLLabel,spell221LVLLabel,spell222LVLLabel,spell231LVLLabel,spell232LVLLabel,spell241LVLLabel,spell242LVLLabel,spell251LVLLabel,spell252LVLLabel,spell11LVLLabel,spell12LVLLabel,spell21LVLLabel,spell22LVLLabel,spell31LVLLabel,spell32LVLLabel,spell41LVLLabel,spell42LVLLabel,spell51LVLLabel,spell52LVLLabel,staticEnergy,staticRegenEnergy,staticHaste,staticAttack,staticDMG,staticHP,staticRegenHP,staticEvade,staticDMG,staticMP,staticRegenMP,staticDirectMagicDMG,staticPeriodicMagicDMG,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalHP,totalRegenHP,totalEvade,totalDMG,totalMP,totalRegenMP,totalDirectMagicDMG,totalPeriodicMagicDMG,totalSpellPenetration,staticSpellPenetration,staticEnergyLabel,staticDMGLabel,staticAttackLabel,staticDMGLabel,staticEvadeLabel,staticHasteLabel,staticMPLabel,staticRegenMPLabel,staticDirectMagicDMGLabel,staticSpellPenetrationLabel,staticHPLabel,staticRegenHPLabel,staticPeriodicMagicDMG,staticPeriodicMagicDMGLabel,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalARP,totalHP,totalRegenHP,totalEvade,totalArmor,totalMgicArmor,totalMP,totalRegenMP,totalSpellPenetration,totalDirectMagicDMG,totalPeriodicMagicDMG,totalAttackLabel,totalDMGLabel,totalEvadeLabel,totalHasteLabel,totalMPLabel,totalRegenMPLabel,totalDirectMagicDMGLabel,totalSpellPenetrationLabel,totalPeriodicMagicDMGLabel,totalHPLabel,totalRegenHPLabel
 
 
     if allAtt > 0:
         if num == 0:
-            meleFightAttInt += 1
-            staticAttack += 1
-            widget.config(text='{0}'.format(meleFightAttInt))
+            if meleFightAttInt < 5:
+                meleFightAttInt += 1
+                staticAttack += 1
+                allAtt -= 1
+                totalAttack = staticAttack + changeAttack
+                widget.config(text='{0}'.format(meleFightAttInt))
+                staticAttackLabel.config(text = '{0}'.format(staticAttack))
+                totalAttackLabel.config(text = '{0}'.format(totalAttack))
         elif num == 1:
-            shootAttInt += 1
-            staticDMG += 1
-            widget.config(text='{0}'.format(shootAttInt))
+            if shootAttInt < 5:
+                shootAttInt += 1
+                staticDMG += 1
+                allAtt -= 1
+                totalDMG = staticDMG + changeDMG
+                widget.config(text='{0}'.format(shootAttInt))
+                staticDMGLabel.config(text = '{0}'.format(staticDMG))
+                totalDMGLabel.config(text = '{0}'.format(totalDMG))
         elif num == 2:
-            strongHitsAttInt += 1
-            widget.config(text='{0}'.format(strongHitsAttInt))
+            if strongHitsAttInt < 5:
+                strongHitsAttInt += 1
+                allAtt -= 1
+                widget.config(text='{0}'.format(strongHitsAttInt))
         elif num == 3:
-            warBusinessAttInt += 1
-            widget.config(text='{0}'.format(warBusinessAttInt))
+            if warBusinessAttInt < 5:
+                warBusinessAttInt += 1
+                allAtt -= 1
+                widget.config(text='{0}'.format(warBusinessAttInt))
         elif num == 4:
-            tacticsAttInt += 1
-            widget.config(text='{0}'.format(tacticsAttInt))
+            if tacticsAttInt < 5:
+                tacticsAttInt += 1
+                allAtt -= 1
+                widget.config(text='{0}'.format(tacticsAttInt))
         elif num == 5:
-            attackAttInt += 1
-            staticAttack += 1
-            staticDMG += 1
-            widget.config(text='{0}'.format(attackAttInt))
+            if attackAttInt < 5:
+                attackAttInt += 1
+                staticAttack += 1
+                staticDMG += 1
+                allAtt -= 1
+                totalAttack = staticAttack + changeAttack
+                totalDMG = staticDMG + changeDMG
+                widget.config(text='{0}'.format(attackAttInt))
+                staticAttackLabel.config(text = '{0}'.format(staticAttack))
+                staticDMGLabel.config(text = '{0}'.format(staticDMG))
+                totalAttackLabel.config(text = '{0}'.format(totalAttack))
+                totalDMGLabel.config(text = '{0}'.format(totalDMG))
         elif num == 6:
-            evasionAttInt += 1
-            staticEvade += 1
-            widget.config(text='{0}'.format(evasionAttInt))
+            if evasionAttInt < 5:
+                evasionAttInt += 1
+                staticEvade += 1
+                allAtt -= 1
+                totalEvade = staticEvade + changeEvade
+                widget.config(text='{0}'.format(evasionAttInt))
+                staticEvadeLabel.config(text = '{0}'.format(staticEvade))
+                totalEvadeLabel.config(text = '{0}'.format(totalEvade))
         elif num == 7:
-            hasteAttInt += 1
-            staticHaste += 1
-            widget.config(text='{0}'.format(hasteAttInt))
+            if hasteAttInt < 5:
+                hasteAttInt += 1
+                staticHaste += 1
+                allAtt -= 1
+                totalHaste = staticHaste + changeHaste
+                widget.config(text='{0}'.format(hasteAttInt))
+                staticHasteLabel.config(text = '{0}'.format(staticHaste))
+                totalHasteLabel.config(text = '{0}'.format(totalHaste))
         elif num == 8:
-            coldBloodAttInt += 1
-            widget.config(text='{0}'.format(coldBloodAttInt))
+            if coldBloodAttInt < 5:
+                coldBloodAttInt += 1
+                allAtt -= 1
+                widget.config(text='{0}'.format(coldBloodAttInt))
         elif num == 9:
-            thiefArtAttInt += 1
-            widget.config(text='{0}'.format(thiefArtAttInt))
+            if thiefArtAttInt < 5:
+                thiefArtAttInt += 1
+                allAtt -= 1
+                widget.config(text='{0}'.format(thiefArtAttInt))
         elif num == 10:
-            manaAttInt += 1
-            staticMP += 2
-            staticRegenMP += 1
-            widget.config(text='{0}'.format(manaAttInt))
+            if manaAttInt < 5:
+                manaAttInt += 1
+                staticMP += 2
+                staticRegenMP += 1
+                allAtt -= 1
+                totalMP = staticMP + changeMP
+                totalRegenMP = staticRegenMP + changeRegenMP
+                widget.config(text='{0}'.format(manaAttInt))
+                staticMPLabel.config(text = '{0}'.format(staticMP))
+                staticRegenMPLabel.config(text = '{0}'.format(staticRegenMP))
+                totalMPLabel.config(text = '{0}'.format(totalMP))
+                totalRegenMPLabel.config(text = '{0}'.format(totalRegenMP))
         elif num == 11:
-            firstAidAttInt += 1
-            widget.config(text='{0}'.format(firstAidAttInt))
+            if firstAidAttInt < 5:
+                firstAidAttInt += 1
+                allAtt -= 1
+                widget.config(text='{0}'.format(firstAidAttInt))
         elif num == 12:
-            magicCircleAttInt += 1
-            if magicCircleAttInt == 1:
-                spell11LVLInt = 1
-                spell12LVLInt = 1
-                spell211LVLInt = 1
-                spell212LVLInt = 1
-                spell11LVLLabel.config(text = '{0}'.format(spell11LVLInt))
-                spell12LVLLabel.config(text = '{0}'.format(spell12LVLInt))
-                spell211LVLLabel.config(text = '{0}'.format(spell211LVLInt))
-                spell212LVLLabel.config(text = '{0}'.format(spell212LVLInt))
-            elif magicCircleAttInt == 2:
-                spell21LVLInt = 1
-                spell22LVLInt = 1
-                spell221LVLInt = 1
-                spell222LVLInt = 1
-                spell21LVLLabel.config(text = '{0}'.format(spell21LVLInt))
-                spell22LVLLabel.config(text = '{0}'.format(spell22LVLInt))
-                spell221LVLLabel.config(text = '{0}'.format(spell221LVLInt))
-                spell222LVLLabel.config(text = '{0}'.format(spell222LVLInt))
-            elif magicCircleAttInt == 3:
-                spell31LVLInt = 1
-                spell32LVLInt = 1
-                spell231LVLInt = 1
-                spell232LVLInt = 1
-                spell31LVLLabel.config(text = '{0}'.format(spell31LVLInt))
-                spell32LVLLabel.config(text = '{0}'.format(spell32LVLInt))
-                spell231LVLLabel.config(text = '{0}'.format(spell231LVLInt))
-                spell232LVLLabel.config(text = '{0}'.format(spell232LVLInt))
-            elif magicCircleAttInt == 4:
-                spell41LVLInt = 1
-                spell42LVLInt = 1
-                spell241LVLInt = 1
-                spell242LVLInt = 1
-                spell41LVLLabel.config(text = '{0}'.format(spell41LVLInt))
-                spell42LVLLabel.config(text = '{0}'.format(spell42LVLInt))
-                spell241LVLLabel.config(text = '{0}'.format(spell241LVLInt))
-                spell242LVLLabel.config(text = '{0}'.format(spell242LVLInt))
-            elif magicCircleAttInt == 5:
-                spell51LVLInt = 1
-                spell52LVLInt = 1
-                spell251LVLInt = 1
-                spell252LVLInt = 1
-                spell251LVLLabel.config(text = '{0}'.format(spell51LVLInt))
-                spell252LVLLabel.config(text = '{0}'.format(spell52LVLInt))
-                spell251LVLLabel.config(text = '{0}'.format(spell251LVLInt))
-                spell252LVLLabel.config(text = '{0}'.format(spell252LVLInt))
+            if magicCircleAttInt < 5:
+                magicCircleAttInt += 1
+                allAtt -= 1
+                if magicCircleAttInt == 1:
+                    spell11LVLInt = 1
+                    spell12LVLInt = 1
+                    spell211LVLInt = 1
+                    spell212LVLInt = 1
+                    spell11LVLLabel.config(text = '{0}'.format(spell11LVLInt))
+                    spell12LVLLabel.config(text = '{0}'.format(spell12LVLInt))
+                    spell211LVLLabel.config(text = '{0}'.format(spell211LVLInt))
+                    spell212LVLLabel.config(text = '{0}'.format(spell212LVLInt))
+                elif magicCircleAttInt == 2:
+                    spell21LVLInt = 1
+                    spell22LVLInt = 1
+                    spell221LVLInt = 1
+                    spell222LVLInt = 1
+                    spell21LVLLabel.config(text = '{0}'.format(spell21LVLInt))
+                    spell22LVLLabel.config(text = '{0}'.format(spell22LVLInt))
+                    spell221LVLLabel.config(text = '{0}'.format(spell221LVLInt))
+                    spell222LVLLabel.config(text = '{0}'.format(spell222LVLInt))
+                elif magicCircleAttInt == 3:
+                    spell31LVLInt = 1
+                    spell32LVLInt = 1
+                    spell231LVLInt = 1
+                    spell232LVLInt = 1
+                    spell31LVLLabel.config(text = '{0}'.format(spell31LVLInt))
+                    spell32LVLLabel.config(text = '{0}'.format(spell32LVLInt))
+                    spell231LVLLabel.config(text = '{0}'.format(spell231LVLInt))
+                    spell232LVLLabel.config(text = '{0}'.format(spell232LVLInt))
+                elif magicCircleAttInt == 4:
+                    spell41LVLInt = 1
+                    spell42LVLInt = 1
+                    spell241LVLInt = 1
+                    spell242LVLInt = 1
+                    spell41LVLLabel.config(text = '{0}'.format(spell41LVLInt))
+                    spell42LVLLabel.config(text = '{0}'.format(spell42LVLInt))
+                    spell241LVLLabel.config(text = '{0}'.format(spell241LVLInt))
+                    spell242LVLLabel.config(text = '{0}'.format(spell242LVLInt))
+                elif magicCircleAttInt == 5:
+                    spell51LVLInt = 1
+                    spell52LVLInt = 1
+                    spell251LVLInt = 1
+                    spell252LVLInt = 1
+                    spell251LVLLabel.config(text = '{0}'.format(spell51LVLInt))
+                    spell252LVLLabel.config(text = '{0}'.format(spell52LVLInt))
+                    spell251LVLLabel.config(text = '{0}'.format(spell251LVLInt))
+                    spell252LVLLabel.config(text = '{0}'.format(spell252LVLInt))
 
-            widget.config(text='{0}'.format(magicCircleAttInt))
-            try:
-                if magicCircleAttLabel:
-                    magicCircleAttLabel.config(text='{0}'.format(magicCircleAttInt))
-                    magicCircleAttLabel2.config(text='{0}'.format(magicCircleAttInt))
-            except:
-                print("magic window don't open")
+                widget.config(text='{0}'.format(magicCircleAttInt))
+                try:
+                    if magicCircleAttLabel:
+                        magicCircleAttLabel.config(text='{0}'.format(magicCircleAttInt))
+                        magicCircleAttLabel2.config(text='{0}'.format(magicCircleAttInt))
+                except:
+                    print("magic window don't open")
         elif num == 13:
-            magicPowerAttInt += 1
-            staticDirectMagicDMG += 1
-            staticSpellPenetration += 1
-            widget.config(text='{0}'.format(magicPowerAttInt))
+            if magicPowerAttInt < 5:
+                magicPowerAttInt += 1
+                staticDirectMagicDMG += 1
+                staticSpellPenetration += 1
+                staticPeriodicMagicDMG += 1
+                allAtt -= 1
+                totalDirectMagicDMG = staticDirectMagicDMG + changeDirectMagicDMG
+                totalSpellPenetration = staticSpellPenetration + changeSpellPenetration
+                totalPeriodicMagicDMG = staticPeriodicMagicDMG + changePeriodicMagicDMG
+                widget.config(text='{0}'.format(magicPowerAttInt))
+                staticDirectMagicDMGLabel.config(text='{0}'.format(staticDirectMagicDMG))
+                staticSpellPenetrationLabel.config(text='{0}'.format(staticSpellPenetration))
+                staticPeriodicMagicDMGLabel.config(text='{0}'.format(staticPeriodicMagicDMG))
+                totalDirectMagicDMGLabel.config(text='{0}'.format(totalDirectMagicDMG))
+                totalSpellPenetrationLabel.config(text='{0}'.format(totalSpellPenetration))
+                totalPeriodicMagicDMGLabel.config(text='{0}'.format(totalPeriodicMagicDMG))
         elif num == 14:
-            learningAttInt += 1
-            widget.config(text='{0}'.format(learningAttInt))
+            if learningAttInt < 5:
+                learningAttInt += 1
+                allAtt -= 1
+                widget.config(text='{0}'.format(learningAttInt))
         elif num == 15:
-            healthAttInt += 1
-            staticHP += 2
-            staticRegenHP += 1
-            widget.config(text='{0}'.format(healthAttInt))
+            if healthAttInt < 5:
+                healthAttInt += 1
+                staticHP += 2
+                staticRegenHP += 1
+                allAtt -= 1
+                totalHP = staticHP + changeHP
+                totalRegenHP = staticRegenHP + changeRegenHP
+                widget.config(text='{0}'.format(healthAttInt))
+                staticHPLabel.config(text='{0}'.format(staticHP))
+                staticRegenHPLabel.config(text='{0}'.format(staticRegenHP))
+                totalHPLabel.config(text='{0}'.format(totalHP))
+                totalRegenHPLabel.config(text='{0}'.format(totalRegenHP))
         elif num == 16:
-            energyAttInt += 1
-            staticEnergy += 1
-            widget.config(text='{0}'.format(energyAttInt))
+            if energyAttInt < 5:
+                energyAttInt += 1
+                staticEnergy += 1
+                allAtt -= 1
+                totalEnergy = staticEnergy + changeEnergy
+                widget.config(text='{0}'.format(energyAttInt))
+                staticEnergyLabel.config(text='{0}'.format(staticEnergy))
+                totalEnergyLabel.config(text='{0}'.format(totalEnergy))
         elif num == 17:
-            resistAttInt += 1
-            widget.config(text='{0}'.format(resistAttInt))
+            if resistAttInt < 5:
+                resistAttInt += 1
+                allAtt -= 1
+                widget.config(text='{0}'.format(resistAttInt))
         elif num == 18:
-            secondBreathAttInt += 1
-            widget.config(text='{0}'.format(secondBreathAttInt))
+            if secondBreathAttInt < 5:
+                secondBreathAttInt += 1
+                allAtt -= 1
+                widget.config(text='{0}'.format(secondBreathAttInt))
         elif num == 19:
-            steelBodyAttInt += 1
-            widget.config(text='{0}'.format(steelBodyAttInt))
+            if steelBodyAttInt < 5:
+                steelBodyAttInt += 1
+                allAtt -= 1
+                widget.config(text='{0}'.format(steelBodyAttInt))
 
-        allAtt -= 1
         availableAttNumb.config(text='{0}'.format(allAtt))
 
 def create_active_skill_window():
@@ -1239,11 +1321,58 @@ def create_active_skill_window():
     skillLevelLabel9.grid(row=8, column=3)
     skillLevelLabel10.grid(row=9, column=3)
 
+def create_inventory_window():
+    ChoInv = Toplevel(window)
+    ChoInv.title('Школы магии')
+    ChoInv.resizable(width=False, height=False)
+    ChoInv.rowconfigure(0, pad=3)
+    ChoInv.rowconfigure(1, pad=3)
+    ChoInv.rowconfigure(2, pad=3)
+    ChoInv.rowconfigure(3, pad=3)
+    ChoInv.rowconfigure(4, pad=3)
+    ChoInv.rowconfigure(5, pad=3)
+    ChoInv.rowconfigure(6, pad=3)
+    ChoInv.rowconfigure(7, pad=3)
+    ChoInv.rowconfigure(8, pad=3)
+    ChoInv.rowconfigure(9, pad=3)
+    ChoInv.rowconfigure(10, pad=3)
+    ChoInv.rowconfigure(11, pad=3)
+    ChoInv.rowconfigure(12, pad=3)
+    ChoInv.rowconfigure(13, pad=3)
+    ChoInv.rowconfigure(14, pad=3)
+    ChoInv.rowconfigure(15, pad=3)
+    ChoInv.rowconfigure(16, pad=3)
+    ChoInv.columnconfigure(0, pad=3)
+    ChoInv.columnconfigure(1, pad=3)
+    ChoInv.columnconfigure(2, pad=3)
+    ChoInv.columnconfigure(3, pad=3)
+    ChoInv.columnconfigure(4, pad=3)
+    ChoInv.columnconfigure(5, pad=3)
+    ChoInv.columnconfigure(6, pad=3)
+    ChoInv.columnconfigure(7, pad=3)
+    ChoInv.columnconfigure(8, pad=3)
+    ChoInv.columnconfigure(9, pad=3)
+    ChoInv.columnconfigure(10, pad=3)
+    ChoInv.columnconfigure(11, pad=3)
+    ChoInv.columnconfigure(12, pad=3)
+    ChoInv.columnconfigure(13, pad=3)
+    ChoInv.columnconfigure(14, pad=3)
+    ChoInv.columnconfigure(15, pad=3)
+    ChoInv.columnconfigure(16, pad=3)
+
+    Label(ChoInv, text = 'Слот').grid(row=0, column=0)
+    create_labels(ChoInv,1,parametrList)
+
+def create_labels(frame,columnParam,list):
+    for param in list:
+        Label(frame, text = param).grid(row=0, column=columnParam)
+        columnParam+=1
+
 
 # all vars
 lvlNow = 1
 expNow = 0
-repLvl = 1
+repLvl = 0
 repExp = 0
 allAtt = 12
 OPTIONS = list(support['race'].keys())
@@ -1265,7 +1394,7 @@ staticRegenHP = 0
 staticEvade = 0
 staticArmor = 0
 staticMgicArmor = 0
-staticMP = 0
+staticMP = 1
 staticRegenMP = 0
 staticSpellPenetration = 0
 staticDirectMagicDMG = 0
@@ -1288,22 +1417,22 @@ changeSpellPenetration = 0
 changeDirectMagicDMG = 0
 changePeriodicMagicDMG = 0
 
-totalEnergy = 1
-totalRegenEnergy = 0
-totalHaste = 0
-totalAttack = 0
+totalEnergy = staticEnergy
+totalRegenEnergy = staticRegenEnergy
+totalHaste = staticHaste
+totalAttack = staticAttack
 totalDMG = staticDMG
-totalARP = 0
-totalHP = 5
-totalRegenHP = 0
-totalEvade = 0
-totalArmor = 0
-totalMgicArmor = 0
-totalMP = 0
-totalRegenMP = 0
-totalSpellPenetration = 0
-totalDirectMagicDMG = 0
-totalPeriodicMagicDMG = 0
+totalARP = staticARP
+totalHP = staticHP
+totalRegenHP = staticRegenHP
+totalEvade = staticEvade
+totalArmor = staticArmor
+totalMgicArmor = staticMgicArmor
+totalMP = staticMP
+totalRegenMP = staticRegenMP
+totalSpellPenetration = staticSpellPenetration
+totalDirectMagicDMG = staticDirectMagicDMG
+totalPeriodicMagicDMG = staticPeriodicMagicDMG
 
 # Variables str
 allStr = 0
@@ -1407,6 +1536,7 @@ window.rowconfigure(0, pad=3)
 window.rowconfigure(1, pad=3)
 window.columnconfigure(0, pad=3)
 window.columnconfigure(1, pad=3)
+window.columnconfigure(2, pad=3)
 
 raceVar = StringVar()
 raceVar.set(OPTIONS[0]) # default value
@@ -1506,6 +1636,7 @@ addRepLabel.grid(row=5, column=0)
 addRep.grid(row=5, column=1, columnspan=2)
 addExpButt.grid(row=6, column=0, columnspan=3)
 
+# stats
 frame4=Frame(window, relief=RAISED, borderwidth=1)
 frame4.rowconfigure(0, pad=3)
 frame4.rowconfigure(1, pad=3)
@@ -1532,25 +1663,31 @@ frame4.columnconfigure(14, pad=3)
 frame4.columnconfigure(15, pad=3)
 frame4.columnconfigure(16, pad=3)
 frame4.columnconfigure(17, pad=3)
-frame4.grid(row=1, column=0, columnspan=2)
+frame4.grid(row=1, column=0, columnspan=3)
 
+parametrList = ['Энергия',
+                'Регенерация\nЭнергии',
+                'Скорость',
+                'Урон\nближний',
+                'Урон\nдальний',
+                'АРП',
+                'ХП',
+                'Регенерация\nХП',
+                'Уклонение',
+                'Броня',
+                'Броня от\nмагии',
+                'МП',
+                'Регенерация\nМП',
+                'Магическое\nпроникновение',
+                'Прямой\nмаг.урон',
+                'Период\nмаг.урон']
+
+# columnParam = 0
+# for param in parametrList:
+#     Label(frame4, text = param).grid(row=0, column=columnParam)
+#     columnParam+=1
 Label(frame4, text = 'Параметр').grid(row=0, column=0)
-Label(frame4, text = 'Энергия').grid(row=0, column=1)
-Label(frame4, text = 'Регенерация\nЭнергии').grid(row=0, column=2)
-Label(frame4, text = 'Скорость').grid(row=0, column=3)
-Label(frame4, text = 'Урон\nближний').grid(row=0, column=4)
-Label(frame4, text = 'Урон\nдальний').grid(row=0, column=5)
-Label(frame4, text = 'АРП').grid(row=0, column=6)
-Label(frame4, text = 'ХП').grid(row=0, column=7)
-Label(frame4, text = 'Регенерация\nХП').grid(row=0, column=8)
-Label(frame4, text = 'Уклонение').grid(row=0, column=9)
-Label(frame4, text = 'Броня').grid(row=0, column=10)
-Label(frame4, text = 'Броня от\nмагии').grid(row=0, column=11)
-Label(frame4, text = 'МП').grid(row=0, column=12)
-Label(frame4, text = 'Регенерация\nМП').grid(row=0, column=13)
-Label(frame4, text = 'Магическое\nпроникновение').grid(row=0, column=14)
-Label(frame4, text = 'Прямой\nмаг.урон').grid(row=0, column=15)
-Label(frame4, text = 'Период\nмаг.урон').grid(row=0, column=16)
+create_labels(frame4,1,parametrList)
 Label(frame4, text = 'Статус').grid(row=1, column=0)
 Label(frame4, text = 'Изменения').grid(row=2, column=0)
 Label(frame4, text = 'Текущий итог').grid(row=3, column=0)
@@ -1658,5 +1795,12 @@ totalRegenMPLabel.grid(row=3, column=13)
 totalSpellPenetrationLabel.grid(row=3, column=14)
 totalDirectMagicDMGLabel.grid(row=3, column=15)
 totalPeriodicMagicDMGLabel.grid(row=3, column=16)
+
+frame5=Frame(window, relief=RAISED, borderwidth=1)
+frame5.rowconfigure(0, pad=3)
+frame5.columnconfigure(0, pad=3)
+frame5.grid(row=0, column=2)
+
+Button(frame5, command=create_inventory_window, text='Инвентарь').grid(row=0, column=0)
 
 window.mainloop()
