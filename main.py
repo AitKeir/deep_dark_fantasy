@@ -118,12 +118,20 @@ def new_exp():
     if addRep.get():
         repExp = repExp + int(addRep.get())
         repExpNowAttLabel.config(text='{0}'.format(repExp))
-        heroPathProgressLabel.config(text='{0}'.format(repExp))
+        try:
+            heroPathProgressLabel.config(text='{0}'.format(repExp))
+        except:
+            print('no passive window')
         if math.floor(repExp/10) > repLvl:
             repLvl = math.floor(repExp/10)
             repLabel2.config(text='{0}'.format(repLvl))
-            heroPathLevelLabel.config(text='{0}'.format(repLvl))
+            try:
+                heroPathLevelLabel.config(text='{0}'.format(repLvl))
+            except:
+                print('no passive window')
         addRep.delete(0, 'end')
+
+    save()
 
 def create_attribute_window():
     ChoAtt = Toplevel(window)
@@ -405,6 +413,8 @@ def create_magic_window():
         spell52.config(text = list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[1])
         CreateToolTip(spell52,'{0}\n{1}'.format(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[1]]['tooltip'],support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]][list(support['magic'][firstMagicSchool.get()][list(support['magic'][firstMagicSchool.get()].keys())[4]].keys())[1]]['level']))
 
+        save()
+
     def change_lines_in_magic_window2(event):
         global secondSchMag
         secondSchMag = secondMagicSchool.get()
@@ -428,6 +438,8 @@ def create_magic_window():
         CreateToolTip(spell251,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[0]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[0]]['level']))
         spell252.config(text = list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[1])
         CreateToolTip(spell252,'{0}\n{1}'.format(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[1]]['tooltip'],support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]][list(support['magic'][secondMagicSchool.get()][list(support['magic'][secondMagicSchool.get()].keys())[4]].keys())[1]]['level']))
+
+        save()
 
     def add_spell_exp(num):
         global spell11ProgressLabelInt,spell12ProgressLabelInt,spell21ProgressLabelInt,spell22ProgressLabelInt,spell31ProgressLabelInt,spell32ProgressLabelInt,spell41ProgressLabelInt,spell42ProgressLabelInt,spell51ProgressLabelInt,spell52ProgressLabelInt,spell11LVLInt,spell12LVLInt,spell21LVLInt,spell22LVLInt,spell31LVLInt,spell32LVLInt,spell41LVLInt,spell42LVLInt,spell51LVLInt,spell52LVLInt,spell211ProgressLabelInt,spell212ProgressLabelInt,spell221ProgressLabelInt,spell222ProgressLabelInt,spell231ProgressLabelInt,spell232ProgressLabelInt,spell241ProgressLabelInt,spell242ProgressLabelInt,spell251ProgressLabelInt,spell252ProgressLabelInt,spell211LVLInt,spell212LVLInt,spell221LVLInt,spell222LVLInt,spell231LVLInt,spell232LVLInt,spell241LVLInt,spell242LVLInt,spell251LVLInt,spell252LVLInt
@@ -572,6 +584,8 @@ def create_magic_window():
                     spell252LVLInt = math.floor(spell252ProgressLabelInt/10 + 1)
                     spell252LVLLabel.config(text='{0}'.format(spell252LVLInt))
                 spell252ProgressLabel.config(text='{0}'.format(spell252ProgressLabelInt))
+
+        save()
 
     ChoMag = Toplevel(window)
     ChoMag.title('Школы магии')
@@ -928,6 +942,8 @@ def change_race():
     lastRace = raceVar.get()
     CreateToolTip(raceLabel2,support['race'][raceVar.get()]['tooltip'])
 
+    save()
+
 def add_att(num,widget):
     global allAtt, meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,firstAidAttInt,manaAttInt,thiefArtAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt,magicCircleAttLabel,magicCircleAttLabel2,spell211LVLLabel,spell212LVLLabel,spell221LVLLabel,spell222LVLLabel,spell231LVLLabel,spell232LVLLabel,spell241LVLLabel,spell242LVLLabel,spell251LVLLabel,spell252LVLLabel,spell11LVLLabel,spell12LVLLabel,spell21LVLLabel,spell22LVLLabel,spell31LVLLabel,spell32LVLLabel,spell41LVLLabel,spell42LVLLabel,spell51LVLLabel,spell52LVLLabel,staticEnergy,staticRegenEnergy,staticHaste,staticAttack,staticDMG,staticHP,staticRegenHP,staticEvade,staticDMG,staticMP,staticRegenMP,staticDirectMagicDMG,staticPeriodicMagicDMG,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalHP,totalRegenHP,totalEvade,totalDMG,totalMP,totalRegenMP,totalDirectMagicDMG,totalPeriodicMagicDMG,totalSpellPenetration,staticSpellPenetration,staticEnergyLabel,staticDMGLabel,staticAttackLabel,staticDMGLabel,staticEvadeLabel,staticHasteLabel,staticMPLabel,staticRegenMPLabel,staticDirectMagicDMGLabel,staticSpellPenetrationLabel,staticHPLabel,staticRegenHPLabel,staticPeriodicMagicDMG,staticPeriodicMagicDMGLabel,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalARP,totalHP,totalRegenHP,totalEvade,totalArmor,totalMgicArmor,totalMP,totalRegenMP,totalSpellPenetration,totalDirectMagicDMG,totalPeriodicMagicDMG,totalAttackLabel,totalDMGLabel,totalEvadeLabel,totalHasteLabel,totalMPLabel,totalRegenMPLabel,totalDirectMagicDMGLabel,totalSpellPenetrationLabel,totalPeriodicMagicDMGLabel,totalHPLabel,totalRegenHPLabel,staticHit,totalHit,staticHitLabel,totalHitLabel,lvlAtt,allStr,allAgi,allInt,allBody
 
@@ -1253,6 +1269,7 @@ def add_att(num,widget):
                 widget.config(text='{0}'.format(steelBodyAttInt))
 
     availableAttNumb.config(text='{0}'.format(allAtt))
+    save()
 
 def create_active_skill_window():
 
@@ -1335,6 +1352,8 @@ def create_active_skill_window():
             if 6 > math.floor(skillProgressInt10/10 + 1) > skillLevelInt10:
                 skillLevelInt10 = math.floor(skillProgressInt10/10 + 1)
                 skillLevelLabel10.config(text='{0}'.format(skillLevelInt10))
+
+        save()
 
     skillLabel1 = Label(ChoAct, text=list(support['activeSkill'].keys())[0])
     skillLabel2 = Label(ChoAct, text=list(support['activeSkill'].keys())[1])
@@ -2082,12 +2101,16 @@ def create_inventory_window():
         bookCharmMidDMG = bookCharmMidDMGNew
         bookCharmMaxDMG = bookCharmMaxDMGNew
 
+        save()
+
     def save_bag(event):
         global bag
 
         bag = bagEntry.get('1.0','end')
         bag = bag.split('\n')
         bag = '---check---'.join(bag)
+
+        save()
 
     ChoInv = Toplevel(window)
     ChoInv.title('Инвентарь')
@@ -3053,6 +3076,8 @@ def create_passive_skill_window():
         CreateToolTip(secondPassiveSelect,support['passiveSkill'][secondPassive])
         CreateToolTip(thirdPassiveSelect,support['passiveSkill'][thirdPassive])
 
+        save()
+
     def add_passive_skill_exp(num):
 
         global passiveSkillProgress2,passiveSkillProgress3,passiveSkillProgress4,passiveLevelProgress2,passiveLevelProgress3,passiveLevelProgress4
@@ -3075,6 +3100,8 @@ def create_passive_skill_window():
             if 6 > math.floor(passiveSkillProgress4/10 + 1) > passiveLevelProgress4:
                 passiveLevelProgress4 = math.floor(passiveSkillProgress4/10 + 1)
                 thirdPassiveLevelLabel.config(text='{0}'.format(passiveLevelProgress4))
+
+        save()
 
     heroPathLabel = Label(ChoPas,text = list(support['passiveSkill'].keys())[0])
     firstPassiveSelect = ttk.Combobox(ChoPas, values = allPassiveSkill)
@@ -3267,6 +3294,8 @@ def sum_stats(event):
     totalSpellPenetrationLabel.config(text = '{0}'.format(totalSpellPenetration))
     totalDirectMagicDMGLabel.config(text = '{0}'.format(totalDirectMagicDMG))
     totalPeriodicMagicDMGLabel.config(text = '{0}'.format(totalPeriodicMagicDMG))
+
+    save()
 
 def save():
     saveFile = open(login.get(),'w',encoding='UTF8')
@@ -3736,23 +3765,29 @@ def load():
     changeDirectMagicDMGLabel.insert(0,changeDirectMagicDMG)
     changePeriodicMagicDMGLabel.insert(0,changePeriodicMagicDMG)
 
-    totalEnergyLabel.config(text = '{0}'.format(totalEnergy))
-    totalRegenEnergyLabel.config(text = '{0}'.format(totalRegenEnergy))
-    totalHasteLabel.config(text = '{0}'.format(totalHaste))
-    totalHitLabel.config(text = '{0}'.format(totalHit))
-    totalAttackLabel.config(text = '{0}'.format(totalAttack))
-    totalDMGLabel.config(text = '{0}'.format(totalDMG))
-    totalARPLabel.config(text = '{0}'.format(totalARP))
-    totalHPLabel.config(text = '{0}'.format(totalHP))
-    totalRegenHPLabel.config(text = '{0}'.format(totalRegenHP))
-    totalEvadeLabel.config(text = '{0}'.format(totalEvade))
-    totalArmorLabel.config(text = '{0}'.format(totalArmor))
-    totalMgicArmorLabel.config(text = '{0}'.format(totalMgicArmor))
-    totalMPLabel.config(text = '{0}'.format(totalMP))
-    totalRegenMPLabel.config(text = '{0}'.format(totalRegenMP))
-    totalSpellPenetrationLabel.config(text = '{0}'.format(totalSpellPenetration))
-    totalDirectMagicDMGLabel.config(text = '{0}'.format(totalDirectMagicDMG))
-    totalPeriodicMagicDMGLabel.config(text = '{0}'.format(totalPeriodicMagicDMG))
+    totalEnergyLabel.config(text = '{0}'.format(staticEnergy+changeEnergy))
+    totalRegenEnergyLabel.config(text = '{0}'.format(staticRegenEnergy+changeRegenEnergy))
+    totalHasteLabel.config(text = '{0}'.format(staticHaste+changeHaste))
+    totalHitLabel.config(text = '{0}'.format(staticHit+changeHit))
+    totalAttackMin = int(staticAttack.split('/')[0])+int(changeAttack.split('/')[0])
+    totalAttackMid = int(staticAttack.split('/')[1])+int(changeAttack.split('/')[1])
+    totalAttackMax = int(staticAttack.split('/')[2])+int(changeAttack.split('/')[2])
+    totalAttackLabel.config(text = '{0}/{1}/{2}'.format(totalAttackMin,totalAttackMid,totalAttackMax))
+    totalDMGMin = int(staticDMG.split('/')[0])+int(changeDMG.split('/')[0])
+    totalDMGMid = int(staticDMG.split('/')[1])+int(changeDMG.split('/')[1])
+    totalDMGMax = int(staticDMG.split('/')[2])+int(changeDMG.split('/')[2])
+    totalDMGLabel.config(text = '{0}/{1}/{2}'.format(totalDMGMin,totalDMGMid,totalDMGMax))
+    totalARPLabel.config(text = '{0}'.format(staticARP+changeARP))
+    totalHPLabel.config(text = '{0}'.format(staticHP+changeHP))
+    totalRegenHPLabel.config(text = '{0}'.format(staticRegenHP+changeRegenHP))
+    totalEvadeLabel.config(text = '{0}'.format(staticEvade+changeEvade))
+    totalArmorLabel.config(text = '{0}'.format(staticArmor+changeArmor))
+    totalMgicArmorLabel.config(text = '{0}'.format(staticMgicArmor+changeMgicArmor))
+    totalMPLabel.config(text = '{0}'.format(staticMP+changeMP))
+    totalRegenMPLabel.config(text = '{0}'.format(staticRegenMP+changeRegenMP))
+    totalSpellPenetrationLabel.config(text = '{0}'.format(staticSpellPenetration+changeSpellPenetration))
+    totalDirectMagicDMGLabel.config(text = '{0}'.format(staticDirectMagicDMG+changeDirectMagicDMG))
+    totalPeriodicMagicDMGLabel.config(text = '{0}'.format(staticPeriodicMagicDMG+changePeriodicMagicDMG))
 
     levelLabel2.config(text='{0}'.format(lvlNow))
     repLabel2.config(text='{0}'.format(repLvl))
@@ -4538,6 +4573,6 @@ frame5.grid(row=0, column=2)
 
 Button(frame5, command=create_inventory_window, text='Инвентарь').grid(row=0, column=0)
 Button(frame5, command=lambda: save(), text='Сохранить').grid(row=1, column=0)
-Button(frame5, command=lambda: load(), text='Загрухить').grid(row=2, column=0)
+Button(frame5, command=lambda: load(), text='Загрузить').grid(row=2, column=0)
 
 window.mainloop()
