@@ -925,25 +925,37 @@ def change_race():
     CreateToolTip(raceLabel2,support['race'][raceVar.get()]['tooltip'])
 
 def add_att(num,widget):
-    global allAtt, meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,firstAidAttInt,manaAttInt,thiefArtAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt,magicCircleAttLabel,magicCircleAttLabel2,spell211LVLLabel,spell212LVLLabel,spell221LVLLabel,spell222LVLLabel,spell231LVLLabel,spell232LVLLabel,spell241LVLLabel,spell242LVLLabel,spell251LVLLabel,spell252LVLLabel,spell11LVLLabel,spell12LVLLabel,spell21LVLLabel,spell22LVLLabel,spell31LVLLabel,spell32LVLLabel,spell41LVLLabel,spell42LVLLabel,spell51LVLLabel,spell52LVLLabel,staticEnergy,staticRegenEnergy,staticHaste,staticAttack,staticDMG,staticHP,staticRegenHP,staticEvade,staticDMG,staticMP,staticRegenMP,staticDirectMagicDMG,staticPeriodicMagicDMG,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalHP,totalRegenHP,totalEvade,totalDMG,totalMP,totalRegenMP,totalDirectMagicDMG,totalPeriodicMagicDMG,totalSpellPenetration,staticSpellPenetration,staticEnergyLabel,staticDMGLabel,staticAttackLabel,staticDMGLabel,staticEvadeLabel,staticHasteLabel,staticMPLabel,staticRegenMPLabel,staticDirectMagicDMGLabel,staticSpellPenetrationLabel,staticHPLabel,staticRegenHPLabel,staticPeriodicMagicDMG,staticPeriodicMagicDMGLabel,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalARP,totalHP,totalRegenHP,totalEvade,totalArmor,totalMgicArmor,totalMP,totalRegenMP,totalSpellPenetration,totalDirectMagicDMG,totalPeriodicMagicDMG,totalAttackLabel,totalDMGLabel,totalEvadeLabel,totalHasteLabel,totalMPLabel,totalRegenMPLabel,totalDirectMagicDMGLabel,totalSpellPenetrationLabel,totalPeriodicMagicDMGLabel,totalHPLabel,totalRegenHPLabel
+    global allAtt, meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,firstAidAttInt,manaAttInt,thiefArtAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt,magicCircleAttLabel,magicCircleAttLabel2,spell211LVLLabel,spell212LVLLabel,spell221LVLLabel,spell222LVLLabel,spell231LVLLabel,spell232LVLLabel,spell241LVLLabel,spell242LVLLabel,spell251LVLLabel,spell252LVLLabel,spell11LVLLabel,spell12LVLLabel,spell21LVLLabel,spell22LVLLabel,spell31LVLLabel,spell32LVLLabel,spell41LVLLabel,spell42LVLLabel,spell51LVLLabel,spell52LVLLabel,staticEnergy,staticRegenEnergy,staticHaste,staticAttack,staticDMG,staticHP,staticRegenHP,staticEvade,staticDMG,staticMP,staticRegenMP,staticDirectMagicDMG,staticPeriodicMagicDMG,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalHP,totalRegenHP,totalEvade,totalDMG,totalMP,totalRegenMP,totalDirectMagicDMG,totalPeriodicMagicDMG,totalSpellPenetration,staticSpellPenetration,staticEnergyLabel,staticDMGLabel,staticAttackLabel,staticDMGLabel,staticEvadeLabel,staticHasteLabel,staticMPLabel,staticRegenMPLabel,staticDirectMagicDMGLabel,staticSpellPenetrationLabel,staticHPLabel,staticRegenHPLabel,staticPeriodicMagicDMG,staticPeriodicMagicDMGLabel,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalARP,totalHP,totalRegenHP,totalEvade,totalArmor,totalMgicArmor,totalMP,totalRegenMP,totalSpellPenetration,totalDirectMagicDMG,totalPeriodicMagicDMG,totalAttackLabel,totalDMGLabel,totalEvadeLabel,totalHasteLabel,totalMPLabel,totalRegenMPLabel,totalDirectMagicDMGLabel,totalSpellPenetrationLabel,totalPeriodicMagicDMGLabel,totalHPLabel,totalRegenHPLabel,staticHit,totalHit,staticHitLabel,totalHitLabel
 
 
     if allAtt > 0:
         if num == 0:
             if meleFightAttInt < 5:
                 meleFightAttInt += 1
-                staticAttack += 1
+                staticAttackMin = int(staticAttack.split('-')[0])
+                staticAttackMid = int(staticAttack.split('-')[1])
+                staticAttackMax = int(staticAttack.split('-')[2])
+                staticAttackMin += 1
+                staticAttackMid += 1
+                staticAttackMax += 1
+                staticAttack = '{0}-{1}-{2}'.format(staticAttackMin,staticAttackMid,staticAttackMax)
                 allAtt -= 1
-                totalAttack = staticAttack + changeAttack
+                totalAttack = '{0}-{1}-{2}'.format(int(staticAttack.split('-')[0])-int(changeAttack.split('-')[0]),int(staticAttack.split('-')[1])-int(changeAttack.split('-')[1]),int(staticAttack.split('-')[2])-int(changeAttack.split('-')[2]))
                 widget.config(text='{0}'.format(meleFightAttInt))
                 staticAttackLabel.config(text = '{0}'.format(staticAttack))
                 totalAttackLabel.config(text = '{0}'.format(totalAttack))
         elif num == 1:
             if shootAttInt < 5:
                 shootAttInt += 1
-                staticDMG += 1
+                staticDMGMin = int(staticDMG.split('-')[0])
+                staticDMGMid = int(staticDMG.split('-')[1])
+                staticDMGMax = int(staticDMG.split('-')[2])
+                staticDMGMin += 1
+                staticDMGMid += 1
+                staticDMGMax += 1
+                staticDMG = '{0}-{1}-{2}'.format(staticDMGMin,staticDMGMid,staticDMGMax)
                 allAtt -= 1
-                totalDMG = staticDMG + changeDMG
+                totalDMG = '{0}-{1}-{2}'.format(int(staticDMG.split('-')[0])-int(changeDMG.split('-')[0]),int(staticDMG.split('-')[1])-int(changeDMG.split('-')[1]),int(staticDMG.split('-')[2])-int(changeDMG.split('-')[2]))
                 widget.config(text='{0}'.format(shootAttInt))
                 staticDMGLabel.config(text = '{0}'.format(staticDMG))
                 totalDMGLabel.config(text = '{0}'.format(totalDMG))
@@ -965,16 +977,12 @@ def add_att(num,widget):
         elif num == 5:
             if attackAttInt < 5:
                 attackAttInt += 1
-                staticAttack += 1
-                staticDMG += 1
+                staticHit += 1
                 allAtt -= 1
-                totalAttack = staticAttack + changeAttack
-                totalDMG = staticDMG + changeDMG
+                totalHit = staticHit + changeHit
                 widget.config(text='{0}'.format(attackAttInt))
-                staticAttackLabel.config(text = '{0}'.format(staticAttack))
-                staticDMGLabel.config(text = '{0}'.format(staticDMG))
-                totalAttackLabel.config(text = '{0}'.format(totalAttack))
-                totalDMGLabel.config(text = '{0}'.format(totalDMG))
+                staticHitLabel.config(text = '{0}'.format(staticHit))
+                totalHitLabel.config(text = '{0}'.format(totalHit))
         elif num == 6:
             if evasionAttInt < 5:
                 evasionAttInt += 1
@@ -1322,8 +1330,660 @@ def create_active_skill_window():
     skillLevelLabel10.grid(row=9, column=3)
 
 def create_inventory_window():
+    global allAtt, meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,firstAidAttInt,manaAttInt,thiefArtAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt,magicCircleAttLabel,magicCircleAttLabel2,spell211LVLLabel,spell212LVLLabel,spell221LVLLabel,spell222LVLLabel,spell231LVLLabel,spell232LVLLabel,spell241LVLLabel,spell242LVLLabel,spell251LVLLabel,spell252LVLLabel,spell11LVLLabel,spell12LVLLabel,spell21LVLLabel,spell22LVLLabel,spell31LVLLabel,spell32LVLLabel,spell41LVLLabel,spell42LVLLabel,spell51LVLLabel,spell52LVLLabel,staticEnergy,staticRegenEnergy,staticHaste,staticAttack,staticDMG,staticHP,staticRegenHP,staticEvade,staticDMG,staticMP,staticRegenMP,staticDirectMagicDMG,staticPeriodicMagicDMG,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalHP,totalRegenHP,totalEvade,totalDMG,totalMP,totalRegenMP,totalDirectMagicDMG,totalPeriodicMagicDMG,totalSpellPenetration,staticSpellPenetration,staticEnergyLabel,staticDMGLabel,staticAttackLabel,staticDMGLabel,staticEvadeLabel,staticHasteLabel,staticMPLabel,staticRegenMPLabel,staticDirectMagicDMGLabel,staticSpellPenetrationLabel,staticHPLabel,staticRegenHPLabel,staticPeriodicMagicDMG,staticPeriodicMagicDMGLabel,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalARP,totalHP,totalRegenHP,totalEvade,totalArmor,totalMgicArmor,totalMP,totalRegenMP,totalSpellPenetration,totalDirectMagicDMG,totalPeriodicMagicDMG,totalAttackLabel,totalDMGLabel,totalEvadeLabel,totalHasteLabel,totalMPLabel,totalRegenMPLabel,totalDirectMagicDMGLabel,totalSpellPenetrationLabel,totalPeriodicMagicDMGLabel,totalHPLabel,totalRegenHPLabel,staticHit,totalHit,staticHitLabel,totalHitLabel,rightHandEnergy,rightHandRegenEnergy,rightHandHaste,rightHandHit,rightHandAttack,rightHandMinAttack,rightHandMidAttack,rightHandMaxAttack,rightHandMinDMG,rightHandMidDMG,rightHandMaxDMG,rightHandDMG,rightHandARP,rightHandHP,rightHandRegenHP,rightHandEvade,rightHandArmor,rightHandMgicArmor,rightHandMP,rightHandRegenMP,rightHandSpellPenetration,rightHandDirectMagicDMG,rightHandPeriodicMagicDMG,rightHandCharmEnergy,rightHandCharmRegenEnergy,rightHandCharmHaste,rightHandCharmHit,rightHandCharmAttack,rightHandCharmMinAttack,rightHandCharmMidAttack,rightHandCharmMaxAttack,rightHandCharmMinDMG,rightHandCharmMidDMG,rightHandCharmMaxDMG,rightHandCharmDMG,rightHandCharmARP,rightHandCharmHP,rightHandCharmRegenHP,rightHandCharmEvade,rightHandCharmArmor,rightHandCharmMgicArmor,rightHandCharmMP,rightHandCharmRegenMP,rightHandCharmSpellPenetration,rightHandCharmDirectMagicDMG,rightHandCharmPeriodicMagicDMG,leftHandEnergy,leftHandRegenEnergy,leftHandHaste,leftHandHit,leftHandAttack,leftHandMinAttack,leftHandMidAttack,leftHandMaxAttack,leftHandMinDMG,leftHandMidDMG,leftHandMaxDMG,leftHandDMG,leftHandARP,leftHandHP,leftHandRegenHP,leftHandEvade,leftHandArmor,leftHandMgicArmor,leftHandMP,leftHandRegenMP,leftHandSpellPenetration,leftHandDirectMagicDMG,leftHandPeriodicMagicDMG,leftHandCharmEnergy,leftHandCharmRegenEnergy,leftHandCharmHaste,leftHandCharmHit,leftHandCharmAttack,leftHandCharmMinAttack,leftHandCharmMidAttack,leftHandCharmMaxAttack,leftHandCharmMinDMG,leftHandCharmMidDMG,leftHandCharmMaxDMG,leftHandCharmDMG,leftHandCharmARP,leftHandCharmHP,leftHandCharmRegenHP,leftHandCharmEvade,leftHandCharmArmor,leftHandCharmMgicArmor,leftHandCharmMP,leftHandCharmRegenMP,leftHandCharmSpellPenetration,leftHandCharmDirectMagicDMG,leftHandCharmPeriodicMagicDMG,ChestEnergy,ChestRegenEnergy,ChestHaste,ChestHit,ChestAttack,ChestMinAttack,ChestMidAttack,ChestMaxAttack,ChestMinDMG,ChestMidDMG,ChestMaxDMG,ChestDMG,ChestARP,ChestHP,ChestRegenHP,ChestEvade,ChestArmor,ChestMgicArmor,ChestMP,ChestRegenMP,ChestSpellPenetration,ChestDirectMagicDMG,ChestPeriodicMagicDMG,ChestCharmEnergy,ChestCharmRegenEnergy,ChestCharmHaste,ChestCharmHit,ChestCharmAttack,ChestCharmMinAttack,ChestCharmMidAttack,ChestCharmMaxAttack,ChestCharmMinDMG,ChestCharmMidDMG,ChestCharmMaxDMG,ChestCharmDMG,ChestCharmARP,ChestCharmHP,ChestCharmRegenHP,ChestCharmEvade,ChestCharmArmor,ChestCharmMgicArmor,ChestCharmMP,ChestCharmRegenMP,ChestCharmSpellPenetration,ChestCharmDirectMagicDMG,ChestCharmPeriodicMagicDMG,amuletEnergy,amuletRegenEnergy,amuletHaste,amuletHit,amuletAttack,amuletMinAttack,amuletMidAttack,amuletMaxAttack,amuletMinDMG,amuletMidDMG,amuletMaxDMG,amuletDMG,amuletARP,amuletHP,amuletRegenHP,amuletEvade,amuletArmor,amuletMgicArmor,amuletMP,amuletRegenMP,amuletSpellPenetration,amuletDirectMagicDMG,amuletPeriodicMagicDMG,amuletCharmEnergy,amuletCharmRegenEnergy,amuletCharmHaste,amuletCharmHit,amuletCharmAttack,amuletCharmMinAttack,amuletCharmMidAttack,amuletCharmMaxAttack,amuletCharmMinDMG,amuletCharmMidDMG,amuletCharmMaxDMG,amuletCharmDMG,amuletCharmARP,amuletCharmHP,amuletCharmRegenHP,amuletCharmEvade,amuletCharmArmor,amuletCharmMgicArmor,amuletCharmMP,amuletCharmRegenMP,amuletCharmSpellPenetration,amuletCharmDirectMagicDMG,amuletCharmPeriodicMagicDMG,ringEnergy,ringRegenEnergy,ringHaste,ringHit,ringAttack,ringMinAttack,ringMidAttack,ringMaxAttack,ringMinDMG,ringMidDMG,ringMaxDMG,ringDMG,ringARP,ringHP,ringRegenHP,ringEvade,ringArmor,ringMgicArmor,ringMP,ringRegenMP,ringSpellPenetration,ringDirectMagicDMG,ringPeriodicMagicDMG,ringCharmEnergy,ringCharmRegenEnergy,ringCharmHaste,ringCharmHit,ringCharmAttack,ringCharmMinAttack,ringCharmMidAttack,ringCharmMaxAttack,ringCharmMinDMG,ringCharmMidDMG,ringCharmMaxDMG,ringCharmDMG,ringCharmARP,ringCharmHP,ringCharmRegenHP,ringCharmEvade,ringCharmArmor,ringCharmMgicArmor,ringCharmMP,ringCharmRegenMP,ringCharmSpellPenetration,ringCharmDirectMagicDMG,ringCharmPeriodicMagicDMG,bookEnergy,bookRegenEnergy,bookHaste,bookHit,bookAttack,bookMinAttack,bookMidAttack,bookMaxAttack,bookMinDMG,bookMidDMG,bookMaxDMG,bookDMG,bookARP,bookHP,bookRegenHP,bookEvade,bookArmor,bookMgicArmor,bookMP,bookRegenMP,bookSpellPenetration,bookDirectMagicDMG,bookPeriodicMagicDMG,bookCharmEnergy,bookCharmRegenEnergy,bookCharmHaste,bookCharmHit,bookCharmAttack,bookCharmMinAttack,bookCharmMidAttack,bookCharmMaxAttack,bookCharmMinDMG,bookCharmMidDMG,bookCharmMaxDMG,bookCharmDMG,bookCharmARP,bookCharmHP,bookCharmRegenHP,bookCharmEvade,bookCharmArmor,bookCharmMgicArmor,bookCharmMP,bookCharmRegenMP,bookCharmSpellPenetration,bookCharmDirectMagicDMG,bookCharmPeriodicMagicDMG,staticArmor,staticMgicArmor,staticARP
+
+    def add_att_inventory(event):
+        global allAtt, meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,firstAidAttInt,manaAttInt,thiefArtAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt,magicCircleAttLabel,magicCircleAttLabel2,spell211LVLLabel,spell212LVLLabel,spell221LVLLabel,spell222LVLLabel,spell231LVLLabel,spell232LVLLabel,spell241LVLLabel,spell242LVLLabel,spell251LVLLabel,spell252LVLLabel,spell11LVLLabel,spell12LVLLabel,spell21LVLLabel,spell22LVLLabel,spell31LVLLabel,spell32LVLLabel,spell41LVLLabel,spell42LVLLabel,spell51LVLLabel,spell52LVLLabel,staticEnergy,staticRegenEnergy,staticHaste,staticAttack,staticDMG,staticHP,staticRegenHP,staticEvade,staticDMG,staticMP,staticRegenMP,staticDirectMagicDMG,staticPeriodicMagicDMG,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalHP,totalRegenHP,totalEvade,totalDMG,totalMP,totalRegenMP,totalDirectMagicDMG,totalPeriodicMagicDMG,totalSpellPenetration,staticSpellPenetration,staticEnergyLabel,staticDMGLabel,staticAttackLabel,staticDMGLabel,staticEvadeLabel,staticHasteLabel,staticMPLabel,staticRegenMPLabel,staticDirectMagicDMGLabel,staticSpellPenetrationLabel,staticHPLabel,staticRegenHPLabel,staticPeriodicMagicDMG,staticPeriodicMagicDMGLabel,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalARP,totalHP,totalRegenHP,totalEvade,totalArmor,totalMgicArmor,totalMP,totalRegenMP,totalSpellPenetration,totalDirectMagicDMG,totalPeriodicMagicDMG,totalAttackLabel,totalDMGLabel,totalEvadeLabel,totalHasteLabel,totalMPLabel,totalRegenMPLabel,totalDirectMagicDMGLabel,totalSpellPenetrationLabel,totalPeriodicMagicDMGLabel,totalHPLabel,totalRegenHPLabel,staticHit,totalHit,staticHitLabel,totalHitLabel,rightHandEnergy,rightHandRegenEnergy,rightHandHaste,rightHandHit,rightHandAttack,rightHandMinAttack,rightHandMidAttack,rightHandMaxAttack,rightHandMinDMG,rightHandMidDMG,rightHandMaxDMG,rightHandDMG,rightHandARP,rightHandHP,rightHandRegenHP,rightHandEvade,rightHandArmor,rightHandMgicArmor,rightHandMP,rightHandRegenMP,rightHandSpellPenetration,rightHandDirectMagicDMG,rightHandPeriodicMagicDMG,rightHandCharmEnergy,rightHandCharmRegenEnergy,rightHandCharmHaste,rightHandCharmHit,rightHandCharmAttack,rightHandCharmMinAttack,rightHandCharmMidAttack,rightHandCharmMaxAttack,rightHandCharmMinDMG,rightHandCharmMidDMG,rightHandCharmMaxDMG,rightHandCharmDMG,rightHandCharmARP,rightHandCharmHP,rightHandCharmRegenHP,rightHandCharmEvade,rightHandCharmArmor,rightHandCharmMgicArmor,rightHandCharmMP,rightHandCharmRegenMP,rightHandCharmSpellPenetration,rightHandCharmDirectMagicDMG,rightHandCharmPeriodicMagicDMG,leftHandEnergy,leftHandRegenEnergy,leftHandHaste,leftHandHit,leftHandAttack,leftHandMinAttack,leftHandMidAttack,leftHandMaxAttack,leftHandMinDMG,leftHandMidDMG,leftHandMaxDMG,leftHandDMG,leftHandARP,leftHandHP,leftHandRegenHP,leftHandEvade,leftHandArmor,leftHandMgicArmor,leftHandMP,leftHandRegenMP,leftHandSpellPenetration,leftHandDirectMagicDMG,leftHandPeriodicMagicDMG,leftHandCharmEnergy,leftHandCharmRegenEnergy,leftHandCharmHaste,leftHandCharmHit,leftHandCharmAttack,leftHandCharmMinAttack,leftHandCharmMidAttack,leftHandCharmMaxAttack,leftHandCharmMinDMG,leftHandCharmMidDMG,leftHandCharmMaxDMG,leftHandCharmDMG,leftHandCharmARP,leftHandCharmHP,leftHandCharmRegenHP,leftHandCharmEvade,leftHandCharmArmor,leftHandCharmMgicArmor,leftHandCharmMP,leftHandCharmRegenMP,leftHandCharmSpellPenetration,leftHandCharmDirectMagicDMG,leftHandCharmPeriodicMagicDMG,ChestEnergy,ChestRegenEnergy,ChestHaste,ChestHit,ChestAttack,ChestMinAttack,ChestMidAttack,ChestMaxAttack,ChestMinDMG,ChestMidDMG,ChestMaxDMG,ChestDMG,ChestARP,ChestHP,ChestRegenHP,ChestEvade,ChestArmor,ChestMgicArmor,ChestMP,ChestRegenMP,ChestSpellPenetration,ChestDirectMagicDMG,ChestPeriodicMagicDMG,ChestCharmEnergy,ChestCharmRegenEnergy,ChestCharmHaste,ChestCharmHit,ChestCharmAttack,ChestCharmMinAttack,ChestCharmMidAttack,ChestCharmMaxAttack,ChestCharmMinDMG,ChestCharmMidDMG,ChestCharmMaxDMG,ChestCharmDMG,ChestCharmARP,ChestCharmHP,ChestCharmRegenHP,ChestCharmEvade,ChestCharmArmor,ChestCharmMgicArmor,ChestCharmMP,ChestCharmRegenMP,ChestCharmSpellPenetration,ChestCharmDirectMagicDMG,ChestCharmPeriodicMagicDMG,amuletEnergy,amuletRegenEnergy,amuletHaste,amuletHit,amuletAttack,amuletMinAttack,amuletMidAttack,amuletMaxAttack,amuletMinDMG,amuletMidDMG,amuletMaxDMG,amuletDMG,amuletARP,amuletHP,amuletRegenHP,amuletEvade,amuletArmor,amuletMgicArmor,amuletMP,amuletRegenMP,amuletSpellPenetration,amuletDirectMagicDMG,amuletPeriodicMagicDMG,amuletCharmEnergy,amuletCharmRegenEnergy,amuletCharmHaste,amuletCharmHit,amuletCharmAttack,amuletCharmMinAttack,amuletCharmMidAttack,amuletCharmMaxAttack,amuletCharmMinDMG,amuletCharmMidDMG,amuletCharmMaxDMG,amuletCharmDMG,amuletCharmARP,amuletCharmHP,amuletCharmRegenHP,amuletCharmEvade,amuletCharmArmor,amuletCharmMgicArmor,amuletCharmMP,amuletCharmRegenMP,amuletCharmSpellPenetration,amuletCharmDirectMagicDMG,amuletCharmPeriodicMagicDMG,ringEnergy,ringRegenEnergy,ringHaste,ringHit,ringAttack,ringMinAttack,ringMidAttack,ringMaxAttack,ringMinDMG,ringMidDMG,ringMaxDMG,ringDMG,ringARP,ringHP,ringRegenHP,ringEvade,ringArmor,ringMgicArmor,ringMP,ringRegenMP,ringSpellPenetration,ringDirectMagicDMG,ringPeriodicMagicDMG,ringCharmEnergy,ringCharmRegenEnergy,ringCharmHaste,ringCharmHit,ringCharmAttack,ringCharmMinAttack,ringCharmMidAttack,ringCharmMaxAttack,ringCharmMinDMG,ringCharmMidDMG,ringCharmMaxDMG,ringCharmDMG,ringCharmARP,ringCharmHP,ringCharmRegenHP,ringCharmEvade,ringCharmArmor,ringCharmMgicArmor,ringCharmMP,ringCharmRegenMP,ringCharmSpellPenetration,ringCharmDirectMagicDMG,ringCharmPeriodicMagicDMG,bookEnergy,bookRegenEnergy,bookHaste,bookHit,bookAttack,bookMinAttack,bookMidAttack,bookMaxAttack,bookMinDMG,bookMidDMG,bookMaxDMG,bookDMG,bookARP,bookHP,bookRegenHP,bookEvade,bookArmor,bookMgicArmor,bookMP,bookRegenMP,bookSpellPenetration,bookDirectMagicDMG,bookPeriodicMagicDMG,bookCharmEnergy,bookCharmRegenEnergy,bookCharmHaste,bookCharmHit,bookCharmAttack,bookCharmMinAttack,bookCharmMidAttack,bookCharmMaxAttack,bookCharmMinDMG,bookCharmMidDMG,bookCharmMaxDMG,bookCharmDMG,bookCharmARP,bookCharmHP,bookCharmRegenHP,bookCharmEvade,bookCharmArmor,bookCharmMgicArmor,bookCharmMP,bookCharmRegenMP,bookCharmSpellPenetration,bookCharmDirectMagicDMG,bookCharmPeriodicMagicDMG,staticArmor,staticMgicArmor,staticARP
+
+        rightHandEnergyNew = int(rightHandEnergyEntry.get())
+        rightHandRegenEnergyNew = int(rightHandRegenEnergyEntry.get())
+        rightHandHasteNew = int(rightHandHasteEntry.get())
+        rightHandHitNew = int(rightHandHitEntry.get())
+        # rightHandAttack = rightHandAttackEntry.get()
+        rightHandMinAttackNew = int(rightHandAttackEntry.get().split('-')[0])
+        rightHandMidAttackNew = int(rightHandAttackEntry.get().split('-')[1])
+        rightHandMaxAttackNew = int(rightHandAttackEntry.get().split('-')[2])
+        # rightHandDMG = rightHandDMGEntry.get()
+        rightHandMinDMGNew = int(rightHandDMGEntry.get().split('-')[0])
+        rightHandMidDMGNew = int(rightHandDMGEntry.get().split('-')[1])
+        rightHandMaxDMGNew = int(rightHandDMGEntry.get().split('-')[2])
+        rightHandARPNew = int(rightHandARPEntry.get())
+        rightHandHPNew = int(rightHandHPEntry.get())
+        rightHandRegenHPNew = int(rightHandRegenHPEntry.get())
+        rightHandEvadeNew = int(rightHandEvadeEntry.get())
+        rightHandArmorNew = int(rightHandArmorEntry.get())
+        rightHandMgicArmorNew = int(rightHandMgicArmorEntry.get())
+        rightHandMPNew = int(rightHandMPEntry.get())
+        rightHandRegenMPNew = int(rightHandRegenMPEntry.get())
+        rightHandSpellPenetrationNew = int(rightHandSpellPenetrationEntry.get())
+        rightHandDirectMagicDMGNew = int(rightHandDirectMagicDMGEntry.get())
+        rightHandPeriodicMagicDMGNew = int(rightHandPeriodicMagicDMGEntry.get())
+
+        rightHandCharmEnergyNew = int(rightHandCharmEnergyEntry.get())
+        rightHandCharmRegenEnergyNew = int(rightHandCharmRegenEnergyEntry.get())
+        rightHandCharmHasteNew = int(rightHandCharmHasteEntry.get())
+        rightHandCharmHitNew = int(rightHandCharmHitEntry.get())
+        rightHandCharmMinAttackNew = int(rightHandCharmAttackEntry.get().split('-')[0])
+        rightHandCharmMidAttackNew = int(rightHandCharmAttackEntry.get().split('-')[1])
+        rightHandCharmMaxAttackNew = int(rightHandCharmAttackEntry.get().split('-')[2])
+        rightHandCharmMinDMGNew = int(rightHandCharmDMGEntry.get().split('-')[0])
+        rightHandCharmMidDMGNew = int(rightHandCharmDMGEntry.get().split('-')[1])
+        rightHandCharmMaxDMGNew = int(rightHandCharmDMGEntry.get().split('-')[2])
+        # rightHandCharmDMGNew = int(rightHandCharmDMGEntry.get())
+        rightHandCharmARPNew = int(rightHandCharmARPEntry.get())
+        rightHandCharmHPNew = int(rightHandCharmHPEntry.get())
+        rightHandCharmRegenHPNew = int(rightHandCharmRegenHPEntry.get())
+        rightHandCharmEvadeNew = int(rightHandCharmEvadeEntry.get())
+        rightHandCharmArmorNew = int(rightHandCharmArmorEntry.get())
+        rightHandCharmMgicArmorNew = int(rightHandCharmMgicArmorEntry.get())
+        rightHandCharmMPNew = int(rightHandCharmMPEntry.get())
+        rightHandCharmRegenMPNew = int(rightHandCharmRegenMPEntry.get())
+        rightHandCharmSpellPenetrationNew = int(rightHandCharmSpellPenetrationEntry.get())
+        rightHandCharmDirectMagicDMGNew = int(rightHandCharmDirectMagicDMGEntry.get())
+        rightHandCharmPeriodicMagicDMGNew = int(rightHandCharmPeriodicMagicDMGEntry.get())
+
+        leftHandEnergyNew = int(leftHandEnergyEntry.get())
+        leftHandRegenEnergyNew = int(leftHandRegenEnergyEntry.get())
+        leftHandHasteNew = int(leftHandHasteEntry.get())
+        leftHandHitNew = int(leftHandHitEntry.get())
+        # leftHandAttackNew = int(leftHandAttackEntry.get())
+        leftHandMinAttackNew = int(leftHandAttackEntry.get().split('-')[0])
+        leftHandMidAttackNew = int(leftHandAttackEntry.get().split('-')[1])
+        leftHandMaxAttackNew = int(leftHandAttackEntry.get().split('-')[2])
+        leftHandMinDMGNew = int(leftHandDMGEntry.get().split('-')[0])
+        leftHandMidDMGNew = int(leftHandDMGEntry.get().split('-')[1])
+        leftHandMaxDMGNew = int(leftHandDMGEntry.get().split('-')[2])
+        # leftHandDMGNew = int(leftHandDMGEntry.get())
+        leftHandARPNew = int(leftHandARPEntry.get())
+        leftHandHPNew = int(leftHandHPEntry.get())
+        leftHandRegenHPNew = int(leftHandRegenHPEntry.get())
+        leftHandEvadeNew = int(leftHandEvadeEntry.get())
+        leftHandArmorNew = int(leftHandArmorEntry.get())
+        leftHandMgicArmorNew = int(leftHandMgicArmorEntry.get())
+        leftHandMPNew = int(leftHandMPEntry.get())
+        leftHandRegenMPNew = int(leftHandRegenMPEntry.get())
+        leftHandSpellPenetrationNew = int(leftHandSpellPenetrationEntry.get())
+        leftHandDirectMagicDMGNew = int(leftHandDirectMagicDMGEntry.get())
+        leftHandPeriodicMagicDMGNew = int(leftHandPeriodicMagicDMGEntry.get())
+
+        leftHandCharmEnergyNew = int(leftHandCharmEnergyEntry.get())
+        leftHandCharmRegenEnergyNew = int(leftHandCharmRegenEnergyEntry.get())
+        leftHandCharmHasteNew = int(leftHandCharmHasteEntry.get())
+        leftHandCharmHitNew = int(leftHandCharmHitEntry.get())
+        # leftHandCharmAttackNew = int(leftHandCharmAttackEntry.get())
+        leftHandCharmMinAttackNew = int(leftHandCharmAttackEntry.get().split('-')[0])
+        leftHandCharmMidAttackNew = int(leftHandCharmAttackEntry.get().split('-')[1])
+        leftHandCharmMaxAttackNew = int(leftHandCharmAttackEntry.get().split('-')[2])
+        leftHandCharmMinDMGNew = int(leftHandCharmDMGEntry.get().split('-')[0])
+        leftHandCharmMidDMGNew = int(leftHandCharmDMGEntry.get().split('-')[1])
+        leftHandCharmMaxDMGNew = int(leftHandCharmDMGEntry.get().split('-')[2])
+        # leftHandCharmDMGNew = int(leftHandCharmDMGEntry.get())
+        leftHandCharmARPNew = int(leftHandCharmARPEntry.get())
+        leftHandCharmHPNew = int(leftHandCharmHPEntry.get())
+        leftHandCharmRegenHPNew = int(leftHandCharmRegenHPEntry.get())
+        leftHandCharmEvadeNew = int(leftHandCharmEvadeEntry.get())
+        leftHandCharmArmorNew = int(leftHandCharmArmorEntry.get())
+        leftHandCharmMgicArmorNew = int(leftHandCharmMgicArmorEntry.get())
+        leftHandCharmMPNew = int(leftHandCharmMPEntry.get())
+        leftHandCharmRegenMPNew = int(leftHandCharmRegenMPEntry.get())
+        leftHandCharmSpellPenetrationNew = int(leftHandCharmSpellPenetrationEntry.get())
+        leftHandCharmDirectMagicDMGNew = int(leftHandCharmDirectMagicDMGEntry.get())
+        leftHandCharmPeriodicMagicDMGNew = int(leftHandCharmPeriodicMagicDMGEntry.get())
+
+        ChestEnergyNew = int(ChestEnergyEntry.get())
+        ChestRegenEnergyNew = int(ChestRegenEnergyEntry.get())
+        ChestHasteNew = int(ChestHasteEntry.get())
+        ChestHitNew = int(ChestHitEntry.get())
+        # ChestAttackNew = int(ChestAttackEntry.get())
+        ChestMinAttackNew = int(ChestAttackEntry.get().split('-')[0])
+        ChestMidAttackNew = int(ChestAttackEntry.get().split('-')[1])
+        ChestMaxAttackNew = int(ChestAttackEntry.get().split('-')[2])
+        ChestMinDMGNew = int(ChestDMGEntry.get().split('-')[0])
+        ChestMidDMGNew = int(ChestDMGEntry.get().split('-')[1])
+        ChestMaxDMGNew = int(ChestDMGEntry.get().split('-')[2])
+        # ChestDMGNew = int(ChestDMGEntry.get())
+        ChestARPNew = int(ChestARPEntry.get())
+        ChestHPNew = int(ChestHPEntry.get())
+        ChestRegenHPNew = int(ChestRegenHPEntry.get())
+        ChestEvadeNew = int(ChestEvadeEntry.get())
+        ChestArmorNew = int(ChestArmorEntry.get())
+        ChestMgicArmorNew = int(ChestMgicArmorEntry.get())
+        ChestMPNew = int(ChestMPEntry.get())
+        ChestRegenMPNew = int(ChestRegenMPEntry.get())
+        ChestSpellPenetrationNew = int(ChestSpellPenetrationEntry.get())
+        ChestDirectMagicDMGNew = int(ChestDirectMagicDMGEntry.get())
+        ChestPeriodicMagicDMGNew = int(ChestPeriodicMagicDMGEntry.get())
+
+        ChestCharmEnergyNew = int(ChestCharmEnergyEntry.get())
+        ChestCharmRegenEnergyNew = int(ChestCharmRegenEnergyEntry.get())
+        ChestCharmHasteNew = int(ChestCharmHasteEntry.get())
+        ChestCharmHitNew = int(ChestCharmHitEntry.get())
+        # ChestCharmAttackNew = int(ChestCharmAttackEntry.get())
+        ChestCharmMinAttackNew = int(ChestCharmAttackEntry.get().split('-')[0])
+        ChestCharmMidAttackNew = int(ChestCharmAttackEntry.get().split('-')[1])
+        ChestCharmMaxAttackNew = int(ChestCharmAttackEntry.get().split('-')[2])
+        ChestCharmMinDMGNew = int(ChestCharmDMGEntry.get().split('-')[0])
+        ChestCharmMidDMGNew = int(ChestCharmDMGEntry.get().split('-')[1])
+        ChestCharmMaxDMGNew = int(ChestCharmDMGEntry.get().split('-')[2])
+        # ChestCharmDMGNew = int(ChestCharmDMGEntry.get())
+        ChestCharmARPNew = int(ChestCharmARPEntry.get())
+        ChestCharmHPNew = int(ChestCharmHPEntry.get())
+        ChestCharmRegenHPNew = int(ChestCharmRegenHPEntry.get())
+        ChestCharmEvadeNew = int(ChestCharmEvadeEntry.get())
+        ChestCharmArmorNew = int(ChestCharmArmorEntry.get())
+        ChestCharmMgicArmorNew = int(ChestCharmMgicArmorEntry.get())
+        ChestCharmMPNew = int(ChestCharmMPEntry.get())
+        ChestCharmRegenMPNew = int(ChestCharmRegenMPEntry.get())
+        ChestCharmSpellPenetrationNew = int(ChestCharmSpellPenetrationEntry.get())
+        ChestCharmDirectMagicDMGNew = int(ChestCharmDirectMagicDMGEntry.get())
+        ChestCharmPeriodicMagicDMGNew = int(ChestCharmPeriodicMagicDMGEntry.get())
+
+        amuletEnergyNew = int(amuletEnergyEntry.get())
+        amuletRegenEnergyNew = int(amuletRegenEnergyEntry.get())
+        amuletHasteNew = int(amuletHasteEntry.get())
+        amuletHitNew = int(amuletHitEntry.get())
+        # amuletAttackNew = int(amuletAttackEntry.get())
+        amuletMinAttackNew = int(amuletAttackEntry.get().split('-')[0])
+        amuletMidAttackNew = int(amuletAttackEntry.get().split('-')[1])
+        amuletMaxAttackNew = int(amuletAttackEntry.get().split('-')[2])
+        amuletMinDMGNew = int(amuletDMGEntry.get().split('-')[0])
+        amuletMidDMGNew = int(amuletDMGEntry.get().split('-')[1])
+        amuletMaxDMGNew = int(amuletDMGEntry.get().split('-')[2])
+        # amuletDMGNew = int(amuletDMGEntry.get())
+        amuletARPNew = int(amuletARPEntry.get())
+        amuletHPNew = int(amuletHPEntry.get())
+        amuletRegenHPNew = int(amuletRegenHPEntry.get())
+        amuletEvadeNew = int(amuletEvadeEntry.get())
+        amuletArmorNew = int(amuletArmorEntry.get())
+        amuletMgicArmorNew = int(amuletMgicArmorEntry.get())
+        amuletMPNew = int(amuletMPEntry.get())
+        amuletRegenMPNew = int(amuletRegenMPEntry.get())
+        amuletSpellPenetrationNew = int(amuletSpellPenetrationEntry.get())
+        amuletDirectMagicDMGNew = int(amuletDirectMagicDMGEntry.get())
+        amuletPeriodicMagicDMGNew = int(amuletPeriodicMagicDMGEntry.get())
+
+        amuletCharmEnergyNew = int(amuletCharmEnergyEntry.get())
+        amuletCharmRegenEnergyNew = int(amuletCharmRegenEnergyEntry.get())
+        amuletCharmHasteNew = int(amuletCharmHasteEntry.get())
+        amuletCharmHitNew = int(amuletCharmHitEntry.get())
+        # amuletCharmAttackNew = int(amuletCharmAttackEntry.get())
+        amuletCharmMinAttackNew = int(amuletCharmAttackEntry.get().split('-')[0])
+        amuletCharmMidAttackNew = int(amuletCharmAttackEntry.get().split('-')[1])
+        amuletCharmMaxAttackNew = int(amuletCharmAttackEntry.get().split('-')[2])
+        amuletCharmMinDMGNew = int(amuletCharmDMGEntry.get().split('-')[0])
+        amuletCharmMidDMGNew = int(amuletCharmDMGEntry.get().split('-')[1])
+        amuletCharmMaxDMGNew = int(amuletCharmDMGEntry.get().split('-')[2])
+        # amuletCharmDMGNew = int(amuletCharmDMGEntry.get())
+        amuletCharmARPNew = int(amuletCharmARPEntry.get())
+        amuletCharmHPNew = int(amuletCharmHPEntry.get())
+        amuletCharmRegenHPNew = int(amuletCharmRegenHPEntry.get())
+        amuletCharmEvadeNew = int(amuletCharmEvadeEntry.get())
+        amuletCharmArmorNew = int(amuletCharmArmorEntry.get())
+        amuletCharmMgicArmorNew = int(amuletCharmMgicArmorEntry.get())
+        amuletCharmMPNew = int(amuletCharmMPEntry.get())
+        amuletCharmRegenMPNew = int(amuletCharmRegenMPEntry.get())
+        amuletCharmSpellPenetrationNew = int(amuletCharmSpellPenetrationEntry.get())
+        amuletCharmDirectMagicDMGNew = int(amuletCharmDirectMagicDMGEntry.get())
+        amuletCharmPeriodicMagicDMGNew = int(amuletCharmPeriodicMagicDMGEntry.get())
+
+        ringEnergyNew = int(ringEnergyEntry.get())
+        ringRegenEnergyNew = int(ringRegenEnergyEntry.get())
+        ringHasteNew = int(ringHasteEntry.get())
+        ringHitNew = int(ringHitEntry.get())
+        # ringAttackNew = int(ringAttackEntry.get())
+        ringMinAttackNew = int(ringAttackEntry.get().split('-')[0])
+        ringMidAttackNew = int(ringAttackEntry.get().split('-')[1])
+        ringMaxAttackNew = int(ringAttackEntry.get().split('-')[2])
+        ringMinDMGNew = int(ringDMGEntry.get().split('-')[0])
+        ringMidDMGNew = int(ringDMGEntry.get().split('-')[1])
+        ringMaxDMGNew = int(ringDMGEntry.get().split('-')[2])
+        # ringDMGNew = int(ringDMGEntry.get())
+        ringARPNew = int(ringARPEntry.get())
+        ringHPNew = int(ringHPEntry.get())
+        ringRegenHPNew = int(ringRegenHPEntry.get())
+        ringEvadeNew = int(ringEvadeEntry.get())
+        ringArmorNew = int(ringArmorEntry.get())
+        ringMgicArmorNew = int(ringMgicArmorEntry.get())
+        ringMPNew = int(ringMPEntry.get())
+        ringRegenMPNew = int(ringRegenMPEntry.get())
+        ringSpellPenetrationNew = int(ringSpellPenetrationEntry.get())
+        ringDirectMagicDMGNew = int(ringDirectMagicDMGEntry.get())
+        ringPeriodicMagicDMGNew = int(ringPeriodicMagicDMGEntry.get())
+
+        ringCharmEnergyNew = int(ringCharmEnergyEntry.get())
+        ringCharmRegenEnergyNew = int(ringCharmRegenEnergyEntry.get())
+        ringCharmHasteNew = int(ringCharmHasteEntry.get())
+        ringCharmHitNew = int(ringCharmHitEntry.get())
+        # ringCharmAttackNew = int(ringCharmAttackEntry.get())
+        ringCharmMinAttackNew = int(ringCharmAttackEntry.get().split('-')[0])
+        ringCharmMidAttackNew = int(ringCharmAttackEntry.get().split('-')[1])
+        ringCharmMaxAttackNew = int(ringCharmAttackEntry.get().split('-')[2])
+        ringCharmMinDMGNew = int(ringCharmDMGEntry.get().split('-')[0])
+        ringCharmMidDMGNew = int(ringCharmDMGEntry.get().split('-')[1])
+        ringCharmMaxDMGNew = int(ringCharmDMGEntry.get().split('-')[2])
+        # ringCharmDMGNew = int(ringCharmDMGEntry.get())
+        ringCharmARPNew = int(ringCharmARPEntry.get())
+        ringCharmHPNew = int(ringCharmHPEntry.get())
+        ringCharmRegenHPNew = int(ringCharmRegenHPEntry.get())
+        ringCharmEvadeNew = int(ringCharmEvadeEntry.get())
+        ringCharmArmorNew = int(ringCharmArmorEntry.get())
+        ringCharmMgicArmorNew = int(ringCharmMgicArmorEntry.get())
+        ringCharmMPNew = int(ringCharmMPEntry.get())
+        ringCharmRegenMPNew = int(ringCharmRegenMPEntry.get())
+        ringCharmSpellPenetrationNew = int(ringCharmSpellPenetrationEntry.get())
+        ringCharmDirectMagicDMGNew = int(ringCharmDirectMagicDMGEntry.get())
+        ringCharmPeriodicMagicDMGNew = int(ringCharmPeriodicMagicDMGEntry.get())
+
+        bookEnergyNew = int(bookEnergyEntry.get())
+        bookRegenEnergyNew = int(bookRegenEnergyEntry.get())
+        bookHasteNew = int(bookHasteEntry.get())
+        bookHitNew = int(bookHitEntry.get())
+        # bookAttackNew = int(bookAttackEntry.get())
+        bookMinAttackNew = int(bookAttackEntry.get().split('-')[0])
+        bookMidAttackNew = int(bookAttackEntry.get().split('-')[1])
+        bookMaxAttackNew = int(bookAttackEntry.get().split('-')[2])
+        bookMinDMGNew = int(bookDMGEntry.get().split('-')[0])
+        bookMidDMGNew = int(bookDMGEntry.get().split('-')[1])
+        bookMaxDMGNew = int(bookDMGEntry.get().split('-')[2])
+        # bookDMGNew = int(bookDMGEntry.get())
+        bookARPNew = int(bookARPEntry.get())
+        bookHPNew = int(bookHPEntry.get())
+        bookRegenHPNew = int(bookRegenHPEntry.get())
+        bookEvadeNew = int(bookEvadeEntry.get())
+        bookArmorNew = int(bookArmorEntry.get())
+        bookMgicArmorNew = int(bookMgicArmorEntry.get())
+        bookMPNew = int(bookMPEntry.get())
+        bookRegenMPNew = int(bookRegenMPEntry.get())
+        bookSpellPenetrationNew = int(bookSpellPenetrationEntry.get())
+        bookDirectMagicDMGNew = int(bookDirectMagicDMGEntry.get())
+        bookPeriodicMagicDMGNew = int(bookPeriodicMagicDMGEntry.get())
+
+        bookCharmEnergyNew = int(bookCharmEnergyEntry.get())
+        bookCharmRegenEnergyNew = int(bookCharmRegenEnergyEntry.get())
+        bookCharmHasteNew = int(bookCharmHasteEntry.get())
+        bookCharmHitNew = int(bookCharmHitEntry.get())
+        # bookCharmAttackNew = int(bookCharmAttackEntry.get())
+        bookCharmMinAttackNew = int(bookCharmAttackEntry.get().split('-')[0])
+        bookCharmMidAttackNew = int(bookCharmAttackEntry.get().split('-')[1])
+        bookCharmMaxAttackNew = int(bookCharmAttackEntry.get().split('-')[2])
+        bookCharmMinDMGNew = int(bookCharmDMGEntry.get().split('-')[0])
+        bookCharmMidDMGNew = int(bookCharmDMGEntry.get().split('-')[1])
+        bookCharmMaxDMGNew = int(bookCharmDMGEntry.get().split('-')[2])
+        # bookCharmDMGNew = int(bookCharmDMGEntry.get())
+        bookCharmARPNew = int(bookCharmARPEntry.get())
+        bookCharmHPNew = int(bookCharmHPEntry.get())
+        bookCharmRegenHPNew = int(bookCharmRegenHPEntry.get())
+        bookCharmEvadeNew = int(bookCharmEvadeEntry.get())
+        bookCharmArmorNew = int(bookCharmArmorEntry.get())
+        bookCharmMgicArmorNew = int(bookCharmMgicArmorEntry.get())
+        bookCharmMPNew = int(bookCharmMPEntry.get())
+        bookCharmRegenMPNew = int(bookCharmRegenMPEntry.get())
+        bookCharmSpellPenetrationNew = int(bookCharmSpellPenetrationEntry.get())
+        bookCharmDirectMagicDMGNew = int(bookCharmDirectMagicDMGEntry.get())
+        bookCharmPeriodicMagicDMGNew = int(bookCharmPeriodicMagicDMGEntry.get())
+
+        staticEnergy += rightHandEnergyNew-rightHandEnergy+rightHandCharmEnergyNew-rightHandCharmEnergy+leftHandEnergyNew-leftHandEnergy+leftHandCharmEnergyNew-leftHandCharmEnergy+ChestEnergyNew-ChestEnergy+ChestCharmEnergyNew-ChestCharmEnergy+amuletEnergyNew-amuletEnergy+amuletCharmEnergyNew-amuletCharmEnergy+ringEnergyNew-ringEnergy+ringCharmEnergyNew-ringCharmEnergy+bookEnergyNew-bookEnergy+bookCharmEnergyNew-bookCharmEnergy
+
+        staticRegenEnergy += rightHandRegenEnergyNew-rightHandRegenEnergy+rightHandCharmRegenEnergyNew-rightHandCharmRegenEnergy+leftHandRegenEnergyNew-leftHandRegenEnergy+leftHandCharmRegenEnergyNew-leftHandCharmRegenEnergy+ChestRegenEnergyNew-ChestRegenEnergy+ChestCharmRegenEnergyNew-ChestCharmRegenEnergy+amuletRegenEnergyNew-amuletRegenEnergy+amuletCharmRegenEnergyNew-amuletCharmRegenEnergy+ringRegenEnergyNew-ringRegenEnergy+ringCharmRegenEnergyNew-ringCharmRegenEnergy+bookRegenEnergyNew-bookRegenEnergy+bookCharmRegenEnergyNew-bookCharmRegenEnergy
+
+        staticHaste += rightHandHasteNew-rightHandHaste+rightHandCharmHasteNew-rightHandCharmHaste+leftHandHasteNew-leftHandHaste+leftHandCharmHasteNew-leftHandCharmHaste+ChestHasteNew-ChestHaste+ChestCharmHasteNew-ChestCharmHaste+amuletHasteNew-amuletHaste+amuletCharmHasteNew-amuletCharmHaste+ringHasteNew-ringHaste+ringCharmHasteNew-ringCharmHaste+bookHasteNew-bookHaste+bookCharmHasteNew-bookCharmHaste
+
+        staticHit += rightHandHitNew-rightHandHit+rightHandCharmHitNew-rightHandCharmHit+leftHandHitNew-leftHandHit+leftHandCharmHitNew-leftHandCharmHit+ChestHitNew-ChestHit+ChestCharmHitNew-ChestCharmHit+amuletHitNew-amuletHit+amuletCharmHitNew-amuletCharmHit+ringHitNew-ringHit+ringCharmHitNew-ringCharmHit+bookHitNew-bookHit+bookCharmHitNew-bookCharmHit
+
+        staticARP += rightHandARPNew-rightHandARP+rightHandCharmARPNew-rightHandCharmARP+leftHandARPNew-leftHandARP+leftHandCharmARPNew-leftHandCharmARP+ChestARPNew-ChestARP+ChestCharmARPNew-ChestCharmARP+amuletARPNew-amuletARP+amuletCharmARPNew-amuletCharmARP+ringARPNew-ringARP+ringCharmARPNew-ringCharmARP+bookARPNew-bookARP+bookCharmARPNew-bookCharmARP
+
+        staticHP += rightHandHPNew-rightHandHP+rightHandCharmHPNew-rightHandCharmHP+leftHandHPNew-leftHandHP+leftHandCharmHPNew-leftHandCharmHP+ChestHPNew-ChestHP+ChestCharmHPNew-ChestCharmHP+amuletHPNew-amuletHP+amuletCharmHPNew-amuletCharmHP+ringHPNew-ringHP+ringCharmHPNew-ringCharmHP+bookHPNew-bookHP+bookCharmHPNew-bookCharmHP
+
+        staticRegenHP += rightHandRegenHPNew-rightHandRegenHP+rightHandCharmRegenHPNew-rightHandCharmRegenHP+leftHandRegenHPNew-leftHandRegenHP+leftHandCharmRegenHPNew-leftHandCharmRegenHP+ChestRegenHPNew-ChestRegenHP+ChestCharmRegenHPNew-ChestCharmRegenHP+amuletRegenHPNew-amuletRegenHP+amuletCharmRegenHPNew-amuletCharmRegenHP+ringRegenHPNew-ringRegenHP+ringCharmRegenHPNew-ringCharmRegenHP+bookRegenHPNew-bookRegenHP+bookCharmRegenHPNew-bookCharmRegenHP
+
+        staticEvade += rightHandEvadeNew-rightHandEvade+rightHandCharmEvadeNew-rightHandCharmEvade+leftHandEvadeNew-leftHandEvade+leftHandCharmEvadeNew-leftHandCharmEvade+ChestEvadeNew-ChestEvade+ChestCharmEvadeNew-ChestCharmEvade+amuletEvadeNew-amuletEvade+amuletCharmEvadeNew-amuletCharmEvade+ringEvadeNew-ringEvade+ringCharmEvadeNew-ringCharmEvade+bookEvadeNew-bookEvade+bookCharmEvadeNew-bookCharmEvade
+
+        staticArmor += rightHandArmorNew-rightHandArmor+rightHandCharmArmorNew-rightHandCharmArmor+leftHandArmorNew-leftHandArmor+leftHandCharmArmorNew-leftHandCharmArmor+ChestArmorNew-ChestArmor+ChestCharmArmorNew-ChestCharmArmor+amuletArmorNew-amuletArmor+amuletCharmArmorNew-amuletCharmArmor+ringArmorNew-ringArmor+ringCharmArmorNew-ringCharmArmor+bookArmorNew-bookArmor+bookCharmArmorNew-bookCharmArmor
+
+        staticMgicArmor += rightHandMgicArmorNew-rightHandMgicArmor+rightHandCharmMgicArmorNew-rightHandCharmMgicArmor+leftHandMgicArmorNew-leftHandMgicArmor+leftHandCharmMgicArmorNew-leftHandCharmMgicArmor+ChestMgicArmorNew-ChestMgicArmor+ChestCharmMgicArmorNew-ChestCharmMgicArmor+amuletMgicArmorNew-amuletMgicArmor+amuletCharmMgicArmorNew-amuletCharmMgicArmor+ringMgicArmorNew-ringMgicArmor+ringCharmMgicArmorNew-ringCharmMgicArmor+bookMgicArmorNew-bookMgicArmor+bookCharmMgicArmorNew-bookCharmMgicArmor
+
+        staticMP += rightHandMPNew-rightHandMP+rightHandCharmMPNew-rightHandCharmMP+leftHandMPNew-leftHandMP+leftHandCharmMPNew-leftHandCharmMP+ChestMPNew-ChestMP+ChestCharmMPNew-ChestCharmMP+amuletMPNew-amuletMP+amuletCharmMPNew-amuletCharmMP+ringMPNew-ringMP+ringCharmMPNew-ringCharmMP+bookMPNew-bookMP+bookCharmMPNew-bookCharmMP
+
+        staticRegenMP += rightHandRegenMPNew-rightHandRegenMP+rightHandCharmRegenMPNew-rightHandCharmRegenMP+leftHandRegenMPNew-leftHandRegenMP+leftHandCharmRegenMPNew-leftHandCharmRegenMP+ChestRegenMPNew-ChestRegenMP+ChestCharmRegenMPNew-ChestCharmRegenMP+amuletRegenMPNew-amuletRegenMP+amuletCharmRegenMPNew-amuletCharmRegenMP+ringRegenMPNew-ringRegenMP+ringCharmRegenMPNew-ringCharmRegenMP+bookRegenMPNew-bookRegenMP+bookCharmRegenMPNew-bookCharmRegenMP
+
+        staticSpellPenetration += rightHandSpellPenetrationNew-rightHandSpellPenetration+rightHandCharmSpellPenetrationNew-rightHandCharmSpellPenetration+leftHandSpellPenetrationNew-leftHandSpellPenetration+leftHandCharmSpellPenetrationNew-leftHandCharmSpellPenetration+ChestSpellPenetrationNew-ChestSpellPenetration+ChestCharmSpellPenetrationNew-ChestCharmSpellPenetration+amuletSpellPenetrationNew-amuletSpellPenetration+amuletCharmSpellPenetrationNew-amuletCharmSpellPenetration+ringSpellPenetrationNew-ringSpellPenetration+ringCharmSpellPenetrationNew-ringCharmSpellPenetration+bookSpellPenetrationNew-bookSpellPenetration+bookCharmSpellPenetrationNew-bookCharmSpellPenetration
+
+        staticDirectMagicDMG += rightHandDirectMagicDMGNew-rightHandDirectMagicDMG+rightHandCharmDirectMagicDMGNew-rightHandCharmDirectMagicDMG+leftHandDirectMagicDMGNew-leftHandDirectMagicDMG+leftHandCharmDirectMagicDMGNew-leftHandCharmDirectMagicDMG+ChestDirectMagicDMGNew-ChestDirectMagicDMG+ChestCharmDirectMagicDMGNew-ChestCharmDirectMagicDMG+amuletDirectMagicDMGNew-amuletDirectMagicDMG+amuletCharmDirectMagicDMGNew-amuletCharmDirectMagicDMG+ringDirectMagicDMGNew-ringDirectMagicDMG+ringCharmDirectMagicDMGNew-ringCharmDirectMagicDMG+bookDirectMagicDMGNew-bookDirectMagicDMG+bookCharmDirectMagicDMGNew-bookCharmDirectMagicDMG
+
+        staticPeriodicMagicDMG += rightHandPeriodicMagicDMGNew-rightHandPeriodicMagicDMG+rightHandCharmPeriodicMagicDMGNew-rightHandCharmPeriodicMagicDMG+leftHandPeriodicMagicDMGNew-leftHandPeriodicMagicDMG+leftHandCharmPeriodicMagicDMGNew-leftHandCharmPeriodicMagicDMG+ChestPeriodicMagicDMGNew-ChestPeriodicMagicDMG+ChestCharmPeriodicMagicDMGNew-ChestCharmPeriodicMagicDMG+amuletPeriodicMagicDMGNew-amuletPeriodicMagicDMG+amuletCharmPeriodicMagicDMGNew-amuletCharmPeriodicMagicDMG+ringPeriodicMagicDMGNew-ringPeriodicMagicDMG+ringCharmPeriodicMagicDMGNew-ringCharmPeriodicMagicDMG+bookPeriodicMagicDMGNew-bookPeriodicMagicDMG+bookCharmPeriodicMagicDMGNew-bookCharmPeriodicMagicDMG
+
+        rightHandEnergy = rightHandEnergyNew
+        rightHandRegenEnergy = rightHandRegenEnergyNew
+        rightHandHaste = rightHandHasteNew
+        rightHandHit = rightHandHitNew
+        # rightHandAttack = rightHandAttackNew
+        # rightHandMinAttack = rightHandMinAttackNew
+        # rightHandMidAttack = rightHandMidAttackNew
+        # rightHandMaxAttack = rightHandMaxAttackNew
+        # rightHandMinDMG = rightHandMinDMGNew
+        # rightHandMidDMG = rightHandMidDMGNew
+        # rightHandMaxDMG = rightHandMaxDMGNew
+        # rightHandDMG = rightHandDMGNew
+        rightHandARP = rightHandARPNew
+        rightHandHP = rightHandHPNew
+        rightHandRegenHP = rightHandRegenHPNew
+        rightHandEvade = rightHandEvadeNew
+        rightHandArmor = rightHandArmorNew
+        rightHandMgicArmor = rightHandMgicArmorNew
+        rightHandMP = rightHandMPNew
+        rightHandRegenMP = rightHandRegenMPNew
+        rightHandSpellPenetration = rightHandSpellPenetrationNew
+        rightHandDirectMagicDMG = rightHandDirectMagicDMGNew
+        rightHandPeriodicMagicDMG = rightHandPeriodicMagicDMGNew
+
+        rightHandCharmEnergy = rightHandCharmEnergyNew
+        rightHandCharmRegenEnergy = rightHandCharmRegenEnergyNew
+        rightHandCharmHaste = rightHandCharmHasteNew
+        rightHandCharmHit = rightHandCharmHitNew
+        # rightHandCharmAttack = rightHandCharmAttackNew
+        # rightHandCharmMinAttack = rightHandCharmMinAttackNew
+        # rightHandCharmMidAttack = rightHandCharmMidAttackNew
+        # rightHandCharmMaxAttack = rightHandCharmMaxAttackNew
+        # rightHandCharmMinDMG = rightHandCharmMinDMGNew
+        # rightHandCharmMidDMG = rightHandCharmMidDMGNew
+        # rightHandCharmMaxDMG = rightHandCharmMaxDMGNew
+        # rightHandCharmDMG = rightHandCharmDMGNew
+        rightHandCharmARP = rightHandCharmARPNew
+        rightHandCharmHP = rightHandCharmHPNew
+        rightHandCharmRegenHP = rightHandCharmRegenHPNew
+        rightHandCharmEvade = rightHandCharmEvadeNew
+        rightHandCharmArmor = rightHandCharmArmorNew
+        rightHandCharmMgicArmor = rightHandCharmMgicArmorNew
+        rightHandCharmMP = rightHandCharmMPNew
+        rightHandCharmRegenMP = rightHandCharmRegenMPNew
+        rightHandCharmSpellPenetration = rightHandCharmSpellPenetrationNew
+        rightHandCharmDirectMagicDMG = rightHandCharmDirectMagicDMGNew
+        rightHandCharmPeriodicMagicDMG = rightHandCharmPeriodicMagicDMGNew
+
+        leftHandEnergy = leftHandEnergyNew
+        leftHandRegenEnergy = leftHandRegenEnergyNew
+        leftHandHaste = leftHandHasteNew
+        leftHandHit = leftHandHitNew
+        # leftHandAttack = leftHandAttackNew
+        # leftHandMinAttack = leftHandMinAttackNew
+        # leftHandMidAttack = leftHandMidAttackNew
+        # leftHandMaxAttack = leftHandMaxAttackNew
+        # leftHandMinDMG = leftHandMinDMGNew
+        # leftHandMidDMG = leftHandMidDMGNew
+        # leftHandMaxDMG = leftHandMaxDMGNew
+        # leftHandDMG = leftHandDMGNew
+        leftHandARP = leftHandARPNew
+        leftHandHP = leftHandHPNew
+        leftHandRegenHP = leftHandRegenHPNew
+        leftHandEvade = leftHandEvadeNew
+        leftHandArmor = leftHandArmorNew
+        leftHandMgicArmor = leftHandMgicArmorNew
+        leftHandMP = leftHandMPNew
+        leftHandRegenMP = leftHandRegenMPNew
+        leftHandSpellPenetration = leftHandSpellPenetrationNew
+        leftHandDirectMagicDMG = leftHandDirectMagicDMGNew
+        leftHandPeriodicMagicDMG = leftHandPeriodicMagicDMGNew
+
+        leftHandCharmEnergy = leftHandCharmEnergyNew
+        leftHandCharmRegenEnergy = leftHandCharmRegenEnergyNew
+        leftHandCharmHaste = leftHandCharmHasteNew
+        leftHandCharmHit = leftHandCharmHitNew
+        # leftHandCharmAttack = leftHandCharmAttackNew
+        # leftHandCharmMinAttack = leftHandCharmMinAttackNew
+        # leftHandCharmMidAttack = leftHandCharmMidAttackNew
+        # leftHandCharmMaxAttack = leftHandCharmMaxAttackNew
+        # leftHandCharmMinDMG = leftHandCharmMinDMGNew
+        # leftHandCharmMidDMG = leftHandCharmMidDMGNew
+        # leftHandCharmMaxDMG = leftHandCharmMaxDMGNew
+        # leftHandCharmDMG = leftHandCharmDMGNew
+        leftHandCharmARP = leftHandCharmARPNew
+        leftHandCharmHP = leftHandCharmHPNew
+        leftHandCharmRegenHP = leftHandCharmRegenHPNew
+        leftHandCharmEvade = leftHandCharmEvadeNew
+        leftHandCharmArmor = leftHandCharmArmorNew
+        leftHandCharmMgicArmor = leftHandCharmMgicArmorNew
+        leftHandCharmMP = leftHandCharmMPNew
+        leftHandCharmRegenMP = leftHandCharmRegenMPNew
+        leftHandCharmSpellPenetration = leftHandCharmSpellPenetrationNew
+        leftHandCharmDirectMagicDMG = leftHandCharmDirectMagicDMGNew
+        leftHandCharmPeriodicMagicDMG = leftHandCharmPeriodicMagicDMGNew
+
+        ChestEnergy = ChestEnergyNew
+        ChestRegenEnergy = ChestRegenEnergyNew
+        ChestHaste = ChestHasteNew
+        ChestHit = ChestHitNew
+        # ChestAttack = ChestAttackNew
+        # ChestMinAttack = ChestMinAttackNew
+        # ChestMidAttack = ChestMidAttackNew
+        # ChestMaxAttack = ChestMaxAttackNew
+        # ChestMinDMG = ChestMinDMGNew
+        # ChestMidDMG = ChestMidDMGNew
+        # ChestMaxDMG = ChestMaxDMGNew
+        # ChestDMG = ChestDMGNew
+        ChestARP = ChestARPNew
+        ChestHP = ChestHPNew
+        ChestRegenHP = ChestRegenHPNew
+        ChestEvade = ChestEvadeNew
+        ChestArmor = ChestArmorNew
+        ChestMgicArmor = ChestMgicArmorNew
+        ChestMP = ChestMPNew
+        ChestRegenMP = ChestRegenMPNew
+        ChestSpellPenetration = ChestSpellPenetrationNew
+        ChestDirectMagicDMG = ChestDirectMagicDMGNew
+        ChestPeriodicMagicDMG = ChestPeriodicMagicDMGNew
+
+        ChestCharmEnergy = ChestCharmEnergyNew
+        ChestCharmRegenEnergy = ChestCharmRegenEnergyNew
+        ChestCharmHaste = ChestCharmHasteNew
+        ChestCharmHit = ChestCharmHitNew
+        # ChestCharmAttack = ChestCharmAttackNew
+        # ChestCharmMinAttack = ChestCharmMinAttackNew
+        # ChestCharmMidAttack = ChestCharmMidAttackNew
+        # ChestCharmMaxAttack = ChestCharmMaxAttackNew
+        # ChestCharmMinDMG = ChestCharmMinDMGNew
+        # ChestCharmMidDMG = ChestCharmMidDMGNew
+        # ChestCharmMaxDMG = ChestCharmMaxDMGNew
+        # ChestCharmDMG = ChestCharmDMGNew
+        ChestCharmARP = ChestCharmARPNew
+        ChestCharmHP = ChestCharmHPNew
+        ChestCharmRegenHP = ChestCharmRegenHPNew
+        ChestCharmEvade = ChestCharmEvadeNew
+        ChestCharmArmor = ChestCharmArmorNew
+        ChestCharmMgicArmor = ChestCharmMgicArmorNew
+        ChestCharmMP = ChestCharmMPNew
+        ChestCharmRegenMP = ChestCharmRegenMPNew
+        ChestCharmSpellPenetration = ChestCharmSpellPenetrationNew
+        ChestCharmDirectMagicDMG = ChestCharmDirectMagicDMGNew
+        ChestCharmPeriodicMagicDMG = ChestCharmPeriodicMagicDMGNew
+
+        amuletEnergy = amuletEnergyNew
+        amuletRegenEnergy = amuletRegenEnergyNew
+        amuletHaste = amuletHasteNew
+        amuletHit = amuletHitNew
+        # amuletAttack = amuletAttackNew
+        # amuletMinAttack = amuletMinAttackNew
+        # amuletMidAttack = amuletMidAttackNew
+        # amuletMaxAttack = amuletMaxAttackNew
+        # amuletMinDMG = amuletMinDMGNew
+        # amuletMidDMG = amuletMidDMGNew
+        # amuletMaxDMG = amuletMaxDMGNew
+        # amuletDMG = amuletDMGNew
+        amuletARP = amuletARPNew
+        amuletHP = amuletHPNew
+        amuletRegenHP = amuletRegenHPNew
+        amuletEvade = amuletEvadeNew
+        amuletArmor = amuletArmorNew
+        amuletMgicArmor = amuletMgicArmorNew
+        amuletMP = amuletMPNew
+        amuletRegenMP = amuletRegenMPNew
+        amuletSpellPenetration = amuletSpellPenetrationNew
+        amuletDirectMagicDMG = amuletDirectMagicDMGNew
+        amuletPeriodicMagicDMG = amuletPeriodicMagicDMGNew
+
+        amuletCharmEnergy = amuletCharmEnergyNew
+        amuletCharmRegenEnergy = amuletCharmRegenEnergyNew
+        amuletCharmHaste = amuletCharmHasteNew
+        amuletCharmHit = amuletCharmHitNew
+        # amuletCharmAttack = amuletCharmAttackNew
+        # amuletCharmMinAttack = amuletCharmMinAttackNew
+        # amuletCharmMidAttack = amuletCharmMidAttackNew
+        # amuletCharmMaxAttack = amuletCharmMaxAttackNew
+        # amuletCharmMinDMG = amuletCharmMinDMGNew
+        # amuletCharmMidDMG = amuletCharmMidDMGNew
+        # amuletCharmMaxDMG = amuletCharmMaxDMGNew
+        # amuletCharmDMG = amuletCharmDMGNew
+        amuletCharmARP = amuletCharmARPNew
+        amuletCharmHP = amuletCharmHPNew
+        amuletCharmRegenHP = amuletCharmRegenHPNew
+        amuletCharmEvade = amuletCharmEvadeNew
+        amuletCharmArmor = amuletCharmArmorNew
+        amuletCharmMgicArmor = amuletCharmMgicArmorNew
+        amuletCharmMP = amuletCharmMPNew
+        amuletCharmRegenMP = amuletCharmRegenMPNew
+        amuletCharmSpellPenetration = amuletCharmSpellPenetrationNew
+        amuletCharmDirectMagicDMG = amuletCharmDirectMagicDMGNew
+        amuletCharmPeriodicMagicDMG = amuletCharmPeriodicMagicDMGNew
+
+        ringEnergy = ringEnergyNew
+        ringRegenEnergy = ringRegenEnergyNew
+        ringHaste = ringHasteNew
+        ringHit = ringHitNew
+        # ringAttack = ringAttackNew
+        # ringMinAttack = ringMinAttackNew
+        # ringMidAttack = ringMidAttackNew
+        # ringMaxAttack = ringMaxAttackNew
+        # ringMinDMG = ringMinDMGNew
+        # ringMidDMG = ringMidDMGNew
+        # ringMaxDMG = ringMaxDMGNew
+        # ringDMG = ringDMGNew
+        ringARP = ringARPNew
+        ringHP = ringHPNew
+        ringRegenHP = ringRegenHPNew
+        ringEvade = ringEvadeNew
+        ringArmor = ringArmorNew
+        ringMgicArmor = ringMgicArmorNew
+        ringMP = ringMPNew
+        ringRegenMP = ringRegenMPNew
+        ringSpellPenetration = ringSpellPenetrationNew
+        ringDirectMagicDMG = ringDirectMagicDMGNew
+        ringPeriodicMagicDMG = ringPeriodicMagicDMGNew
+
+        ringCharmEnergy = ringCharmEnergyNew
+        ringCharmRegenEnergy = ringCharmRegenEnergyNew
+        ringCharmHaste = ringCharmHasteNew
+        ringCharmHit = ringCharmHitNew
+        # ringCharmAttack = ringCharmAttackNew
+        # ringCharmMinAttack = ringCharmMinAttackNew
+        # ringCharmMidAttack = ringCharmMidAttackNew
+        # ringCharmMaxAttack = ringCharmMaxAttackNew
+        # ringCharmMinDMG = ringCharmMinDMGNew
+        # ringCharmMidDMG = ringCharmMidDMGNew
+        # ringCharmMaxDMG = ringCharmMaxDMGNew
+        # ringCharmDMG = ringCharmDMGNew
+        ringCharmARP = ringCharmARPNew
+        ringCharmHP = ringCharmHPNew
+        ringCharmRegenHP = ringCharmRegenHPNew
+        ringCharmEvade = ringCharmEvadeNew
+        ringCharmArmor = ringCharmArmorNew
+        ringCharmMgicArmor = ringCharmMgicArmorNew
+        ringCharmMP = ringCharmMPNew
+        ringCharmRegenMP = ringCharmRegenMPNew
+        ringCharmSpellPenetration = ringCharmSpellPenetrationNew
+        ringCharmDirectMagicDMG = ringCharmDirectMagicDMGNew
+        ringCharmPeriodicMagicDMG = ringCharmPeriodicMagicDMGNew
+
+        bookEnergy = bookEnergyNew
+        bookRegenEnergy = bookRegenEnergyNew
+        bookHaste = bookHasteNew
+        bookHit = bookHitNew
+        # bookAttack = bookAttackNew
+        # bookMinAttack = bookMinAttackNew
+        # bookMidAttack = bookMidAttackNew
+        # bookMaxAttack = bookMaxAttackNew
+        # bookMinDMG = bookMinDMGNew
+        # bookMidDMG = bookMidDMGNew
+        # bookMaxDMG = bookMaxDMGNew
+        # bookDMG = bookDMGNew
+        bookARP = bookARPNew
+        bookHP = bookHPNew
+        bookRegenHP = bookRegenHPNew
+        bookEvade = bookEvadeNew
+        bookArmor = bookArmorNew
+        bookMgicArmor = bookMgicArmorNew
+        bookMP = bookMPNew
+        bookRegenMP = bookRegenMPNew
+        bookSpellPenetration = bookSpellPenetrationNew
+        bookDirectMagicDMG = bookDirectMagicDMGNew
+        bookPeriodicMagicDMG = bookPeriodicMagicDMGNew
+
+        bookCharmEnergy = bookCharmEnergyNew
+        bookCharmRegenEnergy = bookCharmRegenEnergyNew
+        bookCharmHaste = bookCharmHasteNew
+        bookCharmHit = bookCharmHitNew
+        # bookCharmAttack = bookCharmAttackNew
+        # bookCharmMinAttack = bookCharmMinAttackNew
+        # bookCharmMidAttack = bookCharmMidAttackNew
+        # bookCharmMaxAttack = bookCharmMaxAttackNew
+        # bookCharmMinDMG = bookCharmMinDMGNew
+        # bookCharmMidDMG = bookCharmMidDMGNew
+        # bookCharmMaxDMG = bookCharmMaxDMGNew
+        # bookCharmDMG = bookCharmDMGNew
+        bookCharmARP = bookCharmARPNew
+        bookCharmHP = bookCharmHPNew
+        bookCharmRegenHP = bookCharmRegenHPNew
+        bookCharmEvade = bookCharmEvadeNew
+        bookCharmArmor = bookCharmArmorNew
+        bookCharmMgicArmor = bookCharmMgicArmorNew
+        bookCharmMP = bookCharmMPNew
+        bookCharmRegenMP = bookCharmRegenMPNew
+        bookCharmSpellPenetration = bookCharmSpellPenetrationNew
+        bookCharmDirectMagicDMG = bookCharmDirectMagicDMGNew
+        bookCharmPeriodicMagicDMG = bookCharmPeriodicMagicDMGNew
+
+        staticEnergyLabel.config(text = '{0}'.format(staticEnergy))
+        staticRegenEnergyLabel.config(text = '{0}'.format(staticRegenEnergy))
+        staticHasteLabel.config(text = '{0}'.format(staticHaste))
+        staticHitLabel.config(text = '{0}'.format(staticHit))
+        staticARPLabel.config(text = '{0}'.format(staticARP))
+        staticHPLabel.config(text = '{0}'.format(staticHP))
+        staticRegenHPLabel.config(text = '{0}'.format(staticRegenHP))
+        staticEvadeLabel.config(text = '{0}'.format(staticEvade))
+        staticArmorLabel.config(text = '{0}'.format(staticArmor))
+        staticMgicArmorLabel.config(text = '{0}'.format(staticMgicArmor))
+        staticMPLabel.config(text = '{0}'.format(staticMP))
+        staticRegenMPLabel.config(text = '{0}'.format(staticRegenMP))
+        staticSpellPenetrationLabel.config(text = '{0}'.format(staticSpellPenetration))
+        staticDirectMagicDMGLabel.config(text = '{0}'.format(staticDirectMagicDMG))
+        staticPeriodicMagicDMGLabel.config(text = '{0}'.format(staticPeriodicMagicDMG))
+
+        sum_stats(1)
+
+        staticAttackMin = int(staticAttack.split('-')[0])
+        staticAttackMid = int(staticAttack.split('-')[1])
+        staticAttackMax = int(staticAttack.split('-')[2])
+        staticAttack = staticAttack = '{0}-{1}-{2}'.format(staticAttackMin+rightHandMinAttackNew-rightHandMinAttack,staticAttackMid+rightHandMidAttackNew-rightHandMidAttack,staticAttackMax+rightHandMaxAttackNew-rightHandMaxAttack)
+        totalAttack = '{0}-{1}-{2}'.format(int(staticAttack.split('-')[0])-int(changeAttack.split('-')[0]),int(staticAttack.split('-')[1])-int(changeAttack.split('-')[1]),int(staticAttack.split('-')[2])-int(changeAttack.split('-')[2]))
+        staticAttackLabel.config(text = '{0}'.format(staticAttack))
+        totalAttackLabel.config(text = '{0}'.format(totalAttack))
+
+        rightHandMinAttack = rightHandMinAttackNew
+        rightHandMidAttack = rightHandMidAttackNew
+        rightHandMaxAttack = rightHandMaxAttackNew
+
+        staticDMGMin = int(staticDMG.split('-')[0])
+        staticDMGMid = int(staticDMG.split('-')[1])
+        staticDMGMax = int(staticDMG.split('-')[2])
+        staticDMG = '{0}-{1}-{2}'.format(staticDMGMin+rightHandMinDMGNew-rightHandMinDMG,staticDMGMid+rightHandMidDMGNew-rightHandMidDMG,staticDMGMax+rightHandMaxDMGNew-rightHandMaxDMG)
+        totalDMG = '{0}-{1}-{2}'.format(int(staticDMG.split('-')[0])-int(changeDMG.split('-')[0]),int(staticDMG.split('-')[1])-int(changeDMG.split('-')[1]),int(staticDMG.split('-')[2])-int(changeDMG.split('-')[2]))
+        staticDMGLabel.config(text = '{0}'.format(staticDMG))
+        totalDMGLabel.config(text = '{0}'.format(totalDMG))
+
+        rightHandMinDMG = rightHandMinDMGNew
+        rightHandMidDMG = rightHandMidDMGNew
+        rightHandMaxDMG = rightHandMaxDMGNew
+
     ChoInv = Toplevel(window)
-    ChoInv.title('Школы магии')
+    ChoInv.title('Инвентарь')
     ChoInv.resizable(width=False, height=False)
     ChoInv.rowconfigure(0, pad=3)
     ChoInv.rowconfigure(1, pad=3)
@@ -1342,6 +2002,7 @@ def create_inventory_window():
     ChoInv.rowconfigure(14, pad=3)
     ChoInv.rowconfigure(15, pad=3)
     ChoInv.rowconfigure(16, pad=3)
+    ChoInv.rowconfigure(17, pad=3)
     ChoInv.columnconfigure(0, pad=3)
     ChoInv.columnconfigure(1, pad=3)
     ChoInv.columnconfigure(2, pad=3)
@@ -1359,15 +2020,818 @@ def create_inventory_window():
     ChoInv.columnconfigure(14, pad=3)
     ChoInv.columnconfigure(15, pad=3)
     ChoInv.columnconfigure(16, pad=3)
+    ChoInv.columnconfigure(17, pad=3)
+    ChoInv.columnconfigure(18, pad=3)
+    ChoInv.columnconfigure(19, pad=3)
 
     Label(ChoInv, text = 'Слот').grid(row=0, column=0)
-    create_labels(ChoInv,1,parametrList)
+    create_labels(ChoInv,1,parametrList,0)
 
-def create_labels(frame,columnParam,list):
-    for param in list:
-        Label(frame, text = param).grid(row=0, column=columnParam)
-        columnParam+=1
+    slotLabels = ['Правая рука',
+                    'Чары',
+                    'Левая рука',
+                    'Чары',
+                    'Броня',
+                    'Чары',
+                    'Амулет',
+                    'Чары',
+                    'Кольцо',
+                    'Чары',
+                    'Книга магии',
+                    'Чары'
+    ]
 
+    create_labels(ChoInv,1,slotLabels,1)
+
+    rightHandEnergyEntry = Entry(ChoInv,width=8)
+    rightHandRegenEnergyEntry = Entry(ChoInv,width=8)
+    rightHandHasteEntry = Entry(ChoInv,width=8)
+    rightHandHitEntry = Entry(ChoInv,width=8)
+    rightHandAttackEntry = Entry(ChoInv,width=8)
+    rightHandDMGEntry = Entry(ChoInv,width=8)
+    rightHandARPEntry = Entry(ChoInv,width=8)
+    rightHandHPEntry = Entry(ChoInv,width=8)
+    rightHandRegenHPEntry = Entry(ChoInv,width=8)
+    rightHandEvadeEntry = Entry(ChoInv,width=8)
+    rightHandArmorEntry = Entry(ChoInv,width=8)
+    rightHandMgicArmorEntry = Entry(ChoInv,width=8)
+    rightHandMPEntry = Entry(ChoInv,width=8)
+    rightHandRegenMPEntry = Entry(ChoInv,width=8)
+    rightHandSpellPenetrationEntry = Entry(ChoInv,width=8)
+    rightHandDirectMagicDMGEntry = Entry(ChoInv,width=8)
+    rightHandPeriodicMagicDMGEntry = Entry(ChoInv,width=8)
+
+    rightHandEnergyEntry.insert(0,'{0}'.format(rightHandEnergy))
+    rightHandRegenEnergyEntry.insert(0,'{0}'.format(rightHandRegenEnergy))
+    rightHandHasteEntry.insert(0,'{0}'.format(rightHandHaste))
+    rightHandHitEntry.insert(0,'{0}'.format(rightHandHit))
+    rightHandAttackEntry.insert(0,'{0}-{1}-{2}'.format(rightHandMinAttack,rightHandMidAttack,rightHandMaxAttack))
+    rightHandDMGEntry.insert(0,'{0}-{1}-{2}'.format(rightHandMinDMG,rightHandMidDMG,rightHandMaxDMG))
+    rightHandARPEntry.insert(0,'{0}'.format(rightHandARP))
+    rightHandHPEntry.insert(0,'{0}'.format(rightHandHP))
+    rightHandRegenHPEntry.insert(0,'{0}'.format(rightHandRegenHP))
+    rightHandEvadeEntry.insert(0,'{0}'.format(rightHandEvade))
+    rightHandArmorEntry.insert(0,'{0}'.format(rightHandArmor))
+    rightHandMgicArmorEntry.insert(0,'{0}'.format(rightHandMgicArmor))
+    rightHandMPEntry.insert(0,'{0}'.format(rightHandMP))
+    rightHandRegenMPEntry.insert(0,'{0}'.format(rightHandRegenMP))
+    rightHandSpellPenetrationEntry.insert(0,'{0}'.format(rightHandSpellPenetration))
+    rightHandDirectMagicDMGEntry.insert(0,'{0}'.format(rightHandDirectMagicDMG))
+    rightHandPeriodicMagicDMGEntry.insert(0,'{0}'.format(rightHandPeriodicMagicDMG))
+
+    rightHandAttackEntry.bind('<Return>', add_att_inventory)
+
+    rightHandCharmEnergyEntry = Entry(ChoInv,width=8)
+    rightHandCharmRegenEnergyEntry = Entry(ChoInv,width=8)
+    rightHandCharmHasteEntry = Entry(ChoInv,width=8)
+    rightHandCharmHitEntry = Entry(ChoInv,width=8)
+    rightHandCharmAttackEntry = Entry(ChoInv,width=8)
+    rightHandCharmDMGEntry = Entry(ChoInv,width=8)
+    rightHandCharmARPEntry = Entry(ChoInv,width=8)
+    rightHandCharmHPEntry = Entry(ChoInv,width=8)
+    rightHandCharmRegenHPEntry = Entry(ChoInv,width=8)
+    rightHandCharmEvadeEntry = Entry(ChoInv,width=8)
+    rightHandCharmArmorEntry = Entry(ChoInv,width=8)
+    rightHandCharmMgicArmorEntry = Entry(ChoInv,width=8)
+    rightHandCharmMPEntry = Entry(ChoInv,width=8)
+    rightHandCharmRegenMPEntry = Entry(ChoInv,width=8)
+    rightHandCharmSpellPenetrationEntry = Entry(ChoInv,width=8)
+    rightHandCharmDirectMagicDMGEntry = Entry(ChoInv,width=8)
+    rightHandCharmPeriodicMagicDMGEntry = Entry(ChoInv,width=8)
+
+    rightHandCharmEnergyEntry.insert(0,'{0}'.format(rightHandCharmEnergy))
+    rightHandCharmRegenEnergyEntry.insert(0,'{0}'.format(rightHandCharmRegenEnergy))
+    rightHandCharmHasteEntry.insert(0,'{0}'.format(rightHandCharmHaste))
+    rightHandCharmHitEntry.insert(0,'{0}'.format(rightHandCharmHit))
+    rightHandCharmAttackEntry.insert(0,'{0}-{1}-{2}'.format(rightHandCharmMinAttack,rightHandCharmMidAttack,rightHandCharmMaxAttack))
+    rightHandCharmDMGEntry.insert(0,'{0}-{1}-{2}'.format(rightHandCharmMinDMG,rightHandCharmMidDMG,rightHandCharmMaxDMG))
+    rightHandCharmARPEntry.insert(0,'{0}'.format(rightHandCharmARP))
+    rightHandCharmHPEntry.insert(0,'{0}'.format(rightHandCharmHP))
+    rightHandCharmRegenHPEntry.insert(0,'{0}'.format(rightHandCharmRegenHP))
+    rightHandCharmEvadeEntry.insert(0,'{0}'.format(rightHandCharmEvade))
+    rightHandCharmArmorEntry.insert(0,'{0}'.format(rightHandCharmArmor))
+    rightHandCharmMgicArmorEntry.insert(0,'{0}'.format(rightHandCharmMgicArmor))
+    rightHandCharmMPEntry.insert(0,'{0}'.format(rightHandCharmMP))
+    rightHandCharmRegenMPEntry.insert(0,'{0}'.format(rightHandCharmRegenMP))
+    rightHandCharmSpellPenetrationEntry.insert(0,'{0}'.format(rightHandCharmSpellPenetration))
+    rightHandCharmDirectMagicDMGEntry.insert(0,'{0}'.format(rightHandCharmDirectMagicDMG))
+    rightHandCharmPeriodicMagicDMGEntry.insert(0,'{0}'.format(rightHandCharmPeriodicMagicDMG))
+
+    rightHandEnergyEntry.grid(row=1,column=1)
+    rightHandRegenEnergyEntry.grid(row=1,column=2)
+    rightHandHasteEntry.grid(row=1,column=3)
+    rightHandHitEntry.grid(row=1,column=4)
+    rightHandAttackEntry.grid(row=1,column=5)
+    rightHandDMGEntry.grid(row=1,column=6)
+    rightHandARPEntry.grid(row=1,column=7)
+    rightHandHPEntry.grid(row=1,column=8)
+    rightHandRegenHPEntry.grid(row=1,column=9)
+    rightHandEvadeEntry.grid(row=1,column=10)
+    rightHandArmorEntry.grid(row=1,column=11)
+    rightHandMgicArmorEntry.grid(row=1,column=12)
+    rightHandMPEntry.grid(row=1,column=13)
+    rightHandRegenMPEntry.grid(row=1,column=14)
+    rightHandSpellPenetrationEntry.grid(row=1,column=15)
+    rightHandDirectMagicDMGEntry.grid(row=1,column=16)
+    rightHandPeriodicMagicDMGEntry.grid(row=1,column=17)
+
+    rightHandCharmEnergyEntry.grid(row=2,column=1)
+    rightHandCharmRegenEnergyEntry.grid(row=2,column=2)
+    rightHandCharmHasteEntry.grid(row=2,column=3)
+    rightHandCharmHitEntry.grid(row=2,column=4)
+    rightHandCharmAttackEntry.grid(row=2,column=5)
+    rightHandCharmDMGEntry.grid(row=2,column=6)
+    rightHandCharmARPEntry.grid(row=2,column=7)
+    rightHandCharmHPEntry.grid(row=2,column=8)
+    rightHandCharmRegenHPEntry.grid(row=2,column=9)
+    rightHandCharmEvadeEntry.grid(row=2,column=10)
+    rightHandCharmArmorEntry.grid(row=2,column=11)
+    rightHandCharmMgicArmorEntry.grid(row=2,column=12)
+    rightHandCharmMPEntry.grid(row=2,column=13)
+    rightHandCharmRegenMPEntry.grid(row=2,column=14)
+    rightHandCharmSpellPenetrationEntry.grid(row=2,column=15)
+    rightHandCharmDirectMagicDMGEntry.grid(row=2,column=16)
+    rightHandCharmPeriodicMagicDMGEntry.grid(row=2,column=17)
+
+    leftHandEnergyEntry = Entry(ChoInv,width=8)
+    leftHandRegenEnergyEntry = Entry(ChoInv,width=8)
+    leftHandHasteEntry = Entry(ChoInv,width=8)
+    leftHandHitEntry = Entry(ChoInv,width=8)
+    leftHandAttackEntry = Entry(ChoInv,width=8)
+    leftHandDMGEntry = Entry(ChoInv,width=8)
+    leftHandARPEntry = Entry(ChoInv,width=8)
+    leftHandHPEntry = Entry(ChoInv,width=8)
+    leftHandRegenHPEntry = Entry(ChoInv,width=8)
+    leftHandEvadeEntry = Entry(ChoInv,width=8)
+    leftHandArmorEntry = Entry(ChoInv,width=8)
+    leftHandMgicArmorEntry = Entry(ChoInv,width=8)
+    leftHandMPEntry = Entry(ChoInv,width=8)
+    leftHandRegenMPEntry = Entry(ChoInv,width=8)
+    leftHandSpellPenetrationEntry = Entry(ChoInv,width=8)
+    leftHandDirectMagicDMGEntry = Entry(ChoInv,width=8)
+    leftHandPeriodicMagicDMGEntry = Entry(ChoInv,width=8)
+
+    leftHandEnergyEntry.insert(0,'{0}'.format(leftHandEnergy))
+    leftHandRegenEnergyEntry.insert(0,'{0}'.format(leftHandRegenEnergy))
+    leftHandHasteEntry.insert(0,'{0}'.format(leftHandHaste))
+    leftHandHitEntry.insert(0,'{0}'.format(leftHandHit))
+    leftHandAttackEntry.insert(0,'{0}-{1}-{2}'.format(leftHandMinAttack,leftHandMidAttack,leftHandMaxAttack))
+    leftHandDMGEntry.insert(0,'{0}-{1}-{2}'.format(leftHandMinDMG,leftHandMidDMG,leftHandMaxDMG))
+    leftHandARPEntry.insert(0,'{0}'.format(leftHandARP))
+    leftHandHPEntry.insert(0,'{0}'.format(leftHandHP))
+    leftHandRegenHPEntry.insert(0,'{0}'.format(leftHandRegenHP))
+    leftHandEvadeEntry.insert(0,'{0}'.format(leftHandEvade))
+    leftHandArmorEntry.insert(0,'{0}'.format(leftHandArmor))
+    leftHandMgicArmorEntry.insert(0,'{0}'.format(leftHandMgicArmor))
+    leftHandMPEntry.insert(0,'{0}'.format(leftHandMP))
+    leftHandRegenMPEntry.insert(0,'{0}'.format(leftHandRegenMP))
+    leftHandSpellPenetrationEntry.insert(0,'{0}'.format(leftHandSpellPenetration))
+    leftHandDirectMagicDMGEntry.insert(0,'{0}'.format(leftHandDirectMagicDMG))
+    leftHandPeriodicMagicDMGEntry.insert(0,'{0}'.format(leftHandPeriodicMagicDMG))
+
+    leftHandCharmEnergyEntry = Entry(ChoInv,width=8)
+    leftHandCharmRegenEnergyEntry = Entry(ChoInv,width=8)
+    leftHandCharmHasteEntry = Entry(ChoInv,width=8)
+    leftHandCharmHitEntry = Entry(ChoInv,width=8)
+    leftHandCharmAttackEntry = Entry(ChoInv,width=8)
+    leftHandCharmDMGEntry = Entry(ChoInv,width=8)
+    leftHandCharmARPEntry = Entry(ChoInv,width=8)
+    leftHandCharmHPEntry = Entry(ChoInv,width=8)
+    leftHandCharmRegenHPEntry = Entry(ChoInv,width=8)
+    leftHandCharmEvadeEntry = Entry(ChoInv,width=8)
+    leftHandCharmArmorEntry = Entry(ChoInv,width=8)
+    leftHandCharmMgicArmorEntry = Entry(ChoInv,width=8)
+    leftHandCharmMPEntry = Entry(ChoInv,width=8)
+    leftHandCharmRegenMPEntry = Entry(ChoInv,width=8)
+    leftHandCharmSpellPenetrationEntry = Entry(ChoInv,width=8)
+    leftHandCharmDirectMagicDMGEntry = Entry(ChoInv,width=8)
+    leftHandCharmPeriodicMagicDMGEntry = Entry(ChoInv,width=8)
+
+    leftHandCharmEnergyEntry.insert(0,'{0}'.format(leftHandCharmEnergy))
+    leftHandCharmRegenEnergyEntry.insert(0,'{0}'.format(leftHandCharmRegenEnergy))
+    leftHandCharmHasteEntry.insert(0,'{0}'.format(leftHandCharmHaste))
+    leftHandCharmHitEntry.insert(0,'{0}'.format(leftHandCharmHit))
+    leftHandCharmAttackEntry.insert(0,'{0}-{1}-{2}'.format(leftHandCharmMinAttack,leftHandCharmMidAttack,leftHandCharmMaxAttack))
+    leftHandCharmDMGEntry.insert(0,'{0}-{1}-{2}'.format(leftHandCharmMinDMG,leftHandCharmMidDMG,leftHandCharmMaxDMG))
+    leftHandCharmARPEntry.insert(0,'{0}'.format(leftHandCharmARP))
+    leftHandCharmHPEntry.insert(0,'{0}'.format(leftHandCharmHP))
+    leftHandCharmRegenHPEntry.insert(0,'{0}'.format(leftHandCharmRegenHP))
+    leftHandCharmEvadeEntry.insert(0,'{0}'.format(leftHandCharmEvade))
+    leftHandCharmArmorEntry.insert(0,'{0}'.format(leftHandCharmArmor))
+    leftHandCharmMgicArmorEntry.insert(0,'{0}'.format(leftHandCharmMgicArmor))
+    leftHandCharmMPEntry.insert(0,'{0}'.format(leftHandCharmMP))
+    leftHandCharmRegenMPEntry.insert(0,'{0}'.format(leftHandCharmRegenMP))
+    leftHandCharmSpellPenetrationEntry.insert(0,'{0}'.format(leftHandCharmSpellPenetration))
+    leftHandCharmDirectMagicDMGEntry.insert(0,'{0}'.format(leftHandCharmDirectMagicDMG))
+    leftHandCharmPeriodicMagicDMGEntry.insert(0,'{0}'.format(leftHandCharmPeriodicMagicDMG))
+
+    leftHandEnergyEntry.grid(row=3,column=1)
+    leftHandRegenEnergyEntry.grid(row=3,column=2)
+    leftHandHasteEntry.grid(row=3,column=3)
+    leftHandHitEntry.grid(row=3,column=4)
+    leftHandAttackEntry.grid(row=3,column=5)
+    leftHandDMGEntry.grid(row=3,column=6)
+    leftHandARPEntry.grid(row=3,column=7)
+    leftHandHPEntry.grid(row=3,column=8)
+    leftHandRegenHPEntry.grid(row=3,column=9)
+    leftHandEvadeEntry.grid(row=3,column=10)
+    leftHandArmorEntry.grid(row=3,column=11)
+    leftHandMgicArmorEntry.grid(row=3,column=12)
+    leftHandMPEntry.grid(row=3,column=13)
+    leftHandRegenMPEntry.grid(row=3,column=14)
+    leftHandSpellPenetrationEntry.grid(row=3,column=15)
+    leftHandDirectMagicDMGEntry.grid(row=3,column=16)
+    leftHandPeriodicMagicDMGEntry.grid(row=3,column=17)
+
+    leftHandCharmEnergyEntry.grid(row=4,column=1)
+    leftHandCharmRegenEnergyEntry.grid(row=4,column=2)
+    leftHandCharmHasteEntry.grid(row=4,column=3)
+    leftHandCharmHitEntry.grid(row=4,column=4)
+    leftHandCharmAttackEntry.grid(row=4,column=5)
+    leftHandCharmDMGEntry.grid(row=4,column=6)
+    leftHandCharmARPEntry.grid(row=4,column=7)
+    leftHandCharmHPEntry.grid(row=4,column=8)
+    leftHandCharmRegenHPEntry.grid(row=4,column=9)
+    leftHandCharmEvadeEntry.grid(row=4,column=10)
+    leftHandCharmArmorEntry.grid(row=4,column=11)
+    leftHandCharmMgicArmorEntry.grid(row=4,column=12)
+    leftHandCharmMPEntry.grid(row=4,column=13)
+    leftHandCharmRegenMPEntry.grid(row=4,column=14)
+    leftHandCharmSpellPenetrationEntry.grid(row=4,column=15)
+    leftHandCharmDirectMagicDMGEntry.grid(row=4,column=16)
+    leftHandCharmPeriodicMagicDMGEntry.grid(row=4,column=17)
+
+    ChestEnergyEntry = Entry(ChoInv,width=8)
+    ChestRegenEnergyEntry = Entry(ChoInv,width=8)
+    ChestHasteEntry = Entry(ChoInv,width=8)
+    ChestHitEntry = Entry(ChoInv,width=8)
+    ChestAttackEntry = Entry(ChoInv,width=8)
+    ChestDMGEntry = Entry(ChoInv,width=8)
+    ChestARPEntry = Entry(ChoInv,width=8)
+    ChestHPEntry = Entry(ChoInv,width=8)
+    ChestRegenHPEntry = Entry(ChoInv,width=8)
+    ChestEvadeEntry = Entry(ChoInv,width=8)
+    ChestArmorEntry = Entry(ChoInv,width=8)
+    ChestMgicArmorEntry = Entry(ChoInv,width=8)
+    ChestMPEntry = Entry(ChoInv,width=8)
+    ChestRegenMPEntry = Entry(ChoInv,width=8)
+    ChestSpellPenetrationEntry = Entry(ChoInv,width=8)
+    ChestDirectMagicDMGEntry = Entry(ChoInv,width=8)
+    ChestPeriodicMagicDMGEntry = Entry(ChoInv,width=8)
+
+    ChestEnergyEntry.insert(0,'{0}'.format(ChestEnergy))
+    ChestRegenEnergyEntry.insert(0,'{0}'.format(ChestRegenEnergy))
+    ChestHasteEntry.insert(0,'{0}'.format(ChestHaste))
+    ChestHitEntry.insert(0,'{0}'.format(ChestHit))
+    ChestAttackEntry.insert(0,'{0}-{1}-{2}'.format(ChestMinAttack,ChestMidAttack,ChestMaxAttack))
+    ChestDMGEntry.insert(0,'{0}-{1}-{2}'.format(ChestMinDMG,ChestMidDMG,ChestMaxDMG))
+    ChestARPEntry.insert(0,'{0}'.format(ChestARP))
+    ChestHPEntry.insert(0,'{0}'.format(ChestHP))
+    ChestRegenHPEntry.insert(0,'{0}'.format(ChestRegenHP))
+    ChestEvadeEntry.insert(0,'{0}'.format(ChestEvade))
+    ChestArmorEntry.insert(0,'{0}'.format(ChestArmor))
+    ChestMgicArmorEntry.insert(0,'{0}'.format(ChestMgicArmor))
+    ChestMPEntry.insert(0,'{0}'.format(ChestMP))
+    ChestRegenMPEntry.insert(0,'{0}'.format(ChestRegenMP))
+    ChestSpellPenetrationEntry.insert(0,'{0}'.format(ChestSpellPenetration))
+    ChestDirectMagicDMGEntry.insert(0,'{0}'.format(ChestDirectMagicDMG))
+    ChestPeriodicMagicDMGEntry.insert(0,'{0}'.format(ChestPeriodicMagicDMG))
+
+    ChestCharmEnergyEntry = Entry(ChoInv,width=8)
+    ChestCharmRegenEnergyEntry = Entry(ChoInv,width=8)
+    ChestCharmHasteEntry = Entry(ChoInv,width=8)
+    ChestCharmHitEntry = Entry(ChoInv,width=8)
+    ChestCharmAttackEntry = Entry(ChoInv,width=8)
+    ChestCharmDMGEntry = Entry(ChoInv,width=8)
+    ChestCharmARPEntry = Entry(ChoInv,width=8)
+    ChestCharmHPEntry = Entry(ChoInv,width=8)
+    ChestCharmRegenHPEntry = Entry(ChoInv,width=8)
+    ChestCharmEvadeEntry = Entry(ChoInv,width=8)
+    ChestCharmArmorEntry = Entry(ChoInv,width=8)
+    ChestCharmMgicArmorEntry = Entry(ChoInv,width=8)
+    ChestCharmMPEntry = Entry(ChoInv,width=8)
+    ChestCharmRegenMPEntry = Entry(ChoInv,width=8)
+    ChestCharmSpellPenetrationEntry = Entry(ChoInv,width=8)
+    ChestCharmDirectMagicDMGEntry = Entry(ChoInv,width=8)
+    ChestCharmPeriodicMagicDMGEntry = Entry(ChoInv,width=8)
+
+    ChestCharmEnergyEntry.insert(0,'{0}'.format(ChestCharmEnergy))
+    ChestCharmRegenEnergyEntry.insert(0,'{0}'.format(ChestCharmRegenEnergy))
+    ChestCharmHasteEntry.insert(0,'{0}'.format(ChestCharmHaste))
+    ChestCharmHitEntry.insert(0,'{0}'.format(ChestCharmHit))
+    ChestCharmAttackEntry.insert(0,'{0}-{1}-{2}'.format(ChestCharmMinAttack,ChestCharmMidAttack,ChestCharmMaxAttack))
+    ChestCharmDMGEntry.insert(0,'{0}-{1}-{2}'.format(ChestCharmMinDMG,ChestCharmMidDMG,ChestCharmMaxDMG))
+    ChestCharmARPEntry.insert(0,'{0}'.format(ChestCharmARP))
+    ChestCharmHPEntry.insert(0,'{0}'.format(ChestCharmHP))
+    ChestCharmRegenHPEntry.insert(0,'{0}'.format(ChestCharmRegenHP))
+    ChestCharmEvadeEntry.insert(0,'{0}'.format(ChestCharmEvade))
+    ChestCharmArmorEntry.insert(0,'{0}'.format(ChestCharmArmor))
+    ChestCharmMgicArmorEntry.insert(0,'{0}'.format(ChestCharmMgicArmor))
+    ChestCharmMPEntry.insert(0,'{0}'.format(ChestCharmMP))
+    ChestCharmRegenMPEntry.insert(0,'{0}'.format(ChestCharmRegenMP))
+    ChestCharmSpellPenetrationEntry.insert(0,'{0}'.format(ChestCharmSpellPenetration))
+    ChestCharmDirectMagicDMGEntry.insert(0,'{0}'.format(ChestCharmDirectMagicDMG))
+    ChestCharmPeriodicMagicDMGEntry.insert(0,'{0}'.format(ChestCharmPeriodicMagicDMG))
+
+    ChestEnergyEntry.grid(row=5,column=1)
+    ChestRegenEnergyEntry.grid(row=5,column=2)
+    ChestHasteEntry.grid(row=5,column=3)
+    ChestHitEntry.grid(row=5,column=4)
+    ChestAttackEntry.grid(row=5,column=5)
+    ChestDMGEntry.grid(row=5,column=6)
+    ChestARPEntry.grid(row=5,column=7)
+    ChestHPEntry.grid(row=5,column=8)
+    ChestRegenHPEntry.grid(row=5,column=9)
+    ChestEvadeEntry.grid(row=5,column=10)
+    ChestArmorEntry.grid(row=5,column=11)
+    ChestMgicArmorEntry.grid(row=5,column=12)
+    ChestMPEntry.grid(row=5,column=13)
+    ChestRegenMPEntry.grid(row=5,column=14)
+    ChestSpellPenetrationEntry.grid(row=5,column=15)
+    ChestDirectMagicDMGEntry.grid(row=5,column=16)
+    ChestPeriodicMagicDMGEntry.grid(row=5,column=17)
+
+    ChestCharmEnergyEntry.grid(row=6,column=1)
+    ChestCharmRegenEnergyEntry.grid(row=6,column=2)
+    ChestCharmHasteEntry.grid(row=6,column=3)
+    ChestCharmHitEntry.grid(row=6,column=4)
+    ChestCharmAttackEntry.grid(row=6,column=5)
+    ChestCharmDMGEntry.grid(row=6,column=6)
+    ChestCharmARPEntry.grid(row=6,column=7)
+    ChestCharmHPEntry.grid(row=6,column=8)
+    ChestCharmRegenHPEntry.grid(row=6,column=9)
+    ChestCharmEvadeEntry.grid(row=6,column=10)
+    ChestCharmArmorEntry.grid(row=6,column=11)
+    ChestCharmMgicArmorEntry.grid(row=6,column=12)
+    ChestCharmMPEntry.grid(row=6,column=13)
+    ChestCharmRegenMPEntry.grid(row=6,column=14)
+    ChestCharmSpellPenetrationEntry.grid(row=6,column=15)
+    ChestCharmDirectMagicDMGEntry.grid(row=6,column=16)
+    ChestCharmPeriodicMagicDMGEntry.grid(row=6,column=17)
+
+    amuletEnergyEntry = Entry(ChoInv,width=8)
+    amuletRegenEnergyEntry = Entry(ChoInv,width=8)
+    amuletHasteEntry = Entry(ChoInv,width=8)
+    amuletHitEntry = Entry(ChoInv,width=8)
+    amuletAttackEntry = Entry(ChoInv,width=8)
+    amuletDMGEntry = Entry(ChoInv,width=8)
+    amuletARPEntry = Entry(ChoInv,width=8)
+    amuletHPEntry = Entry(ChoInv,width=8)
+    amuletRegenHPEntry = Entry(ChoInv,width=8)
+    amuletEvadeEntry = Entry(ChoInv,width=8)
+    amuletArmorEntry = Entry(ChoInv,width=8)
+    amuletMgicArmorEntry = Entry(ChoInv,width=8)
+    amuletMPEntry = Entry(ChoInv,width=8)
+    amuletRegenMPEntry = Entry(ChoInv,width=8)
+    amuletSpellPenetrationEntry = Entry(ChoInv,width=8)
+    amuletDirectMagicDMGEntry = Entry(ChoInv,width=8)
+    amuletPeriodicMagicDMGEntry = Entry(ChoInv,width=8)
+
+    amuletEnergyEntry.insert(0,'{0}'.format(amuletEnergy))
+    amuletRegenEnergyEntry.insert(0,'{0}'.format(amuletRegenEnergy))
+    amuletHasteEntry.insert(0,'{0}'.format(amuletHaste))
+    amuletHitEntry.insert(0,'{0}'.format(amuletHit))
+    amuletAttackEntry.insert(0,'{0}-{1}-{2}'.format(amuletMinAttack,amuletMidAttack,amuletMaxAttack))
+    amuletDMGEntry.insert(0,'{0}-{1}-{2}'.format(amuletMinDMG,amuletMidDMG,amuletMaxDMG))
+    amuletARPEntry.insert(0,'{0}'.format(amuletARP))
+    amuletHPEntry.insert(0,'{0}'.format(amuletHP))
+    amuletRegenHPEntry.insert(0,'{0}'.format(amuletRegenHP))
+    amuletEvadeEntry.insert(0,'{0}'.format(amuletEvade))
+    amuletArmorEntry.insert(0,'{0}'.format(amuletArmor))
+    amuletMgicArmorEntry.insert(0,'{0}'.format(amuletMgicArmor))
+    amuletMPEntry.insert(0,'{0}'.format(amuletMP))
+    amuletRegenMPEntry.insert(0,'{0}'.format(amuletRegenMP))
+    amuletSpellPenetrationEntry.insert(0,'{0}'.format(amuletSpellPenetration))
+    amuletDirectMagicDMGEntry.insert(0,'{0}'.format(amuletDirectMagicDMG))
+    amuletPeriodicMagicDMGEntry.insert(0,'{0}'.format(amuletPeriodicMagicDMG))
+
+    amuletCharmEnergyEntry = Entry(ChoInv,width=8)
+    amuletCharmRegenEnergyEntry = Entry(ChoInv,width=8)
+    amuletCharmHasteEntry = Entry(ChoInv,width=8)
+    amuletCharmHitEntry = Entry(ChoInv,width=8)
+    amuletCharmAttackEntry = Entry(ChoInv,width=8)
+    amuletCharmDMGEntry = Entry(ChoInv,width=8)
+    amuletCharmARPEntry = Entry(ChoInv,width=8)
+    amuletCharmHPEntry = Entry(ChoInv,width=8)
+    amuletCharmRegenHPEntry = Entry(ChoInv,width=8)
+    amuletCharmEvadeEntry = Entry(ChoInv,width=8)
+    amuletCharmArmorEntry = Entry(ChoInv,width=8)
+    amuletCharmMgicArmorEntry = Entry(ChoInv,width=8)
+    amuletCharmMPEntry = Entry(ChoInv,width=8)
+    amuletCharmRegenMPEntry = Entry(ChoInv,width=8)
+    amuletCharmSpellPenetrationEntry = Entry(ChoInv,width=8)
+    amuletCharmDirectMagicDMGEntry = Entry(ChoInv,width=8)
+    amuletCharmPeriodicMagicDMGEntry = Entry(ChoInv,width=8)
+
+    amuletCharmEnergyEntry.insert(0,'{0}'.format(amuletCharmEnergy))
+    amuletCharmRegenEnergyEntry.insert(0,'{0}'.format(amuletCharmRegenEnergy))
+    amuletCharmHasteEntry.insert(0,'{0}'.format(amuletCharmHaste))
+    amuletCharmHitEntry.insert(0,'{0}'.format(amuletCharmHit))
+    amuletCharmAttackEntry.insert(0,'{0}-{1}-{2}'.format(amuletCharmMinAttack,amuletCharmMidAttack,amuletCharmMaxAttack))
+    amuletCharmDMGEntry.insert(0,'{0}-{1}-{2}'.format(amuletCharmMinDMG,amuletCharmMidDMG,amuletCharmMaxDMG))
+    amuletCharmARPEntry.insert(0,'{0}'.format(amuletCharmARP))
+    amuletCharmHPEntry.insert(0,'{0}'.format(amuletCharmHP))
+    amuletCharmRegenHPEntry.insert(0,'{0}'.format(amuletCharmRegenHP))
+    amuletCharmEvadeEntry.insert(0,'{0}'.format(amuletCharmEvade))
+    amuletCharmArmorEntry.insert(0,'{0}'.format(amuletCharmArmor))
+    amuletCharmMgicArmorEntry.insert(0,'{0}'.format(amuletCharmMgicArmor))
+    amuletCharmMPEntry.insert(0,'{0}'.format(amuletCharmMP))
+    amuletCharmRegenMPEntry.insert(0,'{0}'.format(amuletCharmRegenMP))
+    amuletCharmSpellPenetrationEntry.insert(0,'{0}'.format(amuletCharmSpellPenetration))
+    amuletCharmDirectMagicDMGEntry.insert(0,'{0}'.format(amuletCharmDirectMagicDMG))
+    amuletCharmPeriodicMagicDMGEntry.insert(0,'{0}'.format(amuletCharmPeriodicMagicDMG))
+
+    amuletEnergyEntry.grid(row=7,column=1)
+    amuletRegenEnergyEntry.grid(row=7,column=2)
+    amuletHasteEntry.grid(row=7,column=3)
+    amuletHitEntry.grid(row=7,column=4)
+    amuletAttackEntry.grid(row=7,column=5)
+    amuletDMGEntry.grid(row=7,column=6)
+    amuletARPEntry.grid(row=7,column=7)
+    amuletHPEntry.grid(row=7,column=8)
+    amuletRegenHPEntry.grid(row=7,column=9)
+    amuletEvadeEntry.grid(row=7,column=10)
+    amuletArmorEntry.grid(row=7,column=11)
+    amuletMgicArmorEntry.grid(row=7,column=12)
+    amuletMPEntry.grid(row=7,column=13)
+    amuletRegenMPEntry.grid(row=7,column=14)
+    amuletSpellPenetrationEntry.grid(row=7,column=15)
+    amuletDirectMagicDMGEntry.grid(row=7,column=16)
+    amuletPeriodicMagicDMGEntry.grid(row=7,column=17)
+
+    amuletCharmEnergyEntry.grid(row=8,column=1)
+    amuletCharmRegenEnergyEntry.grid(row=8,column=2)
+    amuletCharmHasteEntry.grid(row=8,column=3)
+    amuletCharmHitEntry.grid(row=8,column=4)
+    amuletCharmAttackEntry.grid(row=8,column=5)
+    amuletCharmDMGEntry.grid(row=8,column=6)
+    amuletCharmARPEntry.grid(row=8,column=7)
+    amuletCharmHPEntry.grid(row=8,column=8)
+    amuletCharmRegenHPEntry.grid(row=8,column=9)
+    amuletCharmEvadeEntry.grid(row=8,column=10)
+    amuletCharmArmorEntry.grid(row=8,column=11)
+    amuletCharmMgicArmorEntry.grid(row=8,column=12)
+    amuletCharmMPEntry.grid(row=8,column=13)
+    amuletCharmRegenMPEntry.grid(row=8,column=14)
+    amuletCharmSpellPenetrationEntry.grid(row=8,column=15)
+    amuletCharmDirectMagicDMGEntry.grid(row=8,column=16)
+    amuletCharmPeriodicMagicDMGEntry.grid(row=8,column=17)
+
+    ringEnergyEntry = Entry(ChoInv,width=8)
+    ringRegenEnergyEntry = Entry(ChoInv,width=8)
+    ringHasteEntry = Entry(ChoInv,width=8)
+    ringHitEntry = Entry(ChoInv,width=8)
+    ringAttackEntry = Entry(ChoInv,width=8)
+    ringDMGEntry = Entry(ChoInv,width=8)
+    ringARPEntry = Entry(ChoInv,width=8)
+    ringHPEntry = Entry(ChoInv,width=8)
+    ringRegenHPEntry = Entry(ChoInv,width=8)
+    ringEvadeEntry = Entry(ChoInv,width=8)
+    ringArmorEntry = Entry(ChoInv,width=8)
+    ringMgicArmorEntry = Entry(ChoInv,width=8)
+    ringMPEntry = Entry(ChoInv,width=8)
+    ringRegenMPEntry = Entry(ChoInv,width=8)
+    ringSpellPenetrationEntry = Entry(ChoInv,width=8)
+    ringDirectMagicDMGEntry = Entry(ChoInv,width=8)
+    ringPeriodicMagicDMGEntry = Entry(ChoInv,width=8)
+
+    ringEnergyEntry.insert(0,'{0}'.format(ringEnergy))
+    ringRegenEnergyEntry.insert(0,'{0}'.format(ringRegenEnergy))
+    ringHasteEntry.insert(0,'{0}'.format(ringHaste))
+    ringHitEntry.insert(0,'{0}'.format(ringHit))
+    ringAttackEntry.insert(0,'{0}-{1}-{2}'.format(ringMinAttack,ringMidAttack,ringMaxAttack))
+    ringDMGEntry.insert(0,'{0}-{1}-{2}'.format(ringMinDMG,ringMidDMG,ringMaxDMG))
+    ringARPEntry.insert(0,'{0}'.format(ringARP))
+    ringHPEntry.insert(0,'{0}'.format(ringHP))
+    ringRegenHPEntry.insert(0,'{0}'.format(ringRegenHP))
+    ringEvadeEntry.insert(0,'{0}'.format(ringEvade))
+    ringArmorEntry.insert(0,'{0}'.format(ringArmor))
+    ringMgicArmorEntry.insert(0,'{0}'.format(ringMgicArmor))
+    ringMPEntry.insert(0,'{0}'.format(ringMP))
+    ringRegenMPEntry.insert(0,'{0}'.format(ringRegenMP))
+    ringSpellPenetrationEntry.insert(0,'{0}'.format(ringSpellPenetration))
+    ringDirectMagicDMGEntry.insert(0,'{0}'.format(ringDirectMagicDMG))
+    ringPeriodicMagicDMGEntry.insert(0,'{0}'.format(ringPeriodicMagicDMG))
+
+    ringCharmEnergyEntry = Entry(ChoInv,width=8)
+    ringCharmRegenEnergyEntry = Entry(ChoInv,width=8)
+    ringCharmHasteEntry = Entry(ChoInv,width=8)
+    ringCharmHitEntry = Entry(ChoInv,width=8)
+    ringCharmAttackEntry = Entry(ChoInv,width=8)
+    ringCharmDMGEntry = Entry(ChoInv,width=8)
+    ringCharmARPEntry = Entry(ChoInv,width=8)
+    ringCharmHPEntry = Entry(ChoInv,width=8)
+    ringCharmRegenHPEntry = Entry(ChoInv,width=8)
+    ringCharmEvadeEntry = Entry(ChoInv,width=8)
+    ringCharmArmorEntry = Entry(ChoInv,width=8)
+    ringCharmMgicArmorEntry = Entry(ChoInv,width=8)
+    ringCharmMPEntry = Entry(ChoInv,width=8)
+    ringCharmRegenMPEntry = Entry(ChoInv,width=8)
+    ringCharmSpellPenetrationEntry = Entry(ChoInv,width=8)
+    ringCharmDirectMagicDMGEntry = Entry(ChoInv,width=8)
+    ringCharmPeriodicMagicDMGEntry = Entry(ChoInv,width=8)
+
+    ringCharmEnergyEntry.insert(0,'{0}'.format(ringCharmEnergy))
+    ringCharmRegenEnergyEntry.insert(0,'{0}'.format(ringCharmRegenEnergy))
+    ringCharmHasteEntry.insert(0,'{0}'.format(ringCharmHaste))
+    ringCharmHitEntry.insert(0,'{0}'.format(ringCharmHit))
+    ringCharmAttackEntry.insert(0,'{0}-{1}-{2}'.format(ringCharmMinAttack,ringCharmMidAttack,ringCharmMaxAttack))
+    ringCharmDMGEntry.insert(0,'{0}-{1}-{2}'.format(ringCharmMinDMG,ringCharmMidDMG,ringCharmMaxDMG))
+    ringCharmARPEntry.insert(0,'{0}'.format(ringCharmARP))
+    ringCharmHPEntry.insert(0,'{0}'.format(ringCharmHP))
+    ringCharmRegenHPEntry.insert(0,'{0}'.format(ringCharmRegenHP))
+    ringCharmEvadeEntry.insert(0,'{0}'.format(ringCharmEvade))
+    ringCharmArmorEntry.insert(0,'{0}'.format(ringCharmArmor))
+    ringCharmMgicArmorEntry.insert(0,'{0}'.format(ringCharmMgicArmor))
+    ringCharmMPEntry.insert(0,'{0}'.format(ringCharmMP))
+    ringCharmRegenMPEntry.insert(0,'{0}'.format(ringCharmRegenMP))
+    ringCharmSpellPenetrationEntry.insert(0,'{0}'.format(ringCharmSpellPenetration))
+    ringCharmDirectMagicDMGEntry.insert(0,'{0}'.format(ringCharmDirectMagicDMG))
+    ringCharmPeriodicMagicDMGEntry.insert(0,'{0}'.format(ringCharmPeriodicMagicDMG))
+
+    ringEnergyEntry.grid(row=9,column=1)
+    ringRegenEnergyEntry.grid(row=9,column=2)
+    ringHasteEntry.grid(row=9,column=3)
+    ringHitEntry.grid(row=9,column=4)
+    ringAttackEntry.grid(row=9,column=5)
+    ringDMGEntry.grid(row=9,column=6)
+    ringARPEntry.grid(row=9,column=7)
+    ringHPEntry.grid(row=9,column=8)
+    ringRegenHPEntry.grid(row=9,column=9)
+    ringEvadeEntry.grid(row=9,column=10)
+    ringArmorEntry.grid(row=9,column=11)
+    ringMgicArmorEntry.grid(row=9,column=12)
+    ringMPEntry.grid(row=9,column=13)
+    ringRegenMPEntry.grid(row=9,column=14)
+    ringSpellPenetrationEntry.grid(row=9,column=15)
+    ringDirectMagicDMGEntry.grid(row=9,column=16)
+    ringPeriodicMagicDMGEntry.grid(row=9,column=17)
+
+    ringCharmEnergyEntry.grid(row=10,column=1)
+    ringCharmRegenEnergyEntry.grid(row=10,column=2)
+    ringCharmHasteEntry.grid(row=10,column=3)
+    ringCharmHitEntry.grid(row=10,column=4)
+    ringCharmAttackEntry.grid(row=10,column=5)
+    ringCharmDMGEntry.grid(row=10,column=6)
+    ringCharmARPEntry.grid(row=10,column=7)
+    ringCharmHPEntry.grid(row=10,column=8)
+    ringCharmRegenHPEntry.grid(row=10,column=9)
+    ringCharmEvadeEntry.grid(row=10,column=10)
+    ringCharmArmorEntry.grid(row=10,column=11)
+    ringCharmMgicArmorEntry.grid(row=10,column=12)
+    ringCharmMPEntry.grid(row=10,column=13)
+    ringCharmRegenMPEntry.grid(row=10,column=14)
+    ringCharmSpellPenetrationEntry.grid(row=10,column=15)
+    ringCharmDirectMagicDMGEntry.grid(row=10,column=16)
+    ringCharmPeriodicMagicDMGEntry.grid(row=10,column=17)
+
+    bookEnergyEntry = Entry(ChoInv,width=8)
+    bookRegenEnergyEntry = Entry(ChoInv,width=8)
+    bookHasteEntry = Entry(ChoInv,width=8)
+    bookHitEntry = Entry(ChoInv,width=8)
+    bookAttackEntry = Entry(ChoInv,width=8)
+    bookDMGEntry = Entry(ChoInv,width=8)
+    bookARPEntry = Entry(ChoInv,width=8)
+    bookHPEntry = Entry(ChoInv,width=8)
+    bookRegenHPEntry = Entry(ChoInv,width=8)
+    bookEvadeEntry = Entry(ChoInv,width=8)
+    bookArmorEntry = Entry(ChoInv,width=8)
+    bookMgicArmorEntry = Entry(ChoInv,width=8)
+    bookMPEntry = Entry(ChoInv,width=8)
+    bookRegenMPEntry = Entry(ChoInv,width=8)
+    bookSpellPenetrationEntry = Entry(ChoInv,width=8)
+    bookDirectMagicDMGEntry = Entry(ChoInv,width=8)
+    bookPeriodicMagicDMGEntry = Entry(ChoInv,width=8)
+
+    bookEnergyEntry.insert(0,'{0}'.format(bookEnergy))
+    bookRegenEnergyEntry.insert(0,'{0}'.format(bookRegenEnergy))
+    bookHasteEntry.insert(0,'{0}'.format(bookHaste))
+    bookHitEntry.insert(0,'{0}'.format(bookHit))
+    bookAttackEntry.insert(0,'{0}-{1}-{2}'.format(bookMinAttack,bookMidAttack,bookMaxAttack))
+    bookDMGEntry.insert(0,'{0}-{1}-{2}'.format(bookMinDMG,bookMidDMG,bookMaxDMG))
+    bookARPEntry.insert(0,'{0}'.format(bookARP))
+    bookHPEntry.insert(0,'{0}'.format(bookHP))
+    bookRegenHPEntry.insert(0,'{0}'.format(bookRegenHP))
+    bookEvadeEntry.insert(0,'{0}'.format(bookEvade))
+    bookArmorEntry.insert(0,'{0}'.format(bookArmor))
+    bookMgicArmorEntry.insert(0,'{0}'.format(bookMgicArmor))
+    bookMPEntry.insert(0,'{0}'.format(bookMP))
+    bookRegenMPEntry.insert(0,'{0}'.format(bookRegenMP))
+    bookSpellPenetrationEntry.insert(0,'{0}'.format(bookSpellPenetration))
+    bookDirectMagicDMGEntry.insert(0,'{0}'.format(bookDirectMagicDMG))
+    bookPeriodicMagicDMGEntry.insert(0,'{0}'.format(bookPeriodicMagicDMG))
+
+    bookCharmEnergyEntry = Entry(ChoInv,width=8)
+    bookCharmRegenEnergyEntry = Entry(ChoInv,width=8)
+    bookCharmHasteEntry = Entry(ChoInv,width=8)
+    bookCharmHitEntry = Entry(ChoInv,width=8)
+    bookCharmAttackEntry = Entry(ChoInv,width=8)
+    bookCharmDMGEntry = Entry(ChoInv,width=8)
+    bookCharmARPEntry = Entry(ChoInv,width=8)
+    bookCharmHPEntry = Entry(ChoInv,width=8)
+    bookCharmRegenHPEntry = Entry(ChoInv,width=8)
+    bookCharmEvadeEntry = Entry(ChoInv,width=8)
+    bookCharmArmorEntry = Entry(ChoInv,width=8)
+    bookCharmMgicArmorEntry = Entry(ChoInv,width=8)
+    bookCharmMPEntry = Entry(ChoInv,width=8)
+    bookCharmRegenMPEntry = Entry(ChoInv,width=8)
+    bookCharmSpellPenetrationEntry = Entry(ChoInv,width=8)
+    bookCharmDirectMagicDMGEntry = Entry(ChoInv,width=8)
+    bookCharmPeriodicMagicDMGEntry = Entry(ChoInv,width=8)
+
+    bookCharmEnergyEntry.insert(0,'{0}'.format(bookCharmEnergy))
+    bookCharmRegenEnergyEntry.insert(0,'{0}'.format(bookCharmRegenEnergy))
+    bookCharmHasteEntry.insert(0,'{0}'.format(bookCharmHaste))
+    bookCharmHitEntry.insert(0,'{0}'.format(bookCharmHit))
+    bookCharmAttackEntry.insert(0,'{0}-{1}-{2}'.format(bookCharmMinAttack,bookCharmMidAttack,bookCharmMaxAttack))
+    bookCharmDMGEntry.insert(0,'{0}-{1}-{2}'.format(bookCharmMinDMG,bookCharmMidDMG,bookCharmMaxDMG))
+    bookCharmARPEntry.insert(0,'{0}'.format(bookCharmARP))
+    bookCharmHPEntry.insert(0,'{0}'.format(bookCharmHP))
+    bookCharmRegenHPEntry.insert(0,'{0}'.format(bookCharmRegenHP))
+    bookCharmEvadeEntry.insert(0,'{0}'.format(bookCharmEvade))
+    bookCharmArmorEntry.insert(0,'{0}'.format(bookCharmArmor))
+    bookCharmMgicArmorEntry.insert(0,'{0}'.format(bookCharmMgicArmor))
+    bookCharmMPEntry.insert(0,'{0}'.format(bookCharmMP))
+    bookCharmRegenMPEntry.insert(0,'{0}'.format(bookCharmRegenMP))
+    bookCharmSpellPenetrationEntry.insert(0,'{0}'.format(bookCharmSpellPenetration))
+    bookCharmDirectMagicDMGEntry.insert(0,'{0}'.format(bookCharmDirectMagicDMG))
+    bookCharmPeriodicMagicDMGEntry.insert(0,'{0}'.format(bookCharmPeriodicMagicDMG))
+
+    bookEnergyEntry.grid(row=11,column=1)
+    bookRegenEnergyEntry.grid(row=11,column=2)
+    bookHasteEntry.grid(row=11,column=3)
+    bookHitEntry.grid(row=11,column=4)
+    bookAttackEntry.grid(row=11,column=5)
+    bookDMGEntry.grid(row=11,column=6)
+    bookARPEntry.grid(row=11,column=7)
+    bookHPEntry.grid(row=11,column=8)
+    bookRegenHPEntry.grid(row=11,column=9)
+    bookEvadeEntry.grid(row=11,column=10)
+    bookArmorEntry.grid(row=11,column=11)
+    bookMgicArmorEntry.grid(row=11,column=12)
+    bookMPEntry.grid(row=11,column=13)
+    bookRegenMPEntry.grid(row=11,column=14)
+    bookSpellPenetrationEntry.grid(row=11,column=15)
+    bookDirectMagicDMGEntry.grid(row=11,column=16)
+    bookPeriodicMagicDMGEntry.grid(row=11,column=17)
+
+    bookCharmEnergyEntry.grid(row=12,column=1)
+    bookCharmRegenEnergyEntry.grid(row=12,column=2)
+    bookCharmHasteEntry.grid(row=12,column=3)
+    bookCharmHitEntry.grid(row=12,column=4)
+    bookCharmAttackEntry.grid(row=12,column=5)
+    bookCharmDMGEntry.grid(row=12,column=6)
+    bookCharmARPEntry.grid(row=12,column=7)
+    bookCharmHPEntry.grid(row=12,column=8)
+    bookCharmRegenHPEntry.grid(row=12,column=9)
+    bookCharmEvadeEntry.grid(row=12,column=10)
+    bookCharmArmorEntry.grid(row=12,column=11)
+    bookCharmMgicArmorEntry.grid(row=12,column=12)
+    bookCharmMPEntry.grid(row=12,column=13)
+    bookCharmRegenMPEntry.grid(row=12,column=14)
+    bookCharmSpellPenetrationEntry.grid(row=12,column=15)
+    bookCharmDirectMagicDMGEntry.grid(row=12,column=16)
+    bookCharmPeriodicMagicDMGEntry.grid(row=12,column=17)
+
+def create_labels(frame,columnParam,list,sixParam):
+    if sixParam == 0:
+        for param in list:
+            Label(frame, text = param).grid(row=0, column=columnParam)
+            columnParam+=1
+    elif sixParam == 1:
+        for param in list:
+            Label(frame, text = param).grid(row=columnParam, column=0)
+            columnParam+=1
+
+def sum_stats(event):
+    global totalEnergy,staticEnergy,changeEnergy,totalRegenEnergy,changeRegenEnergy,changeRegenEnergy,totalHaste,staticHaste,changeHaste,totalHit,staticHit,changeHit,totalAttack,staticAttack,changeAttack,totalDMG,staticDMG,changeDMG,totalARP,staticARP,changeARP,totalHP,staticHP,changeHP,totalRegenHP,staticRegenHP,changeRegenHP,totalEvade,staticEvade,changeEvade,totalArmor,staticArmor,changeArmor,totalMgicArmor,staticMgicArmor,changeMgicArmor,totalMP,staticMP,changeMP,totalRegenMP,staticRegenMP,changeRegenMP,totalSpellPenetration,staticSpellPenetration,changeSpellPenetration,totalDirectMagicDMG,staticDirectMagicDMG,changeDirectMagicDMG,totalPeriodicMagicDMG,staticPeriodicMagicDMG,changePeriodicMagicDMG,totalEnergyLabel,totalRegenEnergyLabel,totalHasteLabel,totalHitLabel,totalAttackLabel,totalDMGLabel,totalARPLabel,totalHPLabel,totalRegenHPLabel,totalEvadeLabel,totalArmorLabel,totalMgicArmorLabel,totalMPLabel,totalRegenMPLabel,totalSpellPenetrationLabel,totalDirectMagicDMGLabel,totalPeriodicMagicDMGLabel,changeEnergyLabel,changeRegenEnergyLabel,changeHasteLabel,changeHitLabel,changeAttackLabel,changeDMGLabel,changeARPLabel,changeHPLabel,changeRegenHPLabel,changeEvadeLabel,changeArmorLabel,changeMgicArmorLabel,changeMPLabel,changeRegenMPLabel,changeSpellPenetrationLabel,changeDirectMagicDMGLabel,changePeriodicMagicDMGLabel,secondBreathAttInt
+
+    if changeEnergyLabel.get():
+        changeEnergy = int(changeEnergyLabel.get())
+    if changeRegenEnergyLabel.get():
+        changeRegenEnergy = int(changeRegenEnergyLabel.get())
+    if changeHasteLabel.get():
+        changeHaste = int(changeHasteLabel.get())
+    if changeHitLabel.get():
+        changeHit = int(changeHitLabel.get())
+    if changeAttackLabel.get():
+        changeAttack = changeAttackLabel.get()
+        # changeAttackMin = int(changeAttack.split('-')[0])
+        # changeAttackMid = int(changeAttack.split('-')[1])
+        # changeAttackMax = int(changeAttack.split('-')[2])
+    if changeDMGLabel.get():
+        changeDMG = changeDMGLabel.get()
+        # changeDMGMin = int(changeDMG.split('-')[0])
+        # changeDMGMid = int(changeDMG.split('-')[1])
+        # changeDMGMax = int(changeDMG.split('-')[2])
+    if changeARPLabel.get():
+        changeARP = int(changeARPLabel.get())
+    if changeHPLabel.get():
+        changeHP = int(changeHPLabel.get())
+    if changeRegenHPLabel.get():
+        changeRegenHP = int(changeRegenHPLabel.get())
+    if changeEvadeLabel.get():
+        changeEvade = int(changeEvadeLabel.get())
+    if changeArmorLabel.get():
+        changeArmor = int(changeArmorLabel.get())
+    if changeMgicArmorLabel.get():
+        changeMgicArmor = int(changeMgicArmorLabel.get())
+    if changeMPLabel.get():
+        changeMP = int(changeMPLabel.get())
+    if changeRegenMPLabel.get():
+        changeRegenMP = int(changeRegenMPLabel.get())
+    if changeSpellPenetrationLabel.get():
+        changeSpellPenetration = int(changeSpellPenetrationLabel.get())
+    if changeDirectMagicDMGLabel.get():
+        changeDirectMagicDMG = int(changeDirectMagicDMGLabel.get())
+    if changePeriodicMagicDMGLabel.get():
+        changePeriodicMagicDMG = int(changePeriodicMagicDMGLabel.get())
+
+    totalEnergy = staticEnergy + changeEnergy
+    if totalEnergy < 0:
+        totalEnergy = 0
+    totalRegenEnergy = changeRegenEnergy + changeRegenEnergy
+    if totalRegenEnergy < 0:
+        totalRegenEnergy = 0
+    totalHaste = staticHaste + changeHaste
+    if totalHaste < 0:
+        totalHaste = 0
+    totalHit = staticHit + changeHit
+    if totalHit < 0:
+        totalHit = 0
+    totalAttackMin = int(staticAttack.split('-')[0])-int(changeAttack.split('-')[0])
+    if totalAttackMin < 0:
+        totalAttackMin = 0
+    totalAttackMid = int(staticAttack.split('-')[1])-int(changeAttack.split('-')[1])
+    if totalAttackMid < 0:
+        totalAttackMid = 0
+    totalAttackMax = int(staticAttack.split('-')[2])-int(changeAttack.split('-')[2])
+    if totalAttackMax < 0:
+        totalAttackMax = 0
+    totalAttack = '{0}-{1}-{2}'.format(totalAttackMin,totalAttackMid,totalAttackMax)
+    totalDMGMin = int(staticDMG.split('-')[0])-int(changeDMG.split('-')[0])
+    if totalDMGMin < 0:
+        totalDMGMin = 0
+    totalDMGMid = int(staticDMG.split('-')[1])-int(changeDMG.split('-')[1])
+    if totalDMGMid < 0:
+        totalDMGMid = 0
+    totalDMGMax = int(staticDMG.split('-')[2])-int(changeDMG.split('-')[2])
+    if totalDMGMax < 0:
+        totalDMGMax = 0
+    totalDMG = '{0}-{1}-{2}'.format(totalDMGMin,totalDMGMid,totalDMGMax)
+    totalARP = staticARP + changeARP
+    if totalARP < 0:
+        totalARP = 0
+    totalHP = staticHP + changeHP
+    # if totalHP < totalHP/2:
+    #     totalHP += secondBreathAttInt*2
+    if totalHP < 0:
+        totalHP = 0
+    totalRegenHP = staticRegenHP + changeRegenHP
+    if totalRegenHP < 0:
+        totalRegenHP = 0
+    totalEvade = staticEvade + changeEvade
+    if totalEvade < 0:
+        totalEvade = 0
+    totalArmor = staticArmor + changeArmor
+    if totalArmor < 0:
+        totalArmor = 0
+    totalMgicArmor = staticMgicArmor + changeMgicArmor
+    if totalMgicArmor < 0:
+        totalMgicArmor = 0
+    totalMP = staticMP + changeMP
+    if totalMP < 0:
+        totalMP = 0
+    totalRegenMP = staticRegenMP + changeRegenMP
+    if totalRegenMP < 0:
+        totalRegenMP = 0
+    totalSpellPenetration = staticSpellPenetration + changeSpellPenetration
+    if totalSpellPenetration < 0:
+        totalSpellPenetration = 0
+    totalDirectMagicDMG = staticDirectMagicDMG + changeDirectMagicDMG
+    if totalDirectMagicDMG < 0:
+        totalDirectMagicDMG = 0
+    totalPeriodicMagicDMG = staticPeriodicMagicDMG + changePeriodicMagicDMG
+    if totalPeriodicMagicDMG < 0:
+        totalPeriodicMagicDMG = 0
+
+    totalEnergyLabel.config(text = '{0}'.format(totalEnergy))
+    totalRegenEnergyLabel.config(text = '{0}'.format(totalRegenEnergy))
+    totalHasteLabel.config(text = '{0}'.format(totalHaste))
+    totalHitLabel.config(text = '{0}'.format(totalHit))
+    totalAttackLabel.config(text = '{0}'.format(totalAttack))
+    totalDMGLabel.config(text = '{0}'.format(totalDMG))
+    totalARPLabel.config(text = '{0}'.format(totalARP))
+    totalHPLabel.config(text = '{0}'.format(totalHP))
+    totalRegenHPLabel.config(text = '{0}'.format(totalRegenHP))
+    totalEvadeLabel.config(text = '{0}'.format(totalEvade))
+    totalArmorLabel.config(text = '{0}'.format(totalArmor))
+    totalMgicArmorLabel.config(text = '{0}'.format(totalMgicArmor))
+    totalMPLabel.config(text = '{0}'.format(totalMP))
+    totalRegenMPLabel.config(text = '{0}'.format(totalRegenMP))
+    totalSpellPenetrationLabel.config(text = '{0}'.format(totalSpellPenetration))
+    totalDirectMagicDMGLabel.config(text = '{0}'.format(totalDirectMagicDMG))
+    totalPeriodicMagicDMGLabel.config(text = '{0}'.format(totalPeriodicMagicDMG))
 
 # all vars
 lvlNow = 1
@@ -1386,8 +2850,9 @@ secondSchMag = allMagicSchool[0]
 staticEnergy = 1
 staticRegenEnergy = 0
 staticHaste = 0
-staticAttack = 0
-staticDMG = 0
+staticHit = 0
+staticAttack = '0-0-0'
+staticDMG = '0-0-0'
 staticARP = 0
 staticHP = 5
 staticRegenHP = 0
@@ -1403,7 +2868,8 @@ staticPeriodicMagicDMG = 0
 changeEnergy = 0
 changeRegenEnergy = 0
 changeHaste = 0
-changeAttack = 0
+changeHit = 0
+changeAttack = staticAttack
 changeDMG = staticDMG
 changeARP = 0
 changeHP = 0
@@ -1420,6 +2886,7 @@ changePeriodicMagicDMG = 0
 totalEnergy = staticEnergy
 totalRegenEnergy = staticRegenEnergy
 totalHaste = staticHaste
+totalHit = staticHit
 totalAttack = staticAttack
 totalDMG = staticDMG
 totalARP = staticARP
@@ -1528,6 +2995,297 @@ skillLevelInt7 = 0
 skillLevelInt8 = 0
 skillLevelInt9 = 0
 skillLevelInt10 = 0
+
+# inventory
+rightHandEnergy = 0
+rightHandRegenEnergy = 0
+rightHandHaste = 0
+rightHandHit = 0
+rightHandAttack = 0
+rightHandMinAttack = 0
+rightHandMidAttack = 0
+rightHandMaxAttack = 0
+rightHandMinDMG = 0
+rightHandMidDMG = 0
+rightHandMaxDMG = 0
+rightHandDMG = 0
+rightHandARP = 0
+rightHandHP = 0
+rightHandRegenHP = 0
+rightHandEvade = 0
+rightHandArmor = 0
+rightHandMgicArmor = 0
+rightHandMP = 0
+rightHandRegenMP = 0
+rightHandSpellPenetration = 0
+rightHandDirectMagicDMG = 0
+rightHandPeriodicMagicDMG = 0
+
+rightHandCharmEnergy = 0
+rightHandCharmRegenEnergy = 0
+rightHandCharmHaste = 0
+rightHandCharmHit = 0
+rightHandCharmAttack = 0
+rightHandCharmMinAttack = 0
+rightHandCharmMidAttack = 0
+rightHandCharmMaxAttack = 0
+rightHandCharmMinDMG = 0
+rightHandCharmMidDMG = 0
+rightHandCharmMaxDMG = 0
+rightHandCharmDMG = 0
+rightHandCharmARP = 0
+rightHandCharmHP = 0
+rightHandCharmRegenHP = 0
+rightHandCharmEvade = 0
+rightHandCharmArmor = 0
+rightHandCharmMgicArmor = 0
+rightHandCharmMP = 0
+rightHandCharmRegenMP = 0
+rightHandCharmSpellPenetration = 0
+rightHandCharmDirectMagicDMG = 0
+rightHandCharmPeriodicMagicDMG = 0
+
+leftHandEnergy = 0
+leftHandRegenEnergy = 0
+leftHandHaste = 0
+leftHandHit = 0
+leftHandAttack = 0
+leftHandMinAttack = 0
+leftHandMidAttack = 0
+leftHandMaxAttack = 0
+leftHandMinDMG = 0
+leftHandMidDMG = 0
+leftHandMaxDMG = 0
+leftHandDMG = 0
+leftHandARP = 0
+leftHandHP = 0
+leftHandRegenHP = 0
+leftHandEvade = 0
+leftHandArmor = 0
+leftHandMgicArmor = 0
+leftHandMP = 0
+leftHandRegenMP = 0
+leftHandSpellPenetration = 0
+leftHandDirectMagicDMG = 0
+leftHandPeriodicMagicDMG = 0
+
+leftHandCharmEnergy = 0
+leftHandCharmRegenEnergy = 0
+leftHandCharmHaste = 0
+leftHandCharmHit = 0
+leftHandCharmAttack = 0
+leftHandCharmMinAttack = 0
+leftHandCharmMidAttack = 0
+leftHandCharmMaxAttack = 0
+leftHandCharmMinDMG = 0
+leftHandCharmMidDMG = 0
+leftHandCharmMaxDMG = 0
+leftHandCharmDMG = 0
+leftHandCharmARP = 0
+leftHandCharmHP = 0
+leftHandCharmRegenHP = 0
+leftHandCharmEvade = 0
+leftHandCharmArmor = 0
+leftHandCharmMgicArmor = 0
+leftHandCharmMP = 0
+leftHandCharmRegenMP = 0
+leftHandCharmSpellPenetration = 0
+leftHandCharmDirectMagicDMG = 0
+leftHandCharmPeriodicMagicDMG = 0
+
+ChestEnergy = 0
+ChestRegenEnergy = 0
+ChestHaste = 0
+ChestHit = 0
+ChestAttack = 0
+ChestMinAttack = 0
+ChestMidAttack = 0
+ChestMaxAttack = 0
+ChestMinDMG = 0
+ChestMidDMG = 0
+ChestMaxDMG = 0
+ChestDMG = 0
+ChestARP = 0
+ChestHP = 0
+ChestRegenHP = 0
+ChestEvade = 0
+ChestArmor = 0
+ChestMgicArmor = 0
+ChestMP = 0
+ChestRegenMP = 0
+ChestSpellPenetration = 0
+ChestDirectMagicDMG = 0
+ChestPeriodicMagicDMG = 0
+
+ChestCharmEnergy = 0
+ChestCharmRegenEnergy = 0
+ChestCharmHaste = 0
+ChestCharmHit = 0
+ChestCharmAttack = 0
+ChestCharmMinAttack = 0
+ChestCharmMidAttack = 0
+ChestCharmMaxAttack = 0
+ChestCharmMinDMG = 0
+ChestCharmMidDMG = 0
+ChestCharmMaxDMG = 0
+ChestCharmDMG = 0
+ChestCharmARP = 0
+ChestCharmHP = 0
+ChestCharmRegenHP = 0
+ChestCharmEvade = 0
+ChestCharmArmor = 0
+ChestCharmMgicArmor = 0
+ChestCharmMP = 0
+ChestCharmRegenMP = 0
+ChestCharmSpellPenetration = 0
+ChestCharmDirectMagicDMG = 0
+ChestCharmPeriodicMagicDMG = 0
+
+amuletEnergy = 0
+amuletRegenEnergy = 0
+amuletHaste = 0
+amuletHit = 0
+amuletAttack = 0
+amuletMinAttack = 0
+amuletMidAttack = 0
+amuletMaxAttack = 0
+amuletMinDMG = 0
+amuletMidDMG = 0
+amuletMaxDMG = 0
+amuletDMG = 0
+amuletARP = 0
+amuletHP = 0
+amuletRegenHP = 0
+amuletEvade = 0
+amuletArmor = 0
+amuletMgicArmor = 0
+amuletMP = 0
+amuletRegenMP = 0
+amuletSpellPenetration = 0
+amuletDirectMagicDMG = 0
+amuletPeriodicMagicDMG = 0
+
+amuletCharmEnergy = 0
+amuletCharmRegenEnergy = 0
+amuletCharmHaste = 0
+amuletCharmHit = 0
+amuletCharmAttack = 0
+amuletCharmMinAttack = 0
+amuletCharmMidAttack = 0
+amuletCharmMaxAttack = 0
+amuletCharmMinDMG = 0
+amuletCharmMidDMG = 0
+amuletCharmMaxDMG = 0
+amuletCharmDMG = 0
+amuletCharmARP = 0
+amuletCharmHP = 0
+amuletCharmRegenHP = 0
+amuletCharmEvade = 0
+amuletCharmArmor = 0
+amuletCharmMgicArmor = 0
+amuletCharmMP = 0
+amuletCharmRegenMP = 0
+amuletCharmSpellPenetration = 0
+amuletCharmDirectMagicDMG = 0
+amuletCharmPeriodicMagicDMG = 0
+
+ringEnergy = 0
+ringRegenEnergy = 0
+ringHaste = 0
+ringHit = 0
+ringAttack = 0
+ringMinAttack = 0
+ringMidAttack = 0
+ringMaxAttack = 0
+ringMinDMG = 0
+ringMidDMG = 0
+ringMaxDMG = 0
+ringDMG = 0
+ringARP = 0
+ringHP = 0
+ringRegenHP = 0
+ringEvade = 0
+ringArmor = 0
+ringMgicArmor = 0
+ringMP = 0
+ringRegenMP = 0
+ringSpellPenetration = 0
+ringDirectMagicDMG = 0
+ringPeriodicMagicDMG = 0
+
+ringCharmEnergy = 0
+ringCharmRegenEnergy = 0
+ringCharmHaste = 0
+ringCharmHit = 0
+ringCharmAttack = 0
+ringCharmMinAttack = 0
+ringCharmMidAttack = 0
+ringCharmMaxAttack = 0
+ringCharmMinDMG = 0
+ringCharmMidDMG = 0
+ringCharmMaxDMG = 0
+ringCharmDMG = 0
+ringCharmARP = 0
+ringCharmHP = 0
+ringCharmRegenHP = 0
+ringCharmEvade = 0
+ringCharmArmor = 0
+ringCharmMgicArmor = 0
+ringCharmMP = 0
+ringCharmRegenMP = 0
+ringCharmSpellPenetration = 0
+ringCharmDirectMagicDMG = 0
+ringCharmPeriodicMagicDMG = 0
+
+bookEnergy = 0
+bookRegenEnergy = 0
+bookHaste = 0
+bookHit = 0
+bookAttack = 0
+bookMinAttack = 0
+bookMidAttack = 0
+bookMaxAttack = 0
+bookMinDMG = 0
+bookMidDMG = 0
+bookMaxDMG = 0
+bookDMG = 0
+bookARP = 0
+bookHP = 0
+bookRegenHP = 0
+bookEvade = 0
+bookArmor = 0
+bookMgicArmor = 0
+bookMP = 0
+bookRegenMP = 0
+bookSpellPenetration = 0
+bookDirectMagicDMG = 0
+bookPeriodicMagicDMG = 0
+
+bookCharmEnergy = 0
+bookCharmRegenEnergy = 0
+bookCharmHaste = 0
+bookCharmHit = 0
+bookCharmAttack = 0
+bookCharmMinAttack = 0
+bookCharmMidAttack = 0
+bookCharmMaxAttack = 0
+bookCharmMinDMG = 0
+bookCharmMidDMG = 0
+bookCharmMaxDMG = 0
+bookCharmDMG = 0
+bookCharmARP = 0
+bookCharmHP = 0
+bookCharmRegenHP = 0
+bookCharmEvade = 0
+bookCharmArmor = 0
+bookCharmMgicArmor = 0
+bookCharmMP = 0
+bookCharmRegenMP = 0
+bookCharmSpellPenetration = 0
+bookCharmDirectMagicDMG = 0
+bookCharmPeriodicMagicDMG = 0
+
+
 
 window = Tk() #sozdanie okna
 window.title('Лист персонажа.') #Присвоение окну тайтла
@@ -1668,6 +3426,7 @@ frame4.grid(row=1, column=0, columnspan=3)
 parametrList = ['Энергия',
                 'Регенерация\nЭнергии',
                 'Скорость',
+                'Меткость',
                 'Урон\nближний',
                 'Урон\nдальний',
                 'АРП',
@@ -1687,7 +3446,7 @@ parametrList = ['Энергия',
 #     Label(frame4, text = param).grid(row=0, column=columnParam)
 #     columnParam+=1
 Label(frame4, text = 'Параметр').grid(row=0, column=0)
-create_labels(frame4,1,parametrList)
+create_labels(frame4,1,parametrList,0)
 Label(frame4, text = 'Статус').grid(row=1, column=0)
 Label(frame4, text = 'Изменения').grid(row=2, column=0)
 Label(frame4, text = 'Текущий итог').grid(row=3, column=0)
@@ -1695,6 +3454,7 @@ Label(frame4, text = 'Текущий итог').grid(row=3, column=0)
 staticEnergyLabel = Label(frame4, text = '{0}'.format(staticEnergy))
 staticRegenEnergyLabel = Label(frame4, text = '{0}'.format(staticRegenEnergy))
 staticHasteLabel = Label(frame4, text = '{0}'.format(staticHaste))
+staticHitLabel = Label(frame4, text = '{0}'.format(staticHit))
 staticAttackLabel = Label(frame4, text = '{0}'.format(staticAttack))
 staticDMGLabel = Label(frame4, text = '{0}'.format(staticDMG))
 staticARPLabel = Label(frame4, text = '{0}'.format(staticARP))
@@ -1712,23 +3472,25 @@ staticPeriodicMagicDMGLabel = Label(frame4, text = '{0}'.format(staticPeriodicMa
 staticEnergyLabel.grid(row=1, column=1)
 staticRegenEnergyLabel.grid(row=1, column=2)
 staticHasteLabel.grid(row=1, column=3)
-staticAttackLabel.grid(row=1, column=4)
-staticDMGLabel.grid(row=1, column=5)
-staticARPLabel.grid(row=1, column=6)
-staticHPLabel.grid(row=1, column=7)
-staticRegenHPLabel.grid(row=1, column=8)
-staticEvadeLabel.grid(row=1, column=9)
-staticArmorLabel.grid(row=1, column=10)
-staticMgicArmorLabel.grid(row=1, column=11)
-staticMPLabel.grid(row=1, column=12)
-staticRegenMPLabel.grid(row=1, column=13)
-staticSpellPenetrationLabel.grid(row=1, column=14)
-staticDirectMagicDMGLabel.grid(row=1, column=15)
-staticPeriodicMagicDMGLabel.grid(row=1, column=16)
+staticHitLabel.grid(row=1, column=4)
+staticAttackLabel.grid(row=1, column=5)
+staticDMGLabel.grid(row=1, column=6)
+staticARPLabel.grid(row=1, column=7)
+staticHPLabel.grid(row=1, column=8)
+staticRegenHPLabel.grid(row=1, column=9)
+staticEvadeLabel.grid(row=1, column=10)
+staticArmorLabel.grid(row=1, column=11)
+staticMgicArmorLabel.grid(row=1, column=12)
+staticMPLabel.grid(row=1, column=13)
+staticRegenMPLabel.grid(row=1, column=14)
+staticSpellPenetrationLabel.grid(row=1, column=15)
+staticDirectMagicDMGLabel.grid(row=1, column=16)
+staticPeriodicMagicDMGLabel.grid(row=1, column=17)
 
 changeEnergyLabel = Entry(frame4,width=8)
 changeRegenEnergyLabel = Entry(frame4,width=8)
 changeHasteLabel = Entry(frame4,width=8)
+changeHitLabel = Entry(frame4,width=8)
 changeAttackLabel = Entry(frame4,width=8)
 changeDMGLabel = Entry(frame4,width=8)
 changeARPLabel = Entry(frame4,width=8)
@@ -1743,28 +3505,46 @@ changeSpellPenetrationLabel = Entry(frame4,width=8)
 changeDirectMagicDMGLabel = Entry(frame4,width=8)
 changePeriodicMagicDMGLabel = Entry(frame4,width=8)
 
-# ADLogin.bind('<Return>', clickReturn)
+changeEnergyLabel.bind('<Return>', sum_stats)
+changeRegenEnergyLabel.bind('<Return>', sum_stats)
+changeHasteLabel.bind('<Return>', sum_stats)
+changeHitLabel.bind('<Return>', sum_stats)
+changeAttackLabel.bind('<Return>', sum_stats)
+changeDMGLabel.bind('<Return>', sum_stats)
+changeARPLabel.bind('<Return>', sum_stats)
+changeHPLabel.bind('<Return>', sum_stats)
+changeRegenHPLabel.bind('<Return>', sum_stats)
+changeEvadeLabel.bind('<Return>', sum_stats)
+changeArmorLabel.bind('<Return>', sum_stats)
+changeMgicArmorLabel.bind('<Return>', sum_stats)
+changeMPLabel.bind('<Return>', sum_stats)
+changeRegenMPLabel.bind('<Return>', sum_stats)
+changeSpellPenetrationLabel.bind('<Return>', sum_stats)
+changeDirectMagicDMGLabel.bind('<Return>', sum_stats)
+changePeriodicMagicDMGLabel.bind('<Return>', sum_stats)
 
 changeEnergyLabel.grid(row=2, column=1)
 changeRegenEnergyLabel.grid(row=2, column=2)
 changeHasteLabel.grid(row=2, column=3)
-changeAttackLabel.grid(row=2, column=4)
-changeDMGLabel.grid(row=2, column=5)
-changeARPLabel.grid(row=2, column=6)
-changeHPLabel.grid(row=2, column=7)
-changeRegenHPLabel.grid(row=2, column=8)
-changeEvadeLabel.grid(row=2, column=9)
-changeArmorLabel.grid(row=2, column=10)
-changeMgicArmorLabel.grid(row=2, column=11)
-changeMPLabel.grid(row=2, column=12)
-changeRegenMPLabel.grid(row=2, column=13)
-changeSpellPenetrationLabel.grid(row=2, column=14)
-changeDirectMagicDMGLabel.grid(row=2, column=15)
-changePeriodicMagicDMGLabel.grid(row=2, column=16)
+changeHitLabel.grid(row=2, column=4)
+changeAttackLabel.grid(row=2, column=5)
+changeDMGLabel.grid(row=2, column=6)
+changeARPLabel.grid(row=2, column=7)
+changeHPLabel.grid(row=2, column=8)
+changeRegenHPLabel.grid(row=2, column=9)
+changeEvadeLabel.grid(row=2, column=10)
+changeArmorLabel.grid(row=2, column=11)
+changeMgicArmorLabel.grid(row=2, column=12)
+changeMPLabel.grid(row=2, column=13)
+changeRegenMPLabel.grid(row=2, column=14)
+changeSpellPenetrationLabel.grid(row=2, column=15)
+changeDirectMagicDMGLabel.grid(row=2, column=16)
+changePeriodicMagicDMGLabel.grid(row=2, column=17)
 
 totalEnergyLabel = Label(frame4, text = '{0}'.format(totalEnergy))
 totalRegenEnergyLabel = Label(frame4, text = '{0}'.format(totalRegenEnergy))
 totalHasteLabel = Label(frame4, text = '{0}'.format(totalHaste))
+totalHitLabel = Label(frame4, text = '{0}'.format(totalHit))
 totalAttackLabel = Label(frame4, text = '{0}'.format(totalAttack))
 totalDMGLabel = Label(frame4, text = '{0}'.format(totalDMG))
 totalARPLabel = Label(frame4, text = '{0}'.format(totalARP))
@@ -1782,19 +3562,20 @@ totalPeriodicMagicDMGLabel = Label(frame4, text = '{0}'.format(totalPeriodicMagi
 totalEnergyLabel.grid(row=3, column=1)
 totalRegenEnergyLabel.grid(row=3, column=2)
 totalHasteLabel.grid(row=3, column=3)
-totalAttackLabel.grid(row=3, column=4)
-totalDMGLabel.grid(row=3, column=5)
-totalARPLabel.grid(row=3, column=6)
-totalHPLabel.grid(row=3, column=7)
-totalRegenHPLabel.grid(row=3, column=8)
-totalEvadeLabel.grid(row=3, column=9)
-totalArmorLabel.grid(row=3, column=10)
-totalMgicArmorLabel.grid(row=3, column=11)
-totalMPLabel.grid(row=3, column=12)
-totalRegenMPLabel.grid(row=3, column=13)
-totalSpellPenetrationLabel.grid(row=3, column=14)
-totalDirectMagicDMGLabel.grid(row=3, column=15)
-totalPeriodicMagicDMGLabel.grid(row=3, column=16)
+totalHitLabel.grid(row=3, column=4)
+totalAttackLabel.grid(row=3, column=5)
+totalDMGLabel.grid(row=3, column=6)
+totalARPLabel.grid(row=3, column=7)
+totalHPLabel.grid(row=3, column=8)
+totalRegenHPLabel.grid(row=3, column=9)
+totalEvadeLabel.grid(row=3, column=10)
+totalArmorLabel.grid(row=3, column=11)
+totalMgicArmorLabel.grid(row=3, column=12)
+totalMPLabel.grid(row=3, column=13)
+totalRegenMPLabel.grid(row=3, column=14)
+totalSpellPenetrationLabel.grid(row=3, column=15)
+totalDirectMagicDMGLabel.grid(row=3, column=16)
+totalPeriodicMagicDMGLabel.grid(row=3, column=17)
 
 frame5=Frame(window, relief=RAISED, borderwidth=1)
 frame5.rowconfigure(0, pad=3)
