@@ -945,7 +945,7 @@ def change_race():
     save()
 
 def add_att(num,widget):
-    global allAtt, meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,firstAidAttInt,manaAttInt,thiefArtAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt,magicCircleAttLabel,magicCircleAttLabel2,spell211LVLLabel,spell212LVLLabel,spell221LVLLabel,spell222LVLLabel,spell231LVLLabel,spell232LVLLabel,spell241LVLLabel,spell242LVLLabel,spell251LVLLabel,spell252LVLLabel,spell11LVLLabel,spell12LVLLabel,spell21LVLLabel,spell22LVLLabel,spell31LVLLabel,spell32LVLLabel,spell41LVLLabel,spell42LVLLabel,spell51LVLLabel,spell52LVLLabel,staticEnergy,staticRegenEnergy,staticHaste,staticAttack,staticDMG,staticHP,staticRegenHP,staticEvade,staticDMG,staticMP,staticRegenMP,staticDirectMagicDMG,staticPeriodicMagicDMG,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalHP,totalRegenHP,totalEvade,totalDMG,totalMP,totalRegenMP,totalDirectMagicDMG,totalPeriodicMagicDMG,totalSpellPenetration,staticSpellPenetration,staticEnergyLabel,staticDMGLabel,staticAttackLabel,staticDMGLabel,staticEvadeLabel,staticHasteLabel,staticMPLabel,staticRegenMPLabel,staticDirectMagicDMGLabel,staticSpellPenetrationLabel,staticHPLabel,staticRegenHPLabel,staticPeriodicMagicDMG,staticPeriodicMagicDMGLabel,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalARP,totalHP,totalRegenHP,totalEvade,totalArmor,totalMgicArmor,totalMP,totalRegenMP,totalSpellPenetration,totalDirectMagicDMG,totalPeriodicMagicDMG,totalAttackLabel,totalDMGLabel,totalEvadeLabel,totalHasteLabel,totalMPLabel,totalRegenMPLabel,totalDirectMagicDMGLabel,totalSpellPenetrationLabel,totalPeriodicMagicDMGLabel,totalHPLabel,totalRegenHPLabel,staticHit,totalHit,staticHitLabel,totalHitLabel,lvlAtt,allStr,allAgi,allInt,allBody
+    global allAtt, meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,firstAidAttInt,manaAttInt,thiefArtAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt,magicCircleAttLabel,magicCircleAttLabel2,spell211LVLLabel,spell212LVLLabel,spell221LVLLabel,spell222LVLLabel,spell231LVLLabel,spell232LVLLabel,spell241LVLLabel,spell242LVLLabel,spell251LVLLabel,spell252LVLLabel,spell11LVLLabel,spell12LVLLabel,spell21LVLLabel,spell22LVLLabel,spell31LVLLabel,spell32LVLLabel,spell41LVLLabel,spell42LVLLabel,spell51LVLLabel,spell52LVLLabel,staticEnergy,staticRegenEnergy,staticHaste,staticAttack,staticDMG,staticHP,staticRegenHP,staticEvade,staticDMG,staticMP,staticRegenMP,staticDirectMagicDMG,staticPeriodicMagicDMG,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalHP,totalRegenHP,totalEvade,totalDMG,totalMP,totalRegenMP,totalDirectMagicDMG,totalPeriodicMagicDMG,totalSpellPenetration,staticSpellPenetration,staticEnergyLabel,staticDMGLabel,staticAttackLabel,staticDMGLabel,staticEvadeLabel,staticHasteLabel,staticMPLabel,staticRegenMPLabel,staticDirectMagicDMGLabel,staticSpellPenetrationLabel,staticHPLabel,staticRegenHPLabel,staticPeriodicMagicDMG,staticPeriodicMagicDMGLabel,totalEnergy,totalRegenEnergy,totalHaste,totalAttack,totalDMG,totalARP,totalHP,totalRegenHP,totalEvade,totalArmor,totalMgicArmor,totalMP,totalRegenMP,totalSpellPenetration,totalDirectMagicDMG,totalPeriodicMagicDMG,totalAttackLabel,totalDMGLabel,totalEvadeLabel,totalHasteLabel,totalMPLabel,totalRegenMPLabel,totalDirectMagicDMGLabel,totalSpellPenetrationLabel,totalPeriodicMagicDMGLabel,totalHPLabel,totalRegenHPLabel,staticHit,totalHit,staticHitLabel,totalHitLabel,lvlAtt,allStr,allAgi,allInt,allBody,lastRace
 
 
     if lvlAtt > 0 or allStr > 0:
@@ -1195,15 +1195,26 @@ def add_att(num,widget):
                 totalSpellPenetrationLabel.config(text='{0}'.format(totalSpellPenetration))
                 totalPeriodicMagicDMGLabel.config(text='{0}'.format(totalPeriodicMagicDMG))
         elif num == 14:
-            if learningAttInt < 5:
-                learningAttInt += 1
-                if allInt > 0:
-                    allInt -= 1
-                    allAtt -= 1
-                elif allInt == 0:
-                    lvlAtt -= 1
-                    allAtt -= 1
-                widget.config(text='{0}'.format(learningAttInt))
+            if lastRace == 'Человек':
+                if learningAttInt < 6:
+                    learningAttInt += 1
+                    if allInt > 0:
+                        allInt -= 1
+                        allAtt -= 1
+                    elif allInt == 0:
+                        lvlAtt -= 1
+                        allAtt -= 1
+                    widget.config(text='{0}'.format(learningAttInt))
+            else:
+                if learningAttInt < 5:
+                    learningAttInt += 1
+                    if allInt > 0:
+                        allInt -= 1
+                        allAtt -= 1
+                    elif allInt == 0:
+                        lvlAtt -= 1
+                        allAtt -= 1
+                    widget.config(text='{0}'.format(learningAttInt))
     if lvlAtt > 0 or allBody > 0:
         if num == 15:
             if healthAttInt < 5:
