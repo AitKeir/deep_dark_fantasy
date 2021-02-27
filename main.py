@@ -3128,9 +3128,9 @@ def create_passive_skill_window():
     thirdPassiveSelect.set(thirdPassive)
 
     CreateToolTip(heroPathLabel,support['passiveSkill'][list(support['passiveSkill'].keys())[0]])
-    CreateToolTip(firstPassiveSelect,support['passiveSkill'][list(support['passiveSkill'].keys())[1]])
-    CreateToolTip(secondPassiveSelect,support['passiveSkill'][list(support['passiveSkill'].keys())[1]])
-    CreateToolTip(thirdPassiveSelect,support['passiveSkill'][list(support['passiveSkill'].keys())[1]])
+    # CreateToolTip(firstPassiveSelect,support['passiveSkill'][list(support['passiveSkill'].keys())[1]])
+    # CreateToolTip(secondPassiveSelect,support['passiveSkill'][list(support['passiveSkill'].keys())[1]])
+    # CreateToolTip(thirdPassiveSelect,support['passiveSkill'][list(support['passiveSkill'].keys())[1]])
 
     heroPathLabel.grid(row=0, column=0, sticky=W)
     firstPassiveSelect.grid(row=1, column=0, sticky=W)
