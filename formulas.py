@@ -7,6 +7,13 @@ def list_lvlExp():
         allLVL.append('{0}:{1}'.format(a,math.floor(x)))
     return allLVL
 
+def lvl_skill():
+    allLVL = []
+    for a in range(100):
+        x = (((a*a)-a)*10)/2
+        allLVL.append('{0}:{1}'.format(a,math.floor(x)))
+    return allLVL
+
 def lvl_exp(a):
     x = (((a*a)-a)*3)/2
     return math.floor(x)
