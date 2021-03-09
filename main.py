@@ -1213,16 +1213,16 @@ def create_radio(ChoRace,option):
                       variable=raceVar)
 
 def change_race():
-    global allStr,allAgi,allInt,allBody,lvlNow,allAtt,expNow,learningAttInt,shootAttInt,language,lastRace,lanAttLabel
+    global allStr,allAgi,allInt,allBody,lvlNow,allAtt,expNow,learningAttInt,shootAttInt,language,lastRace,lanAttLabel,learningAttIntPlus,shootAttIntPlus
     raceLabel2.config(text = raceVar.get())
     if raceVar.get() == 'Человек' and lastRace != 'Человек':
-        learningAttInt += 1
+        learningAttIntPlus += 1
     elif lastRace == 'Человек':
-        learningAttInt -= 1
+        learningAttIntPlus -= 1
     if raceVar.get() == 'Лесной Эльф' and lastRace != 'Лесной Эльф':
-        shootAttInt += 1
+        shootAttIntPlus += 1
     elif lastRace == 'Лесной Эльф':
-        shootAttInt -= 1
+        shootAttIntPlus -= 1
     allStr = int(support['race'][raceVar.get()]['att']['str'])
     allAgi = int(support['race'][raceVar.get()]['att']['agi'])
     allInt = int(support['race'][raceVar.get()]['att']['int'])
@@ -3775,10 +3775,12 @@ def create_language_window():
 
         global language,languageOrk,languageElf,languagePlan,languageAlder,languageGnom
 
+        if '---check---' in language:
+            language = language.replace('---check---','\n')
+
         if num == 0:
             if languageElf < 10:
                 languageElf += 1
-                languageElfLabel.config(text='{0}'.format(languageElf))
                 if languageElf == 10:
                     if allLanguages[0] not in language:
                         languageLen = len(language.split(','))%2
@@ -3790,7 +3792,6 @@ def create_language_window():
         elif num == 1:
             if languageAlder < 10:
                 languageAlder += 1
-                languageAlderLabel.config(text='{0}'.format(languageAlder))
                 if languageAlder == 10:
                     if allLanguages[1] not in language:
                         languageLen = len(language.split(','))%2
@@ -3802,7 +3803,6 @@ def create_language_window():
         elif num == 2:
             if languageOrk < 10:
                 languageOrk += 1
-                languageOrkLabel.config(text='{0}'.format(languageOrk))
                 if languageOrk == 10:
                     if allLanguages[2] not in language:
                         languageLen = len(language.split(','))%2
@@ -3814,7 +3814,6 @@ def create_language_window():
         elif num == 3:
             if languageGnom < 10:
                 languageGnom += 1
-                languageGnomLabel.config(text='{0}'.format(languageGnom))
                 if languageGnom == 10:
                     if allLanguages[3] not in language:
                         languageLen = len(language.split(','))%2
@@ -3826,7 +3825,6 @@ def create_language_window():
         elif num == 4:
             if languagePlan < 10:
                 languagePlan += 1
-                languagePlanLabel.config(text='{0}'.format(languagePlan))
                 if languagePlan == 10:
                     if allLanguages[4] not in language:
                         languageLen = len(language.split(','))%2
@@ -3835,6 +3833,15 @@ def create_language_window():
                         else:
                             language = language+',{0}'.format(allLanguages[4])
                         lanAttLabel.config(text=language)
+
+        languageElfLabel.config(text='{0}'.format(languageElf))
+        languageAlderLabel.config(text='{0}'.format(languageAlder))
+        languageOrkLabel.config(text='{0}'.format(languageOrk))
+        languageGnomLabel.config(text='{0}'.format(languageGnom))
+        languagePlanLabel.config(text='{0}'.format(languagePlan))
+
+        if '\n' in language:
+            language = language.replace('\n','---check---')
 
         save()
 
@@ -4067,6 +4074,8 @@ def save():
     saveFile = open(login.get(),'w',encoding='UTF8')
     for li in lvlNow,expNow,repLvl,repExp,lvlAtt,allAtt,startAtt,staticEnergy,staticRegenEnergy,staticHaste,staticHit,staticAttack,staticDMG,staticARP,staticHP,staticRegenHP,staticEvade,staticArmor,staticMgicArmor,staticMP,staticRegenMP,staticSpellHit,staticDirectMagicDMG,staticPeriodicMagicDMG,changeEnergy,changeRegenEnergy,changeHaste,changeHit,changeAttack,changeDMG,changeARP,changeHP,changeRegenHP,changeEvade,changeArmor,changeMgicArmor,changeMP,changeRegenMP,changeSpellHit,changeDirectMagicDMG,changePeriodicMagicDMG,allStr,meleFightAttInt,shootAttInt,strongHitsAttInt,warBusinessAttInt,tacticsAttInt,allAgi,attackAttInt,evasionAttInt,hasteAttInt,coldBloodAttInt,thiefArtAttInt,allInt,manaAttInt,firstAidAttInt,magicCircleAttInt,magicPowerAttInt,learningAttInt,allBody,healthAttInt,energyAttInt,resistAttInt,secondBreathAttInt,steelBodyAttInt,spell11ProgressLabelInt,spell12ProgressLabelInt,spell21ProgressLabelInt,spell22ProgressLabelInt,spell31ProgressLabelInt,spell32ProgressLabelInt,spell41ProgressLabelInt,spell42ProgressLabelInt,spell51ProgressLabelInt,spell52ProgressLabelInt,spell211ProgressLabelInt,spell212ProgressLabelInt,spell221ProgressLabelInt,spell222ProgressLabelInt,spell231ProgressLabelInt,spell232ProgressLabelInt,spell241ProgressLabelInt,spell242ProgressLabelInt,spell251ProgressLabelInt,spell252ProgressLabelInt,spell11LVLInt,spell12LVLInt,spell21LVLInt,spell22LVLInt,spell31LVLInt,spell32LVLInt,spell41LVLInt,spell42LVLInt,spell51LVLInt,spell52LVLInt,spell211LVLInt,spell212LVLInt,spell221LVLInt,spell222LVLInt,spell231LVLInt,spell232LVLInt,spell241LVLInt,spell242LVLInt,spell251LVLInt,spell252LVLInt,skillProgressInt1,skillProgressInt2,skillProgressInt3,skillProgressInt4,skillProgressInt5,skillProgressInt6,skillProgressInt7,skillProgressInt8,skillProgressInt9,skillProgressInt10,skillLevelInt1,skillLevelInt2,skillLevelInt3,skillLevelInt4,skillLevelInt5,skillLevelInt6,skillLevelInt7,skillLevelInt8,skillLevelInt9,skillLevelInt10,passiveSkillProgress2,passiveSkillProgress3,passiveSkillProgress4,passiveLevelProgress2,passiveLevelProgress3,passiveLevelProgress4,bag,rightHandEnergy,rightHandRegenEnergy,rightHandHaste,rightHandHit,rightHandAttack,rightHandMinAttack,rightHandMidAttack,rightHandMaxAttack,rightHandMinDMG,rightHandMidDMG,rightHandMaxDMG,rightHandDMG,rightHandARP,rightHandHP,rightHandRegenHP,rightHandEvade,rightHandArmor,rightHandMgicArmor,rightHandMP,rightHandRegenMP,rightHandSpellHit,rightHandDirectMagicDMG,rightHandPeriodicMagicDMG,rightHandCharmEnergy,rightHandCharmRegenEnergy,rightHandCharmHaste,rightHandCharmHit,rightHandCharmAttack,rightHandCharmMinAttack,rightHandCharmMidAttack,rightHandCharmMaxAttack,rightHandCharmMinDMG,rightHandCharmMidDMG,rightHandCharmMaxDMG,rightHandCharmDMG,rightHandCharmARP,rightHandCharmHP,rightHandCharmRegenHP,rightHandCharmEvade,rightHandCharmArmor,rightHandCharmMgicArmor,rightHandCharmMP,rightHandCharmRegenMP,rightHandCharmSpellHit,rightHandCharmDirectMagicDMG,rightHandCharmPeriodicMagicDMG,leftHandEnergy,leftHandRegenEnergy,leftHandHaste,leftHandHit,leftHandAttack,leftHandMinAttack,leftHandMidAttack,leftHandMaxAttack,leftHandMinDMG,leftHandMidDMG,leftHandMaxDMG,leftHandDMG,leftHandARP,leftHandHP,leftHandRegenHP,leftHandEvade,leftHandArmor,leftHandMgicArmor,leftHandMP,leftHandRegenMP,leftHandSpellHit,leftHandDirectMagicDMG,leftHandPeriodicMagicDMG,leftHandCharmEnergy,leftHandCharmRegenEnergy,leftHandCharmHaste,leftHandCharmHit,leftHandCharmAttack,leftHandCharmMinAttack,leftHandCharmMidAttack,leftHandCharmMaxAttack,leftHandCharmMinDMG,leftHandCharmMidDMG,leftHandCharmMaxDMG,leftHandCharmDMG,leftHandCharmARP,leftHandCharmHP,leftHandCharmRegenHP,leftHandCharmEvade,leftHandCharmArmor,leftHandCharmMgicArmor,leftHandCharmMP,leftHandCharmRegenMP,leftHandCharmSpellHit,leftHandCharmDirectMagicDMG,leftHandCharmPeriodicMagicDMG,ChestEnergy,ChestRegenEnergy,ChestHaste,ChestHit,ChestAttack,ChestMinAttack,ChestMidAttack,ChestMaxAttack,ChestMinDMG,ChestMidDMG,ChestMaxDMG,ChestDMG,ChestARP,ChestHP,ChestRegenHP,ChestEvade,ChestArmor,ChestMgicArmor,ChestMP,ChestRegenMP,ChestSpellHit,ChestDirectMagicDMG,ChestPeriodicMagicDMG,ChestCharmEnergy,ChestCharmRegenEnergy,ChestCharmHaste,ChestCharmHit,ChestCharmAttack,ChestCharmMinAttack,ChestCharmMidAttack,ChestCharmMaxAttack,ChestCharmMinDMG,ChestCharmMidDMG,ChestCharmMaxDMG,ChestCharmDMG,ChestCharmARP,ChestCharmHP,ChestCharmRegenHP,ChestCharmEvade,ChestCharmArmor,ChestCharmMgicArmor,ChestCharmMP,ChestCharmRegenMP,ChestCharmSpellHit,ChestCharmDirectMagicDMG,ChestCharmPeriodicMagicDMG,amuletEnergy,amuletRegenEnergy,amuletHaste,amuletHit,amuletAttack,amuletMinAttack,amuletMidAttack,amuletMaxAttack,amuletMinDMG,amuletMidDMG,amuletMaxDMG,amuletDMG,amuletARP,amuletHP,amuletRegenHP,amuletEvade,amuletArmor,amuletMgicArmor,amuletMP,amuletRegenMP,amuletSpellHit,amuletDirectMagicDMG,amuletPeriodicMagicDMG,amuletCharmEnergy,amuletCharmRegenEnergy,amuletCharmHaste,amuletCharmHit,amuletCharmAttack,amuletCharmMinAttack,amuletCharmMidAttack,amuletCharmMaxAttack,amuletCharmMinDMG,amuletCharmMidDMG,amuletCharmMaxDMG,amuletCharmDMG,amuletCharmARP,amuletCharmHP,amuletCharmRegenHP,amuletCharmEvade,amuletCharmArmor,amuletCharmMgicArmor,amuletCharmMP,amuletCharmRegenMP,amuletCharmSpellHit,amuletCharmDirectMagicDMG,amuletCharmPeriodicMagicDMG,ringEnergy,ringRegenEnergy,ringHaste,ringHit,ringAttack,ringMinAttack,ringMidAttack,ringMaxAttack,ringMinDMG,ringMidDMG,ringMaxDMG,ringDMG,ringARP,ringHP,ringRegenHP,ringEvade,ringArmor,ringMgicArmor,ringMP,ringRegenMP,ringSpellHit,ringDirectMagicDMG,ringPeriodicMagicDMG,ringCharmEnergy,ringCharmRegenEnergy,ringCharmHaste,ringCharmHit,ringCharmAttack,ringCharmMinAttack,ringCharmMidAttack,ringCharmMaxAttack,ringCharmMinDMG,ringCharmMidDMG,ringCharmMaxDMG,ringCharmDMG,ringCharmARP,ringCharmHP,ringCharmRegenHP,ringCharmEvade,ringCharmArmor,ringCharmMgicArmor,ringCharmMP,ringCharmRegenMP,ringCharmSpellHit,ringCharmDirectMagicDMG,ringCharmPeriodicMagicDMG,bookEnergy,bookRegenEnergy,bookHaste,bookHit,bookAttack,bookMinAttack,bookMidAttack,bookMaxAttack,bookMinDMG,bookMidDMG,bookMaxDMG,bookDMG,bookARP,bookHP,bookRegenHP,bookEvade,bookArmor,bookMgicArmor,bookMP,bookRegenMP,bookSpellHit,bookDirectMagicDMG,bookPeriodicMagicDMG,bookCharmEnergy,bookCharmRegenEnergy,bookCharmHaste,bookCharmHit,bookCharmAttack,bookCharmMinAttack,bookCharmMidAttack,bookCharmMaxAttack,bookCharmMinDMG,bookCharmMidDMG,bookCharmMaxDMG,bookCharmDMG,bookCharmARP,bookCharmHP,bookCharmRegenHP,bookCharmEvade,bookCharmArmor,bookCharmMgicArmor,bookCharmMP,bookCharmRegenMP,bookCharmSpellHit,bookCharmDirectMagicDMG,bookCharmPeriodicMagicDMG,lastRace,language,firstPassive,secondPassive,thirdPassive,firstSchMag,secondSchMag,gold,languageOrk,languageElf,languagePlan,languageAlder,languageGnom,firstQuestDetail,twoQuestDetail,threeQuestDetail,fourQuestDetail,fiveQuestDetail,sixQuestDetail,firstQuest,twoQuest,threeQuest,fourQuest,fiveQuest,sixQuest,archive,staticRegenHPcombat,staticMgicResist,changeRegenHPcombat,changeMgicResist,rightHandMgicResist,rightHandCharmMgicResist,leftHandMgicResist,leftHandCharmMgicResist,ChestMgicResist,ChestCharmMgicResist,amuletMgicResist,amuletCharmMgicResist,ringMgicResist,ringCharmMgicResist,bookMgicResist,bookCharmMgicResist,meleFightAttIntPlus,shootAttIntPlus,strongHitsAttIntPlus,warBusinessAttIntPlus,tacticsAttIntPlus,attackAttIntPlus,evasionAttIntPlus,hasteAttIntPlus,coldBloodAttIntPlus,thiefArtAttIntPlus,manaAttIntPlus,firstAidAttIntPlus,magicCircleAttIntPlus,magicPowerAttIntPlus,learningAttIntPlus,healthAttIntPlus,energyAttIntPlus,resistAttIntPlus,secondBreathAttIntPlus,steelBodyAttIntPlus,staticSpellPenetration,changeSpellPenetration,rightHandSpellPenetration,rightHandCharmSpellPenetration,leftHandSpellPenetration,leftHandCharmSpellPenetration,ChestSpellPenetration,ChestCharmSpellPenetration,amuletSpellPenetration,amuletCharmSpellPenetration,ringSpellPenetration,ringCharmSpellPenetration,bookSpellPenetration,bookCharmSpellPenetration,arrow,bolt:
         # saveFile.write('---{0}---\n'.format(i))
+        if '\n' in str(li):
+            li = li.replace('\n','---check---')
         saveFile.write('{0}\n'.format(li))
     saveFile.close()
 
@@ -4487,6 +4496,8 @@ def load():
     bookCharmPeriodicMagicDMG = int(loadFile[407])
     lastRace = loadFile[408]
     language = loadFile[409]
+    if '---check---' in language:
+        language = language.replace('---check---','\n')
     firstPassive = loadFile[410]
     secondPassive = loadFile[411]
     thirdPassive = loadFile[412]
